@@ -1,0 +1,51 @@
+% =====================================================================
+%  7. Actividades de prueba y estimaciones   (actividad TP6)
+% =====================================================================
+\section{Actividades de prueba y estimaciones}
+\label{sec:actividades}
+
+\begin{instruccion}
+Identifique las actividades necesarias para el proceso de prueba que se aplicará al caso de
+estudio y estime el esfuerzo neto de cada una, en días u horas.
+
+\textbf{Ampliación respecto de la plantilla original:} añada las \emph{dependencias} entre
+actividades y el \emph{producto} que cada una genera. Las dependencias son las que hacen
+realista el cronograma del apartado~\ref{sec:calendario}; el producto es lo que permite
+comprobar que la actividad terminó.
+
+Las actividades deberían cubrir el ciclo completo: planificación, preparación de entorno y
+datos, diseño e implementación, ejecución, reporte de incidentes, seguimiento y finalización.
+Puede apoyarse en la Figura~\ref{fig:procesos} para no omitir ninguna.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Actividades de prueba, esfuerzo estimado, dependencias y productos.}
+\label{tab:actividades}
+\begin{tabularx}{\textwidth}{|C{1.4cm}|Y|C{1.8cm}|C{1.8cm}|C{2.5cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Actividad} & \textbf{Esfuerzo estimado} & \textbf{Depende de} & \textbf{Producto que genera} \\ \hline
+  \campo{ACT-01} & \campo{Elaborar el plan de prueba} & \campo{h/días} & \campo{---} & \campo{Parte I} \\ \hline
+  \campo{ACT-02} & \campo{Preparar entorno y datos} & \campo{h/días} & \campo{ACT-01} & \campo{Anexo F} \\ \hline
+  \campo{ACT-03} & \campo{Diseñar condiciones y casos} & \campo{h/días} & \campo{ACT-01} & \campo{Anexo A} \\ \hline
+  \campo{ACT-04} & \campo{Elaborar procedimientos} & \campo{h/días} & \campo{ACT-03} & \campo{Anexo B} \\ \hline
+  \campo{ACT-05} & \campo{Ejecutar y registrar} & \campo{h/días} & \campo{ACT-02, ACT-04} & \campo{Anexo C} \\ \hline
+  \campo{ACT-06} & \campo{Reportar y dar seguimiento a incidentes} & \campo{h/días} & \campo{ACT-05} & \campo{Anexo D} \\ \hline
+  \campo{ACT-07} & \campo{Monitorear, controlar e informar} & \campo{h/días} & \campo{Concurrente} & \campo{Anexo E} \\ \hline
+  \campo{ACT-08} & \campo{Finalizar: archivar, limpiar, reportar} & \campo{h/días} & \campo{ACT-05, ACT-06} & \campo{Parte II} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Las actividades anteriores son un punto de partida derivado del modelo de procesos; adáptelas al proyecto. La actividad de seguimiento se marca como concurrente porque no ocupa un lugar fijo en la secuencia.}
+\end{table}
+
+El Cuadro~\ref{tab:actividades} sostiene tanto la estimación de esfuerzo como el cronograma del
+apartado~\ref{sec:calendario}; su columna de esfuerzo estimado es además la línea base contra
+la que el seguimiento compara el consumo real.
+
+\begin{instruccion}
+Indique el método de estimación empleado (juicio experto, analogía con proyectos previos,
+descomposición) y los supuestos en que se apoya. Una estimación sin método declarado no puede
+revisarse cuando se desvía.
+\end{instruccion}
+
+\campo{Método de estimación y supuestos}

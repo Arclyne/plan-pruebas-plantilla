@@ -1,0 +1,147 @@
+% =====================================================================
+%  6. Gestión de incidentes   (proceso IR de ISO/IEC/IEEE 29119-2)
+% =====================================================================
+\section{Gestión de incidentes de prueba}
+\label{sec:gestion-incidentes}
+
+\begin{notanormativa}[Apartado nuevo respecto de la plantilla original]
+La plantilla original no preveía gestión de incidentes. Sin ella, un resultado fallido no
+produce ninguna consecuencia documentada: no puede comunicarse, priorizarse, seguirse ni
+cerrarse. Este apartado desarrolla el proceso de \textbf{reporte de incidentes (IR1–IR2)} de
+\normap{2}. El formato de registro está en el \ref{anx:incidentes}.
+\end{notanormativa}
+
+% ---------------------------------------------------------------------
+\subsection{Análisis previo al reporte (IR1)}
+
+\begin{notanormativa}[Un resultado fallido no es automáticamente un defecto del producto]
+La actividad IR1 exige, antes de crear un reporte, determinar el origen de lo observado. Un
+resultado inesperado puede deberse a:
+\begin{itemize}
+  \item un \textbf{defecto del objeto de prueba} —el caso que interesa al producto—;
+  \item un \textbf{defecto del entorno} (configuración, versión desplegada, servicio caído);
+  \item un \textbf{defecto de los datos} de prueba;
+  \item un \textbf{error del propio caso de prueba} (resultado esperado mal derivado);
+  \item un \textbf{incidente ya conocido}, que debe actualizarse en lugar de duplicarse.
+\end{itemize}
+Omitir esta discriminación infla el conteo de defectos y desvía el esfuerzo de corrección.
+\end{notanormativa}
+
+\begin{instruccion}
+Indique quién realiza este análisis, en qué momento y qué evidencia debe acompañarlo. Registre
+el origen determinado en la columna correspondiente del \ref{anx:incidentes}.
+\end{instruccion}
+
+\campo{Describa el procedimiento de análisis previo al reporte}
+
+% ---------------------------------------------------------------------
+\subsection{Severidad y prioridad}
+
+\begin{notanormativa}[Son dimensiones independientes]
+La \textbf{severidad} mide el impacto técnico o de negocio del incidente. La \textbf{prioridad}
+mide la urgencia de atenderlo. Son independientes: un incidente puede ser de severidad baja y
+prioridad alta (un error ortográfico en la pantalla de inicio antes de una demostración), o de
+severidad alta y prioridad baja (un fallo grave en una función que no se usará en el periodo).
+Colapsarlas en un solo campo impide priorizar el trabajo de corrección de forma defendible.
+\end{notanormativa}
+
+\begin{instruccion}
+Defina las escalas antes de registrar el primer incidente y aplíquelas de forma consistente.
+Indique también quién asigna cada valor: normalmente la severidad la propone quien prueba y la
+prioridad la decide quien decide sobre el producto.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Escala de severidad acordada.}
+\label{tab:severidad}
+\begin{tabularx}{\textwidth}{|C{2.2cm}|Y|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Nivel} & \textbf{Significado: impacto observable} & \textbf{Quién la asigna} \\ \hline
+  \campo{Crítica} & \campo{Criterio} & \campo{Rol} \\ \hline
+  \campo{Alta}    & \campo{Criterio} & \campo{Rol} \\ \hline
+  \campo{Media}   & \campo{Criterio} & \campo{Rol} \\ \hline
+  \campo{Baja}    & \campo{Criterio} & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Escala de prioridad acordada.}
+\label{tab:prioridad}
+\begin{tabularx}{\textwidth}{|C{2.2cm}|Y|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Nivel} & \textbf{Significado: urgencia de atención} & \textbf{Quién la asigna} \\ \hline
+  \campo{Inmediata} & \campo{Criterio y plazo} & \campo{Rol} \\ \hline
+  \campo{Alta}      & \campo{Criterio y plazo} & \campo{Rol} \\ \hline
+  \campo{Normal}    & \campo{Criterio y plazo} & \campo{Rol} \\ \hline
+  \campo{Baja}      & \campo{Criterio y plazo} & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+Los Cuadros~\ref{tab:severidad} y~\ref{tab:prioridad} definen dos ejes distintos de
+clasificación; ambos se registran, por separado, en cada incidente del \ref{anx:incidentes}.
+
+% ---------------------------------------------------------------------
+\subsection{Estados y flujo de tratamiento}
+
+\begin{instruccion}
+Defina los estados por los que puede pasar un incidente y quién autoriza cada transición. Un
+estado sin responsable es un incidente que nadie mueve. Incluya explícitamente el estado
+terminal que corresponda cuando el defecto \emph{no} se corrige, para que los incidentes
+abiertos al cierre queden documentados en lugar de desaparecer.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Estados de un incidente y responsables de cada transición.}
+\label{tab:estados-incidente}
+\begin{tabularx}{\textwidth}{|C{2.4cm}|Y|C{2.4cm}|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Estado} & \textbf{Significado} & \textbf{Transiciona a} & \textbf{Responsable} \\ \hline
+  Nuevo        & Registrado, aún no analizado por el equipo receptor. & \campo{Abierto / Rechazado / Duplicado} & \campo{Rol} \\ \hline
+  Abierto      & Aceptado como incidente válido y pendiente de tratamiento. & \campo{En corrección / Diferido} & \campo{Rol} \\ \hline
+  En corrección& El equipo desarrollador trabaja en la resolución. & \campo{Resuelto} & \campo{Rol} \\ \hline
+  Resuelto     & Se entregó una corrección; pendiente de confirmación. & \campo{Cerrado / Reabierto} & \campo{Rol} \\ \hline
+  Cerrado      & Prueba de confirmación aprobada (\ref{sec:confirmacion-regresion}). & --- & \campo{Rol} \\ \hline
+  Diferido     & Válido, pero no se corregirá en este periodo. & \campo{Riesgo residual} & \campo{Rol} \\ \hline
+  Rechazado    & No constituye un defecto del objeto de prueba (véase IR1). & --- & \campo{Rol} \\ \hline
+  Duplicado    & Ya registrado; se actualiza el incidente original. & --- & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:estados-incidente} define el ciclo de vida del incidente. Los estados
+\emph{Diferido} y \emph{Abierto} al cierre del esfuerzo alimentan directamente los incidentes
+abiertos (apartado~\ref{sec:incidentes-abiertos}) y los riesgos residuales
+(apartado~\ref{sec:residuales}).
+
+\begin{politicaacademica}
+Dado que el curso establece que el equipo de prueba no repara los defectos encontrados, es
+previsible que muchos incidentes terminen el periodo en estado \emph{Abierto} o
+\emph{Diferido}. Eso no es un fallo del proceso: lo que sí debe evitarse es cerrarlos sin
+corrección ni confirmación, porque haría irreconocible la diferencia entre un defecto resuelto
+y uno simplemente no atendido.
+\end{politicaacademica}
+
+% ---------------------------------------------------------------------
+\subsection{Comunicación de incidentes}
+
+\begin{instruccion}
+Indique cómo se comunican los incidentes al equipo desarrollador y a los demás interesados: por
+qué medio, con qué plazo según la severidad, y quién es el punto de contacto de cada parte.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Comunicación de incidentes según severidad.}
+\label{tab:comunicacion-incidentes}
+\begin{tabularx}{\textwidth}{|C{2.2cm}|C{3.0cm}|Y|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Severidad} & \textbf{Destinatario} & \textbf{Medio} & \textbf{Plazo} \\ \hline
+  \campo{Crítica} & \campo{Rol} & \campo{Medio} & \campo{Plazo} \\ \hline
+  \campo{Otras}   & \campo{Rol} & \campo{Medio} & \campo{Plazo} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:comunicacion-incidentes} fija los plazos de aviso; su cumplimiento es uno de
+los aspectos que el seguimiento (apartado~\ref{sec:seguimiento}) puede monitorear.
