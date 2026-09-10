@@ -31,7 +31,7 @@ un árbol limpio (`make cleanall`) y desde un clon recién creado del repositori
 |---|---|---|---|---|
 | Trabajo | `make` | `plantilla-trabajo.pdf` | 67 | 0 |
 | Anotada | `make annotated` | `plantilla-anotada.pdf` | 73 | 0 |
-| Final | `make final` | `plantilla-final.pdf` | 56 | 0 |
+| Final | `make final` | `plantilla-final.pdf` | 52 | 0 |
 
 En las **tres** variantes:
 
@@ -57,7 +57,14 @@ interruptores hacen lo que dicen:
 | Instrucciones (`Qué debe documentarse`) | 67 | 67 | **0** |
 | Observaciones (`Observación de la revisión`) | **0** | 32 | **0** |
 | Campos de observación (`Problema identificado`) | **0** | 32 | **0** |
+| Figuras compuestas | 4 | 4 | **0** |
 | Políticas académicas | 9 | 9 | 9 |
+| Menciones a «plantilla» en el texto | 7 | 8 | **0** |
+
+Al ocultar los diagramas se comprobó además que **no queda ninguna referencia sin
+resolver** (`??` en el texto extraído: 0 en las tres variantes) y que las frases
+que remitían a una figura siguen siendo gramaticalmente correctas sin el inciso.
+Se inspeccionaron los seis pasajes afectados en la variante final.
 
 ### 2.2 Ausencia de fugas del historial de revisión
 
@@ -139,6 +146,7 @@ variante anotada con un bloque de observación junto a la figura que corrige.
 | Cajas de color con su título y sangrado | Correctas; se parten entre páginas cuando procede |
 | Etiqueta de variante en la portada | Presente en trabajo y anotada; ausente en la final, como se pretendía |
 | Bloques de observación | Sólo en la variante anotada, junto al apartado que corrigen |
+| Ausencia de las figuras en la variante final | Sin huecos ni párrafos huérfanos; el texto enlaza directamente con el apartado siguiente |
 | Fichas largas de los anexos | Se parten con encabezado repetido y aviso de continuación |
 
 ## 5. Problemas encontrados y corregidos
@@ -160,6 +168,8 @@ variante anotada con un bloque de observación junto a la figura que corrige.
 | 13 | COB-01 se definía sobre «requisitos con al menos un caso **aprobado**» | Mezclaba cobertura con resultado: un requisito probado por un caso fallido contaba como no cubierto, de modo que la cobertura bajaba al encontrar defectos. | COB-01 pasa a medir elementos ejercitados con independencia del veredicto; los criterios de salida pasan de tres tipos a cuatro y el resumen de cobertura de la base separa «¿Cubierto?» de «Veredictos». |
 | 14 | Un envoltorio `\begin{ficha}` alrededor de `xltabular` abortaba con «File ended while scanning use of `\TX@get@body`» | `xltabular` busca literalmente su `\end{xltabular}` en la entrada y no lo encuentra si está oculto tras una macro. | Las fichas se escriben con el entorno literal en cada anexo; el patrón queda documentado en el README. |
 | 15 | El pie mostraba «Página ii de 58» en los preliminares | Los preliminares van en romanos y el cuerpo reinicia en arábigos, así que `\pageref{LastPage}` devuelve el último número arábigo, no el total físico. | El interruptor `\ifcontarpaginas` omite «de *N*» fuera del cuerpo. |
+| 17 | La versión de entrega hablaba de sí misma como plantilla | Explicaba el código de colores, remitía a `config/metadata.tex` y se presentaba como «esta plantilla»: voz del andamiaje en un documento sobre un sistema. | Discriminante derivado `\ifversionfinal`: se suprime la leyenda de colores y `\segunvariante{…}{…}` reescribe las referencias al documento. Menciones a «plantilla» en la final: 7 → **0**. |
+| 16 | Los diagramas de la norma aparecían en el documento de entrega | Son material de apoyo sobre ISO/IEC/IEEE 29119, no contenido del plan; se incorporaron al documento sin distinguir entre existir en el repositorio y formar parte del entregable. | Cuarto interruptor `\mostrardiagramas`, activo en trabajo y anotada. Las 15 menciones dispersas se envolvieron en `\sidiag{...}` y se reescribieron para leerse sin el inciso; se ocultan también el índice de figuras y la mención a las figuras en el título del índice de cuadros. |
 
 ## 6. Lo que esta validación **no** cubre
 
@@ -190,6 +200,13 @@ done
 for v in trabajo final; do
   pdftotext plantilla-$v.pdf - | grep -ci "plantilla \(original\|anterior\)"  # debe dar 0
 done
+
+# la variante final no debe llevar figuras ni referencias sin resolver
+pdftotext plantilla-final.pdf - | grep -c "^Figura "   # debe dar 0
+pdftotext plantilla-final.pdf - | grep -c "??"         # debe dar 0
+
+# ni hablar de sí misma como plantilla o herramienta
+pdftotext plantilla-final.pdf - | grep -ciE "plantilla|metadata\\.tex|bloques de color"  # debe dar 0
 ```
 
 Para repetir la comprobación de referencias cruzadas basta con verificar que

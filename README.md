@@ -10,9 +10,9 @@ cambia entre ellas es qué bloques se componen:
 
 | Variante | Comando | Archivo | Para qué sirve |
 |---|---|---|---|
-| Trabajo | `make` | `plantilla-trabajo.pdf` | Rellenar la plantilla. Incluye guías, ejemplos, políticas académicas y notas conceptuales. |
+| Trabajo | `make` | `plantilla-trabajo.pdf` | Rellenar la plantilla. Incluye guías, ejemplos, diagramas de apoyo, políticas académicas y notas conceptuales. |
 | Anotada | `make annotated` | `plantilla-anotada.pdf` | Entender el origen de las correcciones. Añade los bloques de *Observación de la revisión*. No se entrega. |
-| Final | `make final` | `plantilla-final.pdf` | Entregar el plan ya rellenado. Sin guías, ejemplos ni observaciones. |
+| Final | `make final` | `plantilla-final.pdf` | Entregar el plan ya rellenado. Sin guías, ejemplos, diagramas de apoyo ni observaciones. |
 
 No existen tres copias de las secciones: las tres variantes salen de los mismos
 archivos de `sections/` y `appendices/`.
@@ -248,6 +248,10 @@ y en el texto: `La Figura~\ref{fig:cronograma} muestra…`.
 existentes, e inclúyalo con `\input{diagrams/mi-diagrama}` desde la sección
 correspondiente. Las bibliotecas TikZ ya cargadas están en `config/preamble.tex`.
 
+Si el diagrama es material de apoyo y no contenido del plan, envuelva la inclusión
+y el párrafo que lo describe en `\ifmostrardiagramas … \fi`, como los cuatro
+existentes, para que no aparezca en la versión de entrega.
+
 ## 9. Cómo controlar qué se muestra en cada variante
 
 El documento usa **cinco tipos de bloque** con significado propio, y tres
@@ -258,6 +262,7 @@ interruptores deciden cuáles se componen:
 | `instruccion` | verde | Guía de la plantilla: qué debe escribirse. | sí | sí | — |
 | `ejemplo` | azul | Ilustración; no es contenido a conservar. | sí | sí | — |
 | `observacion` | morado | Origen de una corrección respecto de la plantilla anterior. | — | sí | — |
+| Diagramas | — | Las cuatro figuras: explican la norma y el uso de la plantilla. | sí | sí | — |
 | `politicaacademica` | naranja | Regla local del curso, **no** requisito de la norma. | sí | sí | sí |
 | `notanormativa` | gris | Referencia normativa o aclaración conceptual. | sí | sí | sí |
 
@@ -274,6 +279,52 @@ fijar una combinación distinta de forma permanente, edite los interruptores de
 \newif\ifmostrarinstrucciones   \mostrarinstruccionestrue
 \newif\ifmostrarejemplos        \mostrarejemplostrue
 \newif\ifmostrarobservaciones   \mostrarobservacionesfalse
+\newif\ifmostrardiagramas       \mostrardiagramastrue
+```
+
+### Por qué los diagramas no van en la entrega
+
+Las cuatro figuras explican **la norma y el uso de la plantilla**, no el sistema
+bajo prueba: un plan de pruebas entregado no necesita un diagrama de las partes
+de ISO/IEC/IEEE 29119. Por eso son material de apoyo y acompañan a las guías.
+
+Si su Experiencia Educativa espera que el documento entregado incluya ese marco
+conceptual, ponga `\mostrardiagramastrue` dentro del bloque `\VARIANTEFINAL` de
+`config/metadata.tex` y volverán a aparecer.
+
+### El documento se refiere a sí mismo según la variante
+
+Mientras se rellena es una plantilla; una vez entregado es un plan de prueba. El
+interruptor `\ifversionfinal` —derivado de `mostrarinstrucciones`, no independiente—
+permite ajustar la redacción sin duplicar párrafos:
+
+```latex
+\segunvariante{Esta plantilla}{Este plan} \textbf{no declara conformidad} con …
+```
+
+Para suprimir un bloque entero en la entrega (por ejemplo, la leyenda de los
+bloques de color, que no tiene sentido en un documento ya rellenado):
+
+```latex
+\ifversionfinal\else
+  … contenido que sólo existe mientras es plantilla …
+\fi
+```
+
+Si añade texto que hable del documento como plantilla, o que explique cómo
+compilarlo, envuélvalo así: la versión de entrega no debe contener ninguna
+referencia a los colores, a los interruptores ni a los objetivos del Makefile.
+
+### Menciones a las figuras
+
+Las menciones a las figuras dentro del texto van envueltas en `\sidiag{...}`, de
+modo que la frase siga siendo correcta cuando la figura no está. Si añade una
+mención nueva, use el mismo envoltorio y redacte la frase de manera que se
+sostenga sin el inciso:
+
+```latex
+Este proceso opera de forma concurrente con la ejecución\sidiag{, como muestra la
+Figura~\ref{fig:procesos}}: no es una etapa entre dos entregas.
 ```
 
 ### Cómo escribir una observación nueva

@@ -54,11 +54,14 @@ a error: los dos primeros tipos se apagan con un interruptor. *(OBS §5.1 · PRO
 (`mostrarinstrucciones`, `mostrarejemplos`, `mostrarobservaciones`) y el Makefile
 compila tres variantes de un único `main.tex`, sin duplicar las secciones:
 
-| Variante | Comando | Archivo | instrucciones | ejemplos | observaciones |
-|---|---|---|:--:|:--:|:--:|
-| Trabajo | `make` | `plantilla-trabajo.pdf` | sí | sí | — |
-| Anotada | `make annotated` | `plantilla-anotada.pdf` | sí | sí | sí |
-| Final | `make final` | `plantilla-final.pdf` | — | — | — |
+| Variante | Comando | Archivo | instrucciones | ejemplos | observaciones | diagramas |
+|---|---|---|:--:|:--:|:--:|:--:|
+| Trabajo | `make` | `plantilla-trabajo.pdf` | sí | sí | — | sí |
+| Anotada | `make annotated` | `plantilla-anotada.pdf` | sí | sí | sí | sí |
+| Final | `make final` | `plantilla-final.pdf` | — | — | — | — |
+
+Además, un quinto discriminante **derivado** (`\ifversionfinal`, verdadero cuando
+no hay guías) ajusta la redacción del documento sobre sí mismo; véase D-24.
 
 Cada objetivo define una macro (`\VARIANTEANOTADA`, `\VARIANTEFINAL`) al llamar a
 `pdflatex`, y `metadata.tex` la traduce a la combinación de interruptores. La
@@ -69,7 +72,7 @@ variante de trabajo es la configuración por defecto, de modo que un
 de mejora y entregar un documento limpio son tres necesidades distintas que no
 pueden satisfacerse con un solo PDF, pero tampoco justifican mantener tres copias
 del contenido: cualquier corrección tendría que aplicarse tres veces y las
-variantes divergirían. Páginas resultantes: 67 (trabajo), 73 (anotada), 56 (final).
+variantes divergirían. Páginas resultantes: 67 (trabajo), 73 (anotada), 52 (final).
 *(PROPIA)*
 
 ## D-05. Orden de las secciones: riesgos antes que estrategia
@@ -294,3 +297,65 @@ arábigos, de modo que `\pageref{LastPage}` devuelve el último número arábigo
 (58 en la variante de trabajo), no el total físico de páginas (67). Antes de la
 corrección, una página preliminar mostraba «Página ii de 58», mezclando dos
 sistemas de numeración. *(PROPIA)*
+
+## D-23. Los diagramas son material de apoyo, no contenido del plan
+
+**Decisión.** Las cuatro figuras se controlan con un cuarto interruptor,
+`mostrardiagramas`: aparecen en las variantes de trabajo y anotada, y no en la
+final.
+
+**Motivo.** Los tres PNG de partida eran material de referencia sobre la norma, y
+sus versiones corregidas siguen siéndolo: las figuras 1–3 explican qué es
+ISO/IEC/IEEE 29119, no dicen nada del sistema bajo prueba. Un plan de pruebas
+entregado no necesita un diagrama de las partes de la norma. La figura 4 (cadena
+de trazabilidad) es de creación propia y explica cómo rellenar el Anexo G, de modo
+que también es instruccional; se le da el mismo trato para mantener una regla
+única.
+
+Que los diagramas se incorporaran al documento no fue una invención: el encargo
+inicial pedía crear al menos tres visualizaciones en `diagrams/` y exigía que toda
+figura se mencionara desde el texto. Lo que faltaba era distinguir entre
+*existir en el repositorio* y *formar parte del documento entregable*.
+
+**Consecuencia técnica.** Quince menciones a las figuras estaban repartidas por
+secciones y anexos. Se envolvieron en `\sidiag{...}` y se reescribieron las frases
+para que se sostengan sin el inciso; los párrafos que sólo describían una figura
+—los que el encargo exigía para cada una— quedaron dentro del bloque condicional
+junto a la propia figura. También se ocultan el índice de figuras y la mención a
+las figuras en el título del índice de cuadros. Resultado: 0 referencias sin
+resolver en las tres variantes.
+
+**Reversible.** Basta con poner `\mostrardiagramastrue` dentro del bloque
+`\VARIANTEFINAL` de `config/metadata.tex` si el curso espera que la entrega
+incluya el marco conceptual. *(PROPIA · decisión del autor tras revisar el
+resultado)*
+
+## D-24. La versión de entrega no habla de sí misma como plantilla
+
+**Decisión.** Un discriminante derivado, `\ifversionfinal` (verdadero cuando no se
+componen las guías), gobierna dos cosas en la variante final:
+
+1. **Se suprime** la caja «Cómo leer los bloques de color de esta plantilla». La
+   entrega no explica qué significan el verde, el azul o el gris, ni qué contenido
+   se oculta, ni cómo se compila.
+2. **Se reescribe** el texto que se refiere al documento. `\segunvariante{…}{…}`
+   sustituye «esta plantilla» por «este plan de prueba» donde corresponde, y
+   `\ifversionfinal\else … \fi` recorta los incisos que explican cómo adaptar la
+   plantilla o dónde editar `config/metadata.tex`.
+
+**Motivo.** Un plan de pruebas entregado es un documento sobre un sistema, no
+sobre la herramienta con que se escribió. Mientras el documento se rellena tiene
+sentido que se presente como plantilla; una vez entregado, esa voz es ruido y
+delata el andamiaje.
+
+**Qué se conservó.** La información normativa permanece íntegra en las tres
+variantes, reescrita como información del plan: la declaración de alcance sigue
+diciendo que el documento no declara conformidad con \norma, pero ahora en primera
+persona del plan. También se conservan las nueve políticas académicas, incluidas
+las que fijan la autoridad de aprobación y de aceptación; lo que se recortó de
+ellas fue únicamente la parte que remitía a un archivo del proyecto LaTeX.
+
+**Derivado, no independiente.** `\ifversionfinal` se calcula a partir de
+`mostrarinstrucciones` en lugar de ser un cuarto interruptor manual, para que no
+pueda quedar descoordinado: si alguien apaga las guías a mano, la redacción se
+ajusta sola. *(PROPIA · decisión del autor tras revisar la variante final)*

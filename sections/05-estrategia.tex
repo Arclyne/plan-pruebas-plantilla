@@ -135,25 +135,28 @@ seleccionada complete: objetivo, elemento al que aplica, justificación, cobertu
 riesgo que ayuda a reducir.
 \end{instruccion}
 
+\ifmostrardiagramas
 \input{diagrams/tecnicas-prueba}
 
 La Figura~\ref{fig:tecnicas} clasifica las técnicas de diseño más habituales en tres familias
 —basadas en especificación, basadas en estructura y basadas en experiencia— e indica qué tipo
 de elemento de cobertura genera cada una. Sirve como menú de selección: se elige de él lo que
 el riesgo justifique, no todo su contenido.
+\fi
 
 \begin{notanormativa}[Los objetivos de cobertura no proceden de la norma]
 \norma\ no fija un porcentaje mínimo de cobertura de sentencias ni de decisiones. Un objetivo
 numérico es, a lo sumo, una decisión del proyecto o una política local, y debe declararse con su
-justificación en el apartado~\ref{sec:cobertura}. Por eso la Figura~\ref{fig:tecnicas} indica el
-\emph{elemento de cobertura} que cada técnica produce, no un porcentaje. Alcanzar una cobertura
-determinada tampoco demuestra la ausencia de defectos.
+justificación en el apartado~\ref{sec:cobertura}. Lo que caracteriza a cada técnica es el
+\emph{elemento de cobertura} que produce, no un porcentaje\sidiag{: así se presentan en la
+Figura~\ref{fig:tecnicas}}. Alcanzar una cobertura determinada tampoco demuestra la ausencia de
+defectos.
 \end{notanormativa}
 
 \begin{observacion}[Cobertura mínima del diagrama de técnicas]
 \obsproblema{El diagrama de técnicas de referencia presentaba «cobertura mínima: 100\,\%» para
 sentencias y decisiones, atribuyendo implícitamente ese umbral a \norma.}
-\obscambio{En la Figura~\ref{fig:tecnicas} se retiraron los porcentajes y se sustituyeron por el
+\obscambio{En el mapa de técnicas se retiraron los porcentajes y se sustituyeron por el
 elemento de cobertura de cada técnica; el objetivo numérico se traslada al
 apartado~\ref{sec:cobertura}, donde debe justificarse.}
 \obsjustificacion{No hay base en los materiales examinados para atribuir ese mínimo universal a
@@ -188,8 +191,8 @@ confundirla con una decisión basada en riesgo.
 
 \begin{instruccion}
 Si emplea pruebas por palabras clave (\emph{keyword-driven testing}, \normap{5}) u otro enfoque
-no listado en la Figura~\ref{fig:tecnicas}, agréguelo al Cuadro~\ref{tab:tecnicas} con la misma
-justificación. Su ausencia del diagrama no lo excluye.
+distinto de los habituales, agréguelo al Cuadro~\ref{tab:tecnicas} con la misma justificación.
+No estar entre las técnicas más frecuentes no lo excluye.
 \end{instruccion}
 
 % ---------------------------------------------------------------------
@@ -205,7 +208,8 @@ requisitos, de las particiones ni de las decisiones del código.
 
 \begin{notanormativa}[Tres preguntas distintas: avance, cobertura y veredicto]
 Al reportar una prueba se mezclan con frecuencia tres magnitudes que responden a preguntas
-diferentes y que esta plantilla mantiene separadas de principio a fin:
+diferentes y que \segunvariante{esta plantilla mantiene}{este plan mantiene} separadas de
+principio a fin:
 
 \medskip
 \begin{center}
@@ -431,8 +435,8 @@ obtenidos antes de la suspensión siguen siendo válidos y cuáles deben volver 
         \emph{ya funcionaba}, para detectar efectos adversos introducidos por el cambio.
 \end{itemize}
 Llamar «regresión» a cualquier verificación de una corrección oculta que la segunda actividad
-—comprobar que no se rompió nada más— puede no estarse realizando. La
-Figura~\ref{fig:procesos} representa ambas por separado.
+—comprobar que no se rompió nada más— puede no estarse realizando.\sidiag{ La
+Figura~\ref{fig:procesos} representa ambas por separado.}
 \end{notanormativa}
 
 \begin{observacion}[«Verificar correcciones» rotulado como regresión]
@@ -440,8 +444,8 @@ Figura~\ref{fig:procesos} representa ambas por separado.
 correcciones» a la prueba de regresión, y el apartado equivalente de la plantilla anterior
 pedía «investigar cuál es la diferencia» en lugar de exigir que se planificaran ambas.}
 \obscambio{Las dos actividades se definen y planifican por separado, con un cuadro comparativo
-que obliga a fijar disparador, criterio de selección y responsable de cada una; la
-Figura~\ref{fig:procesos} las dibuja como cajas distintas.}
+que obliga a fijar disparador, criterio de selección y responsable de cada una, y el diagrama
+del flujo del proceso las dibuja como cajas distintas.}
 \obsfuente{OBS §5.5 · DIAG}
 \end{observacion}
 
