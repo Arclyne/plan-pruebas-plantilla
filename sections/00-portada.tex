@@ -1,0 +1,109 @@
+% =====================================================================
+%  Portada y consideraciones generales de uso de la plantilla
+% =====================================================================
+
+\thispagestyle{uvestilo}
+
+\begin{instruccion}[Consideraciones generales para el uso de esta plantilla]
+\begin{itemize}
+  \item Cuide la redacción y la ortografía; respete tipografía, interlineado y justificación.
+  \item No pierda el encabezado ni el pie de página al agregar contenido.
+  \item Actualice los cuadros de \emph{Historial} y \emph{Revisiones} en cada entrega.
+  \item El índice, los índices de cuadros y figuras y las referencias cruzadas se generan
+        solos: basta con recompilar el documento dos veces.
+  \item \textbf{Todos} los cuadros y figuras deben estar referidos desde el texto
+        (\texttt{\textbackslash ref\{...\}}), indicando qué información presentan y una
+        breve explicación.
+  \item Para producir la versión final de entrega basta con ejecutar \texttt{make final}:
+        las guías verdes y los ejemplos azules desaparecen y el resto del documento no
+        cambia. Para hacerlo permanente, ponga a \texttt{false} los dos interruptores
+        \texttt{mostrarinstrucciones} y \texttt{mostrarejemplos} de
+        \texttt{config/metadata.tex}.
+  \item Sustituya cada marcador \campo{así} por el contenido que corresponda.
+\end{itemize}
+\end{instruccion}
+
+\begin{notanormativa}[Cómo leer los bloques de color de esta plantilla]
+\begin{itemize}
+  \item \textcolor{instrverde}{\textbf{Verde}} — guía de la plantilla: explica qué debe
+        escribirse. Se elimina en la versión final.
+  \item \textcolor{ejemazul}{\textbf{Azul}} — ejemplo ilustrativo. No es contenido a conservar.
+  \item \textcolor{polinaranja}{\textbf{Naranja}} — política académica del curso.
+        Es una regla \emph{local}, no un requisito de \norma.
+  \item \textcolor{normgris}{\textbf{Gris}} — referencia normativa o aclaración conceptual,
+        con su fuente identificada.
+\end{itemize}
+Esta separación responde a una observación explícita de la revisión: el lector debe poder
+distinguir de inmediato un requisito del curso de una recomendación de la norma.
+\end{notanormativa}
+
+\clearpage
+
+% --------------------------- PORTADA ---------------------------------
+\begin{center}
+  \vspace*{1.5\baselineskip}
+
+  {\large\bfseries \uvUniversidad}\\[2pt]
+  {\normalsize \uvFacultad}\\[2pt]
+  {\normalsize \uvPrograma}\\[2pt]
+  {\normalsize \uvEE}
+
+  \vspace{3\baselineskip}
+
+  {\Huge\bfseries\color{uvazul} \docTitulo}
+
+  \vspace{1.2\baselineskip}
+  {\LARGE \docProyecto}
+
+  \vspace{3\baselineskip}
+
+  \begin{tabularx}{0.82\textwidth}{|E{3.6cm}|Y|}
+    \hline
+    Fecha            & \docFecha \\ \hline
+    Equipo           & \docEquipo \\ \hline
+    Integrantes      & \docIntegrantes \\ \hline
+    Versión del documento & \docVersionDoc \\ \hline
+  \end{tabularx}
+
+  \vspace{2.5\baselineskip}
+
+  \begin{minipage}{0.86\textwidth}\small\centering
+    El presente documento se basa en la estructura de documentación de la prueba indicada en
+    \normap{3}, \emph{Software and systems engineering — Software testing — Part~3: Test
+    documentation}, y en el modelo de procesos de \normap{2}.
+  \end{minipage}
+
+  \vfill
+\end{center}
+
+\clearpage
+
+% --------------------- INFORMACIÓN DEL PROYECTO ----------------------
+\section*{Información del proyecto}
+\phantomsection
+\addcontentsline{toc}{part}{Información del proyecto}
+
+\begin{instruccion}
+Identifique el proyecto que será sometido a prueba y su situación actual. El
+\emph{estatus} sirve para justificar decisiones posteriores: no se planifica igual la prueba
+de un sistema terminado que la de uno en desarrollo activo.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Identificación del proyecto sometido a prueba.}
+\label{tab:info-proyecto}
+\begin{tabularx}{\textwidth}{|E{5cm}|Y|}
+  \hline
+  Equipo desarrollador            & \campo{Quién construyó el software} \\ \hline
+  Proyecto                        & \campo{Nombre y versión del sistema} \\ \hline
+  Estatus actual del proyecto     & \campo{En desarrollo / entregado / en mantenimiento} \\ \hline
+  Experiencia Educativa           & \uvEE \\ \hline
+  Equipo de prueba                & \docEquipo \\ \hline
+  Periodo del esfuerzo de prueba  & \campo{dd/mm/aaaa – dd/mm/aaaa} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:info-proyecto} identifica el sistema que será probado, quién lo desarrolló
+y en qué estado se encuentra al iniciar el esfuerzo de prueba; estos datos delimitan lo que el
+resto del plan puede asumir como disponible.

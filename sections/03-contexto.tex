@@ -1,0 +1,318 @@
+% =====================================================================
+%  2. Contexto del esfuerzo de prueba   (actividad TP1 de ISO/IEC/IEEE 29119-2)
+% =====================================================================
+\section{Contexto}
+
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Este apartado desarrolla la actividad \textbf{TP1 «Comprender el contexto»} de \normap{2}:
+identificar partes interesadas, analizar el elemento de prueba y la base de prueba, consultar
+la política y estrategia aplicables y registrar las restricciones de tiempo, recursos y
+regulación.
+\end{notanormativa}
+
+% ---------------------------------------------------------------------
+\subsection{Proyecto caso de estudio}
+
+\begin{instruccion}
+Dé antecedentes del proyecto a probar: autores originales, objetivos, alcances y límites,
+plataformas en que está desarrollado, funcionalidades generales que aborda y cualquier otra
+información pertinente. Debe ser lo bastante explícito para que un lector externo entienda
+qué hace el sistema sin consultar otros documentos.
+\end{instruccion}
+
+\campo{Describa aquí el proyecto caso de estudio}
+
+% ---------------------------------------------------------------------
+\subsection{Objetivo de la prueba}
+
+\begin{instruccion}
+Indique el objetivo general \textbf{de la prueba}, no del sistema. Un objetivo de prueba
+enuncia qué se pretende averiguar o demostrar y para qué decisión sirve; no describe las
+funciones del software.
+
+Formule también objetivos específicos, cada uno asociado a los riesgos que pretende reducir
+(apartado~\ref{sec:riesgos}). Esa asociación es la que permite justificar después la estrategia.
+\end{instruccion}
+
+\begin{ejemplo}
+\textbf{Objetivo de prueba (correcto):} «Determinar si el módulo de facturación calcula
+correctamente totales, impuestos y descuentos bajo las combinaciones de reglas de negocio
+vigentes, con el fin de sustentar la decisión de liberación.»
+
+\textbf{Objetivo del sistema (incorrecto en este apartado):} «Permitir a los usuarios emitir
+facturas electrónicas.»
+\end{ejemplo}
+
+\campo{Objetivo general de la prueba}
+
+\begin{table}[H]
+\centering
+\caption{Objetivos específicos de la prueba y riesgos que pretenden reducir.}
+\label{tab:objetivos}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|Y|C{2.2cm}|C{3.2cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Objetivo específico de la prueba} & \textbf{Riesgo(s) asociado(s)} & \textbf{Cómo se evidenciará} \\ \hline
+  \campo{OBJ-01} & \campo{Qué se pretende averiguar} & \campo{RP-01} & \campo{Registro o métrica} \\ \hline
+  & & & \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:objetivos} vincula cada objetivo específico con los riesgos del
+apartado~\ref{sec:riesgos} y con la evidencia que permitirá comprobar si el objetivo se
+alcanzó; sin esa columna, el objetivo no es verificable al cierre.
+
+% ---------------------------------------------------------------------
+\subsection{Objeto de prueba y base de prueba}
+\label{sec:objeto-base}
+
+\begin{notanormativa}[Corrección respecto de la plantilla original]
+La plantilla original equiparaba los «elementos de prueba» con los \emph{casos de uso}. Son
+cosas distintas y conviene registrarlas por separado:
+\begin{itemize}
+  \item El \textbf{objeto de prueba} es lo que se somete a prueba: sistema, subsistema,
+        módulo, componente, servicio, API o interfaz.
+  \item La \textbf{base de prueba} es la fuente contra la que se juzga ese objeto: requisitos,
+        historias de usuario, casos de uso, reglas de negocio, arquitectura o diseño.
+\end{itemize}
+Un caso de uso es, casi siempre, base de prueba y no objeto de prueba. Separarlos permite
+aplicar esta plantilla a proyectos que no estén documentados mediante casos de uso.
+\end{notanormativa}
+
+\begin{instruccion}
+Identifique primero los objetos bajo prueba con su versión exacta, y después la base de prueba
+que se usará para derivar las condiciones de prueba. Si alguna parte del sistema carece de base
+documentada, dígalo: es una restricción real que condiciona las técnicas aplicables
+(apartado~\ref{sec:tecnicas}) y suele constituir un riesgo de proyecto.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Objetos bajo prueba, con su versión y criticidad asignada.}
+\label{tab:objetos}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|L{3.4cm}|C{2.1cm}|C{1.9cm}|Y|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Objeto de prueba} & \textbf{Tipo} & \textbf{Versión} & \textbf{Criticidad asignada (\ref{sec:criticidad})} \\ \hline
+  \campo{OP-01} & \campo{Módulo de facturación} & \campo{Módulo} & \campo{v1.2.0} & \campo{Crítico} \\ \hline
+  \campo{OP-02} & \campo{API de autenticación} & \campo{Servicio} & \campo{v1.2.0} & \campo{Catastrófico} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Tipo sugerido: sistema · subsistema · módulo · componente · servicio · API · interfaz de usuario · interfaz externa · base de datos.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Base de prueba utilizada para derivar las condiciones de prueba.}
+\label{tab:base-prueba}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|L{3.9cm}|C{2.3cm}|C{2.0cm}|Y|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Elemento de la base} & \textbf{Tipo} & \textbf{Referente (\ref{tab:referentes})} & \textbf{Objeto(s) que sustenta} \\ \hline
+  \campo{BP-01} & \campo{RF-12 Cálculo de total} & \campo{Requisito} & \campo{REF-02} & \campo{OP-01} \\ \hline
+  \campo{BP-02} & \campo{CU-03 Emitir factura} & \campo{Caso de uso} & \campo{REF-02} & \campo{OP-01} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Tipo sugerido: requisito funcional · requisito no funcional · historia de usuario · caso de uso · regla de negocio · documento de arquitectura · especificación de interfaz · norma aplicable.}
+\end{table}
+
+Los Cuadros~\ref{tab:objetos} y~\ref{tab:base-prueba} responden a dos preguntas distintas:
+\emph{qué se prueba} y \emph{contra qué se juzga}. Sus claves son el punto de partida de la
+matriz de trazabilidad del \ref{anx:trazabilidad}, que encadena base de prueba, riesgo,
+condición, caso, ejecución, evidencia e incidente.
+
+% ---------------------------------------------------------------------
+\subsection{Criticidad asignada a los objetos de prueba}
+\label{sec:criticidad}
+
+\begin{politicaacademica}[Política académica: escala de criticidad (SIL)]
+El curso emplea una escala de cuatro niveles para clasificar la criticidad de los objetos de
+prueba: \textbf{Catastrófico}, \textbf{Crítico}, \textbf{Marginal} y \textbf{Despreciable}.
+Esta escala es una \emph{regla local de la Experiencia Educativa}. Describa en el
+Cuadro~\ref{tab:sil} el significado que su equipo da a cada nivel, quién lo asigna y con qué
+criterio.
+\end{politicaacademica}
+
+\begin{notanormativa}[Por qué esta escala no se atribuye a \norma]
+La revisión señaló que las etiquetas anteriores se presentaban como si procedieran de \norma.
+No es así: \norma\ no define esa escala de cuatro niveles. El marco internacional para niveles
+de integridad es \textbf{ISO/IEC/IEEE 15026-3} (\emph{Systems and software assurance —
+Integrity levels}), que exige definir los niveles, los requisitos asociados a cada uno y el
+método de asignación. Mientras esos elementos no se definan y verifiquen contra dicha norma,
+la escala debe tratarse como una clasificación académica interna y no como un nivel de
+integridad en sentido normativo.
+\end{notanormativa}
+
+\begin{instruccion}
+Complete el cuadro siguiente antes de usar la escala. Un nivel de criticidad sin definición ni
+método de asignación no puede justificar decisiones de cobertura ni de técnicas.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Definición local de la escala de criticidad y su efecto sobre la estrategia.}
+\label{tab:sil}
+\begin{tabularx}{\textwidth}{|C{2.3cm}|Y|C{2.6cm}|L{3.5cm}|}
+  \hline
+  \filaenc \textbf{Nivel} & \textbf{Significado acordado por el equipo (consecuencia de un fallo)} & \textbf{Quién lo asigna y cuándo} & \textbf{Efecto sobre la estrategia} \\ \hline
+  Catastrófico & \campo{p.\,ej. pérdida económica irreversible, daño legal o de seguridad} & \campo{Rol y momento} & \campo{Cobertura objetivo, técnicas y niveles} \\ \hline
+  Crítico      & \campo{Significado} & \campo{Rol y momento} & \campo{Efecto} \\ \hline
+  Marginal     & \campo{Significado} & \campo{Rol y momento} & \campo{Efecto} \\ \hline
+  Despreciable & \campo{Significado} & \campo{Rol y momento} & \campo{Efecto} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:sil} hace explícito qué significa cada nivel y cómo modifica la estrategia;
+la asignación concreta a cada objeto se registra en el Cuadro~\ref{tab:objetos}. El criterio de
+asignación debe ser la \emph{consecuencia de un fallo}, no la dificultad de probar el elemento.
+
+% ---------------------------------------------------------------------
+\subsection{Alcance de la prueba}
+\label{sec:alcance}
+
+\begin{notanormativa}[Corrección respecto de la plantilla original]
+La plantilla original orientaba las características a probar únicamente hacia los
+\emph{requisitos no funcionales}. El alcance debe declarar explícitamente ambos tipos:
+características \textbf{funcionales} (calcular un total, autorizar una operación) y
+\textbf{no funcionales} (rendimiento, seguridad, usabilidad, compatibilidad). Además, toda
+exclusión debe justificarse y relacionarse con el riesgo que se asume al excluirla.
+\end{notanormativa}
+
+\begin{instruccion}
+Llene los tres cuadros siguientes. Para las características no funcionales puede apoyarse en el
+modelo de calidad de producto de \textbf{ISO/IEC 25010:2023} (adecuación funcional, eficiencia
+de desempeño, compatibilidad, capacidad de interacción, fiabilidad, seguridad, mantenibilidad,
+flexibilidad y seguridad física) y en los requisitos no funcionales del propio sistema. Si cita
+un anexo de \normap{4}, indique la edición consultada.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Características funcionales incluidas en el alcance.}
+\label{tab:alcance-f}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|C{1.7cm}|Y|C{2.2cm}|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Objeto (\ref{tab:objetos})} & \textbf{Característica funcional a probar} & \textbf{Base (\ref{tab:base-prueba})} & \textbf{Prioridad} \\ \hline
+  \campo{CF-01} & \campo{OP-01} & \campo{Cálculo de total con descuentos} & \campo{BP-01} & \campo{Alta} \\ \hline
+  & & & & \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Características no funcionales incluidas en el alcance.}
+\label{tab:alcance-nf}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|C{1.7cm}|L{3.5cm}|Y|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Objeto} & \textbf{Característica de calidad} & \textbf{Criterio o umbral acordado} & \textbf{Prioridad} \\ \hline
+  \campo{CNF-01} & \campo{OP-02} & \campo{Seguridad — autenticación} & \campo{Umbral verificable} & \campo{Alta} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Una característica no funcional sin criterio o umbral acordado no es verificable: acuérdelo con los interesados antes de diseñar los casos.}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Exclusiones del alcance, su motivo y el riesgo que se asume.}
+\label{tab:exclusiones}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|L{3.7cm}|Y|C{2.6cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Qué se excluye} & \textbf{Justificación de la exclusión} & \textbf{Riesgo asumido (\ref{sec:riesgos})} \\ \hline
+  \campo{EX-01} & \campo{Característica u objeto} & \campo{Por qué no se prueba} & \campo{RP-04} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+Los Cuadros~\ref{tab:alcance-f} y~\ref{tab:alcance-nf} delimitan lo que sí se probará,
+distinguiendo características funcionales de no funcionales; el Cuadro~\ref{tab:exclusiones}
+declara lo que queda fuera y, sobre todo, el riesgo que el proyecto acepta al excluirlo. Ese
+riesgo debe reaparecer entre los riesgos residuales del apartado~\ref{sec:residuales}.
+
+% ---------------------------------------------------------------------
+\subsection{Supuestos y límites}
+\label{sec:supuestos}
+
+\begin{instruccion}
+Describa los supuestos y limitaciones considerados al elaborar el plan: estándares a cumplir,
+política o estrategia de prueba aplicable, tiempo, costo, disponibilidad de personal,
+capacitación, herramientas y entornos. Un supuesto es algo que se da por cierto sin haberlo
+verificado; si resulta falso, suele convertirse en un riesgo de proyecto.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Supuestos y restricciones del esfuerzo de prueba.}
+\label{tab:supuestos}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|C{2.2cm}|Y|C{2.6cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Tipo} & \textbf{Enunciado} & \textbf{Si no se cumple} \\ \hline
+  \campo{SUP-01} & \campo{Supuesto} & \campo{El entorno estará disponible desde la semana 3} & \campo{RPy-02} \\ \hline
+  \campo{LIM-01} & \campo{Restricción} & \campo{No se dispone de datos reales de producción} & \campo{Efecto en el plan} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\notatabla{Tipo: \textit{Supuesto} (se da por cierto y puede fallar) · \textit{Restricción} (límite conocido y firme).}
+\end{table}
+
+El Cuadro~\ref{tab:supuestos} explicita las condiciones bajo las cuales el plan es válido y
+enlaza cada supuesto con el riesgo de proyecto en que se convierte si no se cumple.
+
+\begin{politicaacademica}[Política académica: política general de prueba del curso]
+La Experiencia Educativa fija la siguiente política de cobertura mínima \emph{a nivel de
+planeación}, en función de la criticidad asignada a cada objeto de prueba
+(apartado~\ref{sec:criticidad}):
+
+\medskip
+\begin{center}
+\begin{tabular}{|L{3.4cm}|C{3.2cm}|}
+  \hline
+  \filaenc \textbf{Criticidad} & \textbf{Cobertura mínima} \\ \hline
+  Catastrófico  & 100\,\% \\ \hline
+  Crítico       & 80\,\% \\ \hline
+  Marginal      & 60\,\% \\ \hline
+  Despreciable  & 40\,\% \\ \hline
+\end{tabular}
+\end{center}
+\medskip
+
+A nivel de ejecución, deberá someterse a prueba la totalidad de los elementos con criticidad
+\emph{Catastrófico}. Las demás técnicas abordadas en el curso se aplicarán según corresponda a
+ese mismo nivel de integridad, justificando su elección según las características de las
+unidades a probar.
+
+\textbf{Estos porcentajes son una regla del curso, no un umbral de \norma.} Para que sean
+interpretables debe declararse sobre \emph{qué elemento} se calcula la cobertura: no es lo
+mismo cubrir el 80\,\% de los requisitos que el 80\,\% de las particiones de equivalencia o de
+las decisiones del código. Defina ese elemento en el apartado~\ref{sec:cobertura}.
+\end{politicaacademica}
+
+\begin{instruccion}
+Si reutiliza esta plantilla fuera del curso, sustituya la caja anterior por la política de
+prueba de su organización, o por umbrales acordados con los interesados y justificados por el
+riesgo. Deje constancia de esa adaptación en el apartado~\ref{sec:desviaciones}.
+\end{instruccion}
+
+% ---------------------------------------------------------------------
+\subsection{Interesados en la prueba}
+
+\begin{instruccion}
+Relacione a los interesados (\emph{stakeholders}) en la prueba y su relevancia para el proceso,
+indicando los objetivos y expectativas que tienen sobre la prueba en función de su rol.
+Identifique también qué información necesita recibir cada uno y con qué periodicidad: ese dato
+alimenta directamente el plan de comunicación del apartado~\ref{sec:informes}.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Interesados en la prueba, expectativas y necesidades de información.}
+\label{tab:interesados}
+\begin{tabularx}{\textwidth}{|L{3.2cm}|L{2.9cm}|Y|C{2.9cm}|}
+  \hline
+  \filaenc \textbf{Interesado} & \textbf{Rol frente a la prueba} & \textbf{Objetivo o expectativa} & \textbf{Información y frecuencia} \\ \hline
+  \campo{Nombre o grupo} & \campo{Decide / informa / provee} & \campo{Qué espera obtener de la prueba} & \campo{Informe de estado semanal} \\ \hline
+  & & & \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:interesados} identifica a quién sirve el esfuerzo de prueba y qué espera
+cada parte; la última columna determina los destinatarios y la periodicidad de los informes de
+estado definidos en el apartado~\ref{sec:informes} y formalizados en el \ref{anx:informes}.
