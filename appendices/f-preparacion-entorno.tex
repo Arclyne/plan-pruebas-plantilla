@@ -4,13 +4,22 @@
 \section{Registro de preparación de entorno y datos}
 \label{anx:entorno}
 
-\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
 Corresponde a las actividades \textbf{ES1 «Establecer el entorno de prueba»} y \textbf{ES2
 «Mantener el entorno de prueba»} de \normap{2}, e implementa la verificación de los criterios de
-entrada CE-04 y CE-05 del Cuadro~\ref{tab:criterios-entrada}. La plantilla original describía
-los requisitos del entorno, pero no dejaba constancia de que se hubieran cumplido antes de
-ejecutar.
+entrada CE-04 y CE-05 del Cuadro~\ref{tab:criterios-entrada}.
 \end{notanormativa}
+
+\begin{observacion}[El entorno se describía, pero no se dejaba constancia]
+\obsproblema{La plantilla anterior especificaba los requisitos del entorno y de los datos, pero
+no preveía dejar constancia de que estuvieran preparados antes de ejecutar, ni de los cambios
+aplicados durante el ciclo, ni de las restauraciones entre ejecuciones.}
+\obscambio{Nuevo anexo con tres cuadros: verificación de disponibilidad con responsable y fecha,
+cambios aplicados con las ejecuciones afectadas, y restauraciones realizadas.}
+\obsjustificacion{Sin él, las columnas de entorno y configuración del \ref{anx:ejecuciones} no
+pueden respaldarse y dos resultados dejan de ser comparables sin que nadie lo advierta.}
+\obsfuente{OBS §3 · PDF §1.4 (ES1, ES2)}
+\end{observacion}
 
 \begin{instruccion}
 Complete un registro por cada ciclo de prueba, o cada vez que el entorno cambie. Los requisitos

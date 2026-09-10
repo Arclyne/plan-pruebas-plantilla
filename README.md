@@ -5,6 +5,18 @@ su reporte de finalización, con los formatos de registro que el proceso de prue
 necesita: casos, procedimientos, ejecuciones, incidentes, informes de estado,
 preparación del entorno y matriz de trazabilidad.
 
+Una **sola fuente LaTeX** genera **tres variantes** del documento; lo único que
+cambia entre ellas es qué bloques se componen:
+
+| Variante | Comando | Archivo | Para qué sirve |
+|---|---|---|---|
+| Trabajo | `make` | `plantilla-trabajo.pdf` | Rellenar la plantilla. Incluye guías, ejemplos, políticas académicas y notas conceptuales. |
+| Anotada | `make annotated` | `plantilla-anotada.pdf` | Entender el origen de las correcciones. Añade los bloques de *Observación de la revisión*. No se entrega. |
+| Final | `make final` | `plantilla-final.pdf` | Entregar el plan ya rellenado. Sin guías, ejemplos ni observaciones. |
+
+No existen tres copias de las secciones: las tres variantes salen de los mismos
+archivos de `sections/` y `appendices/`.
+
 Universidad Veracruzana · Facultad de Estadística e Informática
 Licenciatura en Ingeniería de Software · EE. Pruebas de Software
 
@@ -54,10 +66,12 @@ latexmk -v && pdflatex --version | head -1
 ## 2. Cómo compilar
 
 ```sh
-make            # compila main.tex -> main.pdf   (versión de trabajo, con guías)
-make final      # compila plan-pruebas-final.pdf (versión de entrega, sin guías)
-make watch      # recompila automáticamente al guardar
-make view       # abre el PDF
+make            # plantilla-trabajo.pdf  · plantilla por rellenar
+make annotated  # plantilla-anotada.pdf  · + origen de las correcciones
+make final      # plantilla-final.pdf    · documento de entrega
+make variantes  # las tres de una vez
+make watch      # recompila la versión de trabajo al guardar
+make view       # abre la versión de trabajo
 make help       # lista los objetivos disponibles
 ```
 
@@ -65,6 +79,18 @@ Sin `make`, el objetivo principal de compilación es:
 
 ```sh
 latexmk -pdf main.tex
+```
+
+que produce la variante de trabajo (es la configuración por defecto de
+`config/metadata.tex`). Las otras dos se obtienen definiendo una macro al
+compilar:
+
+```sh
+latexmk -pdf -jobname=plantilla-anotada \
+  -pdflatex='pdflatex %O "\def\VARIANTEANOTADA{}\input{%S}"' main.tex
+
+latexmk -pdf -jobname=plantilla-final \
+  -pdflatex='pdflatex %O "\def\VARIANTEFINAL{}\input{%S}"' main.tex
 ```
 
 `latexmk` ejecuta `pdflatex` las veces necesarias para resolver el índice, los
@@ -75,7 +101,7 @@ unos 25 segundos).
 
 ```sh
 make clean      # borra .aux .log .toc .lof .lot .out .fls .fdb_latexmk …
-make cleanall   # borra además los PDF generados
+make cleanall   # borra además los PDF de las tres variantes
 ```
 
 Equivalente sin `make`: `latexmk -c main.tex`.
@@ -89,7 +115,8 @@ Makefile                  Objetivos de compilación y limpieza.
 config/
   preamble.tex            Paquetes, geometría, tipografía, encabezado, pie y estilos de tabla.
   metadata.tex            ← DATOS DEL EQUIPO Y DEL PROYECTO. Es lo primero que debe editar.
-  commands.tex            Cajas de la plantilla (instrucción, ejemplo, política, nota) y comandos propios.
+  commands.tex            Cajas de la plantilla (instrucción, ejemplo, política, nota, observación)
+                          y comandos propios.
 
 sections/
   00-portada.tex          Consideraciones de uso, portada e información del proyecto.
@@ -221,34 +248,51 @@ y en el texto: `La Figura~\ref{fig:cronograma} muestra…`.
 existentes, e inclúyalo con `\input{diagrams/mi-diagrama}` desde la sección
 correspondiente. Las bibliotecas TikZ ya cargadas están en `config/preamble.tex`.
 
-## 9. Cómo activar y desactivar las instrucciones de la plantilla
+## 9. Cómo controlar qué se muestra en cada variante
 
-El documento usa **cuatro tipos de bloque** con significado propio:
+El documento usa **cinco tipos de bloque** con significado propio, y tres
+interruptores deciden cuáles se componen:
 
-| Bloque | Color | Qué es | ¿Se oculta? |
-|---|---|---|---|
-| `instruccion` | verde | Guía de la plantilla: qué debe escribirse. | Sí |
-| `ejemplo` | azul | Ilustración; no es contenido a conservar. | Sí |
-| `politicaacademica` | naranja | Regla local del curso, **no** requisito de la norma. | No |
-| `notanormativa` | gris | Referencia normativa o aclaración, con su fuente. | No |
+| Bloque | Color | Qué es | trabajo | anotada | final |
+|---|---|---|:--:|:--:|:--:|
+| `instruccion` | verde | Guía de la plantilla: qué debe escribirse. | sí | sí | — |
+| `ejemplo` | azul | Ilustración; no es contenido a conservar. | sí | sí | — |
+| `observacion` | morado | Origen de una corrección respecto de la plantilla anterior. | — | sí | — |
+| `politicaacademica` | naranja | Regla local del curso, **no** requisito de la norma. | sí | sí | sí |
+| `notanormativa` | gris | Referencia normativa o aclaración conceptual. | sí | sí | sí |
 
-**Para la entrega**, ejecute:
+Los dos últimos **nunca se ocultan**: son contenido del plan. Una política
+académica sigue vigente mientras el curso la exija, y una nota conceptual explica
+una distinción que el plan necesita (cobertura frente a veredicto, confirmación
+frente a regresión), no el historial de la plantilla.
 
-```sh
-make final      # genera plan-pruebas-final.pdf sin guías ni ejemplos
-```
-
-o, de forma permanente, edite `config/metadata.tex`:
+**Lo habitual es no tocar nada**: elija la variante desde el Makefile. Si quiere
+fijar una combinación distinta de forma permanente, edite los interruptores de
+`config/metadata.tex`:
 
 ```latex
-\mostrarinstruccionesfalse
-\mostrarejemplosfalse
+\newif\ifmostrarinstrucciones   \mostrarinstruccionestrue
+\newif\ifmostrarejemplos        \mostrarejemplostrue
+\newif\ifmostrarobservaciones   \mostrarobservacionesfalse
 ```
 
-Las cajas naranjas y grises **no** se ocultan: son contenido vigente del plan. Si
-reutiliza la plantilla fuera del curso, sustituya las cajas naranjas por la
-política de prueba de su organización y registre el cambio en el apartado
-*Desviaciones respecto de la estrategia acordada*.
+### Cómo escribir una observación nueva
+
+Sólo tiene sentido en la variante anotada. El bloque del PDF es un **resumen**;
+la explicación completa vive en `docs/MATRIZ_CAMBIOS.md`, para no duplicarla:
+
+```latex
+\begin{observacion}[Título corto]
+  \obsproblema{Qué estaba mal en la plantilla anterior.}
+  \obscambio{Qué se hizo en su lugar.}
+  \obsjustificacion{Por qué ese cambio resuelve el problema.}   % opcional
+  \obsfuente{OBS §4.4}
+\end{observacion}
+```
+
+Las claves de `\obsfuente` siguen el criterio de `docs/MATRIZ_CAMBIOS.md`:
+`OBS §n` (documento de observaciones), `PDF §n` (plan de trabajo 29119), `DIAG`
+(análisis de los diagramas) y `PROPIA` (criterio de esta reingeniería).
 
 ## 10. Solución de problemas
 
@@ -258,7 +302,9 @@ política de prueba de su organización y registre el cambio en el apartado
 | `File 'xltabular.sty' not found` | Instalación BasicTeX incompleta: ejecute el `tlmgr install` de la sección 1. |
 | Una tabla se sale del margen | Reduzca el ancho de alguna columna `C{...}`/`L{...}`, o deje que una columna `Y` absorba el sobrante. |
 | Cambió un dato y el PDF no se actualiza | `make clean && make`. |
-| El PDF de entrega sigue mostrando las guías | Está abriendo `main.pdf`; la entrega es `plan-pruebas-final.pdf`. |
+| El PDF de entrega sigue mostrando las guías | Está abriendo `plantilla-trabajo.pdf`; la entrega es `plantilla-final.pdf`. |
+| La versión de trabajo muestra bloques morados | Está abriendo `plantilla-anotada.pdf`; para rellenar use `plantilla-trabajo.pdf`. |
+| Cambió una observación y no aparece | Las observaciones sólo se componen en `make annotated`. |
 
 ## 11. Documentación del proyecto
 

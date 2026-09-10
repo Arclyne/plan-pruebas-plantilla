@@ -15,7 +15,10 @@
 
 # El PDF compilado se regenera con «make»; no se versiona.
 main.pdf
-plan-pruebas-final.pdf
+plantilla-trabajo.pdf
+plantilla-anotada.pdf
+plantilla-final.pdf
+
 
 # --- Sistema operativo ------------------------------------------------
 .DS_Store

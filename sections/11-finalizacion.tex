@@ -10,10 +10,8 @@ consultado, el proceso más frecuentemente omitido en la práctica, pese a ser e
 mejora continua.
 \end{notanormativa}
 
-\begin{notanormativa}[Corrección estructural respecto de la plantilla original]
-La plantilla original resolvía el cierre con un apartado de «evaluación de la finalización» que
-determinaba el nivel de garantía de calidad \emph{a partir de la cobertura} alcanzada. La
-revisión pide separar seis cosas que allí quedaban mezcladas, y que aquí ocupan apartados
+\begin{notanormativa}[Seis preguntas distintas en el cierre]
+El cierre responde a seis preguntas que conviene no mezclar, y que aquí ocupan apartados
 distintos:
 \begin{enumerate}
   \item qué actividades se completaron (\ref{sec:resumen-final});
@@ -26,6 +24,17 @@ distintos:
 Haber ejecutado el 100\,\% de los casos —aun si muchos fallaron— no demuestra que el producto
 sea aceptable.
 \end{notanormativa}
+
+\begin{observacion}[«Evaluación de la finalización» basada en cobertura]
+\obsproblema{La plantilla anterior resolvía el cierre con un único apartado que determinaba «el
+nivel de garantía de calidad logrado con base a la cobertura de las pruebas realizadas», sin
+distinguir actividades completadas, resultados, incidentes abiertos, riesgo residual ni
+autoridad de aceptación.}
+\obscambio{El cierre se desglosa en los seis apartados enumerados arriba, con un cuadro de
+decisión de aceptación que separa la recomendación técnica del equipo de la decisión de quien
+asume el riesgo residual.}
+\obsfuente{OBS §4.6}
+\end{observacion}
 
 % ---------------------------------------------------------------------
 \section{Resumen de las pruebas realizadas}
@@ -60,10 +69,14 @@ sobre la calidad del producto.
 \label{sec:resultados}
 
 \begin{instruccion}
-Presente los resultados agregados de la ejecución, tomados del \ref{anx:ejecuciones}: cuántas
-pruebas se ejecutaron y con qué veredicto, y qué cobertura se alcanzó según las medidas
-definidas en el Cuadro~\ref{tab:cobertura}. Recuerde que el porcentaje de casos ejecutados es
-avance, no cobertura: repórtelos en filas distintas.
+Presente los resultados agregados de la ejecución, tomados del \ref{anx:ejecuciones} y del
+Cuadro~\ref{tab:cobertura-base}. El cuadro está dividido en los tres bloques que el
+apartado~\ref{sec:cobertura} mantiene separados —avance, cobertura y veredicto—; respete la
+división al rellenarlo y no traslade cifras de un bloque a otro.
+
+En particular, la cobertura se calcula sobre lo \emph{ejercitado}: un elemento probado por un
+caso que falló cuenta en el bloque de cobertura \textbf{y} en el de resultados. No lo descuente
+del primero.
 \end{instruccion}
 
 \begin{table}[H]
@@ -73,20 +86,27 @@ avance, no cobertura: repórtelos en filas distintas.
 \begin{tabularx}{\textwidth}{|L{5.2cm}|C{2.6cm}|Y|}
   \hline
   \filaenc \textbf{Indicador} & \textbf{Valor} & \textbf{Comentario} \\ \hline
+  \multicolumn{3}{|l|}{\cellcolor{uvgrisc}\textbf{Avance} — ¿cuánto del trabajo previsto se realizó?} \\ \hline
   Casos de prueba especificados        & \campo{n} & \campo{} \\ \hline
-  Ejecuciones realizadas               & \campo{n} & \campo{Incluye repeticiones} \\ \hline
-  Veredicto \emph{aprobado}            & \campo{n} & \campo{} \\ \hline
-  Veredicto \emph{no aprobado}         & \campo{n} & \campo{} \\ \hline
-  Veredicto \emph{no concluyente}      & \campo{n} & \campo{} \\ \hline
+  Ejecuciones realizadas               & \campo{n} & \campo{Incluye repeticiones y regresiones} \\ \hline
   Casos bloqueados o no ejecutados     & \campo{n} & \campo{Motivo} \\ \hline
   Avance de ejecución (\%)             & \campo{\%} & Casos ejecutados ÷ casos planificados \\ \hline
-  \campo{COB-01} — cobertura alcanzada & \campo{\%} & \campo{Según su definición en el Cuadro~\ref{tab:cobertura}} \\ \hline
-  \campo{COB-02} — cobertura alcanzada & \campo{\%} & \campo{} \\ \hline
+  \multicolumn{3}{|l|}{\cellcolor{uvgrisc}\textbf{Cobertura} — ¿qué elementos quedaron ejercitados?} \\ \hline
+  \campo{COB-01} — cobertura alcanzada & \campo{\%} & Elementos ejercitados, \emph{con independencia del veredicto}; fuente: Cuadro~\ref{tab:cobertura-base} \\ \hline
+  \campo{COB-02} — cobertura alcanzada & \campo{\%} & \campo{Según su definición en el Cuadro~\ref{tab:cobertura}} \\ \hline
+  Elementos del alcance sin ejercitar  & \campo{n} & \campo{Brechas de cobertura; deben reaparecer en \ref{sec:residuales}} \\ \hline
+  \multicolumn{3}{|l|}{\cellcolor{uvgrisc}\textbf{Resultados} — de lo ejercitado, ¿qué se comportó como se esperaba?} \\ \hline
+  Veredicto \emph{aprobado}            & \campo{n} & \campo{} \\ \hline
+  Veredicto \emph{no aprobado}         & \campo{n} & \campo{Origina los incidentes del \ref{anx:incidentes}} \\ \hline
+  Veredicto \emph{no concluyente}      & \campo{n} & \campo{} \\ \hline
 \end{tabularx}
 \end{table}
 
-El Cuadro~\ref{tab:resultados} distingue deliberadamente el avance de ejecución de cada medida
-de cobertura, para evitar la confusión que la revisión señaló en la plantilla original.
+El Cuadro~\ref{tab:resultados} separa en tres bloques el avance, la cobertura y los veredictos.
+Leídos juntos
+responden a la pregunta que interesa al cierre: cuánto se probó, sobre qué y con qué resultado.
+Ninguno de los tres bloques basta por sí solo para sostener la decisión de aceptación del
+apartado~\ref{sec:aceptacion}.
 
 % ---------------------------------------------------------------------
 \section{Evaluación frente a los criterios de salida}
@@ -97,24 +117,38 @@ Evalúe uno a uno los criterios de finalización definidos en el
 Cuadro~\ref{tab:criterios-salida}, indicando el valor alcanzado y si el criterio se cumple. No
 reformule aquí los criterios: si alguno resultó inaplicable, declárelo como desviación en el
 Cuadro~\ref{tab:desviaciones}.
+
+Tome cada valor del bloque que le corresponde en el Cuadro~\ref{tab:resultados}: los criterios
+de avance, de cobertura y de resultados se evalúan con cifras distintas. Un criterio de
+cobertura cumplido al 100\,\% no compensa un criterio de resultados incumplido.
+\end{instruccion}
+
+\begin{instruccion}[Advertencia]
+Si algún criterio de salida quedó redactado sobre «casos aprobados» pero clasificado como
+criterio de \emph{cobertura}, corríjalo antes de evaluarlo: pertenece al tipo
+\emph{Resultados}.
 \end{instruccion}
 
 \begin{table}[H]
 \centering
 \caption{Cumplimiento de los criterios de finalización.}
 \label{tab:eval-salida}
-\begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{2.2cm}|C{2.0cm}|C{2.6cm}|}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.2cm}|Y|C{1.9cm}|C{1.9cm}|C{1.9cm}|}
   \hline
-  \filaenc \textbf{Criterio} & \textbf{Enunciado} & \textbf{Valor objetivo} & \textbf{Valor alcanzado} & \textbf{¿Se cumple?} \\ \hline
-  \campo{CS-01} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
-  \campo{CS-02} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
-  & & & & \\ \hline
+  \filaenc \textbf{Criterio} & \textbf{Tipo} & \textbf{Enunciado} & \textbf{Valor objetivo} & \textbf{Valor alcanzado} & \textbf{¿Se cumple?} \\ \hline
+  \campo{CS-01} & \campo{Cobertura} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-02} & \campo{Avance} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-03} & \campo{Resultados} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-04} & \campo{Incidentes} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  & & & & & \\ \hline
 \end{tabularx}
+\notatabla{La columna «Tipo» debe coincidir con la del Cuadro~\ref{tab:criterios-salida}. Sirve para comprobar de un vistazo que el cierre no se sostiene sobre un solo tipo de criterio.}
 \end{table}
 
 El Cuadro~\ref{tab:eval-salida} establece si las \emph{actividades de prueba} pueden darse por
-concluidas. Es un insumo de la decisión de aceptación del apartado~\ref{sec:aceptacion}, pero no
-la sustituye.
+concluidas, y la columna «Tipo» deja ver sobre qué se apoya esa conclusión. Es un insumo de la
+decisión de aceptación del apartado~\ref{sec:aceptacion}, pero no la sustituye: cumplir los
+criterios de salida significa que se hizo lo previsto, no que el resultado sea aceptable.
 
 % ---------------------------------------------------------------------
 \section{Incidentes abiertos al cierre}
@@ -202,8 +236,8 @@ conocimiento de causa.
 Dar por terminadas las actividades de prueba (\ref{sec:evaluacion-salida}) es una decisión
 sobre el \emph{proceso}. Aceptar el producto es una decisión sobre el \emph{riesgo residual} que
 la organización está dispuesta a asumir. Son decisiones distintas, se toman con información
-distinta y, con frecuencia, corresponden a personas distintas. La plantilla original no preveía
-una autoridad de aceptación identificada.
+distinta y, con frecuencia, corresponden a personas distintas, por lo que el plan debe nombrar
+una autoridad de aceptación.
 \end{notanormativa}
 
 \begin{instruccion}
@@ -267,12 +301,21 @@ Cuadro~\ref{tab:entregables} se produjo efectivamente.
 \section{Archivo, limpieza y activos reutilizables}
 \label{sec:archivo}
 
-\begin{notanormativa}[Ampliación respecto de la plantilla original]
-La plantilla original pedía identificar «activos reutilizables», pero no decía dónde se
-conservan, quién responde por ellos, qué ocurre con los datos sensibles ni en qué estado se deja
-el entorno. Este apartado desarrolla las actividades \textbf{TC1 «Archivar los activos»} y
-\textbf{TC2 «Limpiar el entorno»} de \normap{2}.
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Este apartado desarrolla las actividades \textbf{TC1 «Archivar los activos»} y \textbf{TC2
+«Limpiar el entorno»} de \normap{2}: no basta con identificar qué activos son reutilizables, hay
+que decir dónde se conservan, quién responde por ellos, qué ocurre con los datos sensibles y en
+qué estado se deja el entorno.
 \end{notanormativa}
+
+\begin{observacion}[Archivo y limpieza sin custodia]
+\obsproblema{La plantilla anterior pedía identificar los activos reutilizables, pero no su
+ubicación, su responsable ni su periodo de conservación, y no contemplaba la liberación del
+entorno ni el tratamiento de los datos sensibles al cierre.}
+\obscambio{Dos cuadros: custodia de los activos archivados (TC1) y limpieza, liberación de
+recursos, revocación de accesos y eliminación segura de datos (TC2).}
+\obsfuente{OBS §3}
+\end{observacion}
 
 \begin{instruccion}
 Complete los dos cuadros siguientes. El primero registra qué se conserva y bajo la
@@ -325,10 +368,10 @@ Discuta los resultados y plantee las conclusiones principales sobre el producto 
 proceso. Evalúe el propio proceso de prueba e identifique áreas de mejora. Liste
 recomendaciones justificadas y trazables hasta los resultados que las sustentan.
 
-\textbf{Ampliación respecto de la plantilla original:} indique, para cada lección, a quién se
-comunica y qué debería cambiar como consecuencia. Según el modelo de procesos (actividad TC3),
-las lecciones aprendidas retroalimentan la capa organizacional, tal como muestra el bucle
-externo de la Figura~\ref{fig:procesos}; una lección que no llega a nadie no cierra ese bucle.
+Indique, para cada lección, a quién se comunica y qué debería cambiar como consecuencia. Según
+el modelo de procesos (actividad TC3), las lecciones aprendidas retroalimentan la capa
+organizacional, tal como muestra el bucle externo de la Figura~\ref{fig:procesos}; una lección
+que no llega a nadie no cierra ese bucle.
 \end{instruccion}
 
 \begin{table}[H]

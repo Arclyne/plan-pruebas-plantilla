@@ -48,16 +48,29 @@ inmediatamente requisito del curso, contenido del plan y referencia normativa».
 Un único color no permite esa distinción. Además, borrar texto a mano es propenso
 a error: los dos primeros tipos se apagan con un interruptor. *(OBS §5.1 · PROPIA)*
 
-## D-04. Dos interruptores y un objetivo `make final`
+## D-04. Tres variantes desde una sola fuente
 
-**Decisión.** `config/metadata.tex` define `\mostrarinstrucciones` y
-`\mostrarejemplos`. Además, `make final` compila definiendo `\VERSIONFINAL`, que
-apaga ambos sin modificar ningún archivo, y deja el resultado en
-`plan-pruebas-final.pdf`.
+**Decisión.** `config/metadata.tex` define tres interruptores
+(`mostrarinstrucciones`, `mostrarejemplos`, `mostrarobservaciones`) y el Makefile
+compila tres variantes de un único `main.tex`, sin duplicar las secciones:
 
-**Motivo.** Permite trabajar con las guías visibles y producir la entrega sin
-tocar el documento, evitando el riesgo de borrar contenido real junto con las
-guías. El PDF de trabajo tiene 65 páginas; el de entrega, 56. *(PROPIA)*
+| Variante | Comando | Archivo | instrucciones | ejemplos | observaciones |
+|---|---|---|:--:|:--:|:--:|
+| Trabajo | `make` | `plantilla-trabajo.pdf` | sí | sí | — |
+| Anotada | `make annotated` | `plantilla-anotada.pdf` | sí | sí | sí |
+| Final | `make final` | `plantilla-final.pdf` | — | — | — |
+
+Cada objetivo define una macro (`\VARIANTEANOTADA`, `\VARIANTEFINAL`) al llamar a
+`pdflatex`, y `metadata.tex` la traduce a la combinación de interruptores. La
+variante de trabajo es la configuración por defecto, de modo que un
+`latexmk -pdf main.tex` sin argumentos produce la plantilla por rellenar.
+
+**Motivo.** Trabajar con las guías visibles, conservar la trazabilidad del proceso
+de mejora y entregar un documento limpio son tres necesidades distintas que no
+pueden satisfacerse con un solo PDF, pero tampoco justifican mantener tres copias
+del contenido: cualquier corrección tendría que aplicarse tres veces y las
+variantes divergirían. Páginas resultantes: 67 (trabajo), 73 (anotada), 56 (final).
+*(PROPIA)*
 
 ## D-05. Orden de las secciones: riesgos antes que estrategia
 
@@ -241,3 +254,43 @@ en `MATRIZ_CAMBIOS.md` §9 y en los comentarios de cabecera de cada archivo de
 | «Añadir C–D» a los anexos (OBS §6) | Se añadieron cinco anexos (C a G), no dos. | Los mismos apartados de OBS §3 y §6 exigen informe de estado, preparación de entorno y matriz de trazabilidad, que no caben en dos anexos. |
 | «Ampliar el apartado 3» (OBS §3) | Se reescribió como sección completa (D-06). | Ampliar una lista de entregas no produce un proceso de monitoreo. |
 | «Dos métricas de cada tipo» y tres tipos (proceso, producto, proyecto) | Se conserva la clasificación del curso tal cual. | La revisión no cuestiona los tipos, sólo pide identificar el mínimo como regla local. |
+
+## D-21. La observación se separa de la nota conceptual
+
+**Decisión.** Se distinguen dos tipos de bloque que antes estaban fundidos:
+
+- `notanormativa` (gris) explica un **concepto** que el plan necesita —qué es una
+  base de prueba, por qué confirmación y regresión no son lo mismo, qué mide la
+  cobertura—. Se conserva en las tres variantes.
+- `observacion` (morado) explica el **origen de una corrección**: qué hacía la
+  plantilla anterior, qué se cambió, por qué y con qué fuente. Sólo se compone en
+  la variante anotada.
+
+La separación exigió partir bloques existentes: casi todas las cajas que
+empezaban por «Corrección respecto de la plantilla original» contenían a la vez la
+definición que el plan necesita y el historial del cambio. Por ejemplo, la caja de
+riesgos contenía las definiciones de riesgo de producto y de proyecto —que se
+quedan— y la explicación de que la plantilla anterior las confundía —que se va a
+la observación—.
+
+**Motivo.** El requisito es que la plantilla de trabajo y la final no muestren el
+historial de correcciones, pero sí las distinciones conceptuales sin las cuales el
+plan se rellena mal. Etiquetar los bloques sin partirlos habría obligado a elegir
+entre perder el concepto o filtrar el historial. Hay 32 observaciones repartidas
+en secciones, anexos y diagramas.
+
+**Sin duplicación.** El bloque del PDF es un resumen de cuatro campos; la
+explicación completa, con el estado de cada elemento y su fuente, está en
+`MATRIZ_CAMBIOS.md`, al que remite cada `\obsfuente`. *(PROPIA)*
+
+## D-22. El pie sólo cuenta páginas en el cuerpo
+
+**Decisión.** El pie muestra «Página *n* de *N*» en el cuerpo del documento y
+sólo «Página *n*» en los preliminares, mediante el interruptor `\ifcontarpaginas`
+que `main.tex` activa al llamar a `\pagenumbering{arabic}`.
+
+**Motivo.** Los preliminares se numeran en romanos y el cuerpo reinicia en
+arábigos, de modo que `\pageref{LastPage}` devuelve el último número arábigo
+(58 en la variante de trabajo), no el total físico de páginas (67). Antes de la
+corrección, una página preliminar mostraba «Página ii de 58», mezclando dos
+sistemas de numeración. *(PROPIA)*

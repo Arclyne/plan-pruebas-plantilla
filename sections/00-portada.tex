@@ -14,11 +14,10 @@
   \item \textbf{Todos} los cuadros y figuras deben estar referidos desde el texto
         (\texttt{\textbackslash ref\{...\}}), indicando qué información presentan y una
         breve explicación.
-  \item Para producir la versión final de entrega basta con ejecutar \texttt{make final}:
-        las guías verdes y los ejemplos azules desaparecen y el resto del documento no
-        cambia. Para hacerlo permanente, ponga a \texttt{false} los dos interruptores
-        \texttt{mostrarinstrucciones} y \texttt{mostrarejemplos} de
-        \texttt{config/metadata.tex}.
+  \item Una sola fuente LaTeX produce tres variantes: \texttt{make} genera la versión de
+        trabajo (ésta), \texttt{make annotated} añade las observaciones de la revisión y
+        \texttt{make final} produce la versión de entrega, sin guías ni ejemplos. El contenido
+        del plan es idéntico en las tres.
   \item Sustituya cada marcador \campo{así} por el contenido que corresponda.
 \end{itemize}
 \end{instruccion}
@@ -26,16 +25,35 @@
 \begin{notanormativa}[Cómo leer los bloques de color de esta plantilla]
 \begin{itemize}
   \item \textcolor{instrverde}{\textbf{Verde}} — guía de la plantilla: explica qué debe
-        escribirse. Se elimina en la versión final.
+        escribirse. No aparece en la versión final.
   \item \textcolor{ejemazul}{\textbf{Azul}} — ejemplo ilustrativo. No es contenido a conservar.
   \item \textcolor{polinaranja}{\textbf{Naranja}} — política académica del curso.
         Es una regla \emph{local}, no un requisito de \norma.
   \item \textcolor{normgris}{\textbf{Gris}} — referencia normativa o aclaración conceptual,
-        con su fuente identificada.
+        con su fuente identificada. Forma parte del plan y se conserva siempre.
+  \ifmostrarobservaciones
+  \item \textcolor{obsmorado}{\textbf{Morado}} — observación de la revisión: por qué este
+        apartado es como es. \emph{Sólo aparece en esta versión anotada}; no forma parte del
+        plan ni de la entrega.
+  \fi
 \end{itemize}
-Esta separación responde a una observación explícita de la revisión: el lector debe poder
-distinguir de inmediato un requisito del curso de una recomendación de la norma.
+El lector debe poder distinguir de inmediato un requisito del curso de una recomendación de la
+norma y de una guía de redacción.
 \end{notanormativa}
+
+\ifmostrarobservaciones
+\begin{observacion}[Qué es esta versión anotada]
+\obsproblema{Al corregir la plantilla anterior se corría el riesgo de perder el rastro de qué se
+cambió y por qué, o bien de dejar ese historial dentro de la plantilla, donde estorba a quien
+sólo quiere rellenarla.}
+\obscambio{Una única fuente LaTeX genera tres variantes: \texttt{plantilla-trabajo.pdf} (para
+rellenar), \texttt{plantilla-anotada.pdf} (ésta, con los bloques morados) y
+\texttt{plantilla-final.pdf} (para entregar).}
+\obsjustificacion{Los bloques morados resumen el origen de cada corrección; la explicación
+completa, con su fuente, está en \texttt{docs/MATRIZ\_CAMBIOS.md}.}
+\obsfuente{PROPIA}
+\end{observacion}
+\fi
 
 \clearpage
 
@@ -54,6 +72,11 @@ distinguir de inmediato un requisito del curso de una recomendación de la norma
 
   \vspace{1.2\baselineskip}
   {\LARGE \docProyecto}
+
+  \ifdefined\varianteetiqueta
+    \vspace{0.8\baselineskip}
+    {\small\itshape\color{normgris}\varianteetiqueta}
+  \fi
 
   \vspace{3\baselineskip}
 

@@ -12,10 +12,7 @@ de la estrategia: los riesgos priorizados aquí son la justificación de las dec
 apartado~\ref{sec:estrategia}.
 \end{notanormativa}
 
-\begin{notanormativa}[Corrección respecto de la plantilla original]
-La plantilla original explicaba el \emph{riesgo del producto} por su efecto sobre el tiempo y
-el desarrollo de la prueba. Eso corresponde en realidad a un riesgo de proyecto. La distinción
-correcta es:
+\begin{notanormativa}[Riesgo del producto y riesgo del proyecto]
 \begin{itemize}
   \item \textbf{Riesgo del producto}: consecuencia potencial de un fallo o deficiencia del
         \emph{software} sobre los usuarios, el negocio, los datos, la seguridad o la operación.
@@ -27,6 +24,20 @@ correcta es:
 Ambos se evalúan por probabilidad e impacto, pero el «impacto» no significa lo mismo en cada
 caso: en el producto se mide sobre el usuario o el negocio; en el proyecto, sobre el plan.
 \end{notanormativa}
+
+\begin{observacion}[Riesgo de producto definido como riesgo de proyecto]
+\obsproblema{La plantilla anterior definía el riesgo del producto como «cualquier suceso que
+afecta el buen desarrollo de la prueba, su alcance y entrega a tiempo». Eso describe un riesgo
+de proyecto, de modo que ambos apartados pedían lo mismo y el riesgo real sobre el usuario
+quedaba sin registrar.}
+\obscambio{El riesgo de producto se redefine por la consecuencia de un fallo del software sobre
+usuarios, negocio, datos, seguridad u operación, con ejemplos contrastados; se añaden una escala
+de valoración explícita y un cuadro de tratamiento.}
+\obsjustificacion{Los riesgos de producto son la principal justificación de qué se prueba
+primero y con qué profundidad; si se confunden con los de proyecto, la estrategia pierde su
+fundamento.}
+\obsfuente{OBS §4.1 · PDF §1.3 (TP3, TP4)}
+\end{observacion}
 
 \begin{instruccion}
 Use una escala explícita y aplíquela igual en los dos registros. Si emplea valores numéricos,

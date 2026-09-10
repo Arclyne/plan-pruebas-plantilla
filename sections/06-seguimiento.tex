@@ -4,18 +4,27 @@
 \section{Seguimiento y control de la prueba}
 \label{sec:seguimiento}
 
-\begin{notanormativa}[Ampliación respecto de la plantilla original]
-La plantilla original resolvía este apartado con un listado de «puntos de revisión»: las
-entregas del curso y sus fechas. Eso cubre los hitos, pero no el \emph{seguimiento}: no dice
-qué se mide, con qué frecuencia, quién compara lo planificado con lo observado, ni qué se hace
-cuando aparece una desviación.
-
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
 Este apartado desarrolla el proceso de \textbf{monitoreo y control (TMC1–TMC4)} de \normap{2}:
 preparación (establecer indicadores y línea base), monitorear (recolectar y comparar), controlar
 (emitir directivas y, si procede, replanificar) y reportar. Como muestra la
 Figura~\ref{fig:procesos}, este proceso opera de forma \emph{continua y concurrente} con la
-ejecución: no es una etapa que ocurra entre dos entregas.
+ejecución: no es una etapa que ocurra entre dos entregas, y un listado de fechas de entrega no
+lo sustituye.
 \end{notanormativa}
+
+\begin{observacion}[«Puntos de revisión» en lugar de seguimiento]
+\obsproblema{La plantilla anterior resolvía este apartado con un listado de puntos de revisión
+—las tres entregas del curso y sus fechas—. Eso cubre los hitos, pero no dice qué se mide, con
+qué frecuencia, quién compara lo planificado con lo observado, ni qué se hace cuando aparece una
+desviación.}
+\obscambio{El apartado se convierte en una sección completa con cinco subapartados: enfoque de
+monitoreo, hitos, registro de seguimiento por periodo, reglas de control y replanificación, y
+plan de comunicación. Se añade el formato de informe de estado del \ref{anx:informes}.}
+\obsjustificacion{Sin un registro periódico de avance previsto frente a real, las desviaciones
+sólo se detectan en la entrega siguiente, cuando ya no admiten corrección.}
+\obsfuente{OBS §3 y §5.6 · PDF §1.3 (TMC1–TMC4)}
+\end{observacion}
 
 % ---------------------------------------------------------------------
 \subsection{Enfoque de monitoreo (TMC1)}
@@ -33,7 +42,7 @@ compara. La línea base es el plan aprobado: sin ella no puede hablarse de desvi
   \hline
   \filaenc \textbf{Qué se monitorea} & \textbf{Indicador y fuente del dato} & \textbf{Frecuencia} & \textbf{Responsable} \\ \hline
   Avance de la ejecución & \campo{Procedimientos ejecutados vs. planificados — \ref{anx:ejecuciones}} & \campo{Semanal} & \campo{Rol} \\ \hline
-  Cobertura alcanzada & \campo{Medidas COB-xx del Cuadro~\ref{tab:cobertura}} & \campo{Semanal} & \campo{Rol} \\ \hline
+  Cobertura alcanzada & \campo{Medidas COB-xx del Cuadro~\ref{tab:cobertura}: elementos ejercitados, con independencia del veredicto} & \campo{Semanal} & \campo{Rol} \\ \hline
   Incidentes & \campo{Altas, estado y severidad — \ref{anx:incidentes}} & \campo{Continua} & \campo{Rol} \\ \hline
   Riesgos & \campo{Riesgos materializados y riesgos nuevos} & \campo{Semanal} & \campo{Rol} \\ \hline
   Consumo de esfuerzo & \campo{Horas empleadas vs. estimadas — \ref{sec:actividades}} & \campo{Semanal} & \campo{Rol} \\ \hline
@@ -109,7 +118,7 @@ siempre que indique dónde está, quién la mantiene y que contenga la misma inf
   Aprobadas                   & \campo{n}             & \campo{} \\ \hline
   Fallidas                    & \campo{n}             & \campo{} \\ \hline
   Bloqueadas                  & \campo{n y causa}     & \campo{} \\ \hline
-  Cobertura alcanzada         & \campo{COB-xx = \%}   & \campo{} \\ \hline
+  Cobertura alcanzada         & \campo{COB-xx = \% (ejercitado)} & \campo{} \\ \hline
   Incidentes relevantes       & \campo{INC-xx}        & \campo{} \\ \hline
   Riesgos nuevos              & \campo{Clave y descripción} & \campo{} \\ \hline
   Esfuerzo utilizado          & \campo{h reales / h estimadas} & \campo{} \\ \hline

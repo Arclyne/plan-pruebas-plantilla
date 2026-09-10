@@ -24,43 +24,57 @@ los problemas encontrados y cómo se corrigieron.
 
 ## 2. Resultado de la compilación
 
-Comando principal, desde el directorio raíz y con el árbol limpio
-(`make cleanall`):
+Una sola fuente (`main.tex`) produce tres variantes. Las tres se compilaron desde
+un árbol limpio (`make cleanall`) y desde un clon recién creado del repositorio.
 
-```
-$ latexmk -pdf main.tex
-```
+| Variante | Comando | Archivo | Páginas | Salida |
+|---|---|---|---|---|
+| Trabajo | `make` | `plantilla-trabajo.pdf` | 67 | 0 |
+| Anotada | `make annotated` | `plantilla-anotada.pdf` | 73 | 0 |
+| Final | `make final` | `plantilla-final.pdf` | 56 | 0 |
+
+En las **tres** variantes:
 
 | Métrica | Resultado |
 |---|---|
-| Código de salida | **0** |
-| Pasadas de `pdflatex` | 3 (resolución de índice y referencias cruzadas) |
-| Tiempo de compilación | ~26 s |
 | Errores (`!`) | **0** |
 | `LaTeX Warning` | **0** |
 | Advertencias de paquete | **0** |
-| `Overfull \hbox` | **0** |
-| `Overfull \vbox` | **0** |
-| `Underfull \hbox` | **0** |
-| `Underfull \vbox` | **0** |
+| `Overfull \hbox` / `\vbox` | **0** |
+| `Underfull \hbox` / `\vbox` | **0** |
 | Referencias sin resolver | **0** |
-| Páginas | 65 (A4, 595,3 × 841,9 pt) |
+| Pasadas de `pdflatex` | 3 |
+| Tiempo por variante | ~26 s |
+| Tamaño de página | A4 (595,3 × 841,9 pt) |
 
-Objetivo de la versión de entrega:
+### 2.1 Contenido efectivo de cada variante
 
-```
-$ make final
-```
+Recuento sobre el texto extraído de cada PDF, que es lo que verifica que los
+interruptores hacen lo que dicen:
 
-| Métrica | Resultado |
+| Bloque | Trabajo | Anotada | Final |
+|---|:--:|:--:|:--:|
+| Instrucciones (`Qué debe documentarse`) | 67 | 67 | **0** |
+| Observaciones (`Observación de la revisión`) | **0** | 32 | **0** |
+| Campos de observación (`Problema identificado`) | **0** | 32 | **0** |
+| Políticas académicas | 9 | 9 | 9 |
+
+### 2.2 Ausencia de fugas del historial de revisión
+
+Se buscó en el texto extraído de cada PDF el patrón
+`plantilla (original|anterior)`, `diagrama (original|de referencia)`,
+`la revisión (señaló|detectó|pide|pedía)` y `respecto de la original`:
+
+| Variante | Coincidencias |
 |---|---|
-| Código de salida | **0** |
-| PDF generado | `plan-pruebas-final.pdf` |
-| Páginas | 56 |
-| Cajas de instrucción presentes | 0 (68 en la versión de trabajo) |
-| Cajas de ejemplo presentes | 0 (1 en la versión de trabajo) |
-| Cajas de política académica presentes | 9 (se conservan a propósito) |
-| Cajas de nota normativa presentes | 35 (se conservan a propósito) |
+| Trabajo | **0** |
+| Final | **0** |
+| Anotada | 30 (todas dentro de bloques de observación) |
+
+Esto confirma el requisito de separación: la plantilla de trabajo y la de entrega
+no muestran por qué se corrigió nada; la anotada sí. La única coincidencia
+descartada fue «Cambio aplicado y motivo», encabezado legítimo de una columna del
+registro de cambios del entorno (Anexo F).
 
 ## 3. Comprobaciones automáticas
 
@@ -72,7 +86,7 @@ Se verificó, recorriendo todos los `.tex`, que cada `\label` tenga al menos un
 | Comprobación | Resultado |
 |---|---|
 | Etiquetas definidas | 117 |
-| Referencias emitidas | 260 |
+| Referencias emitidas | 291 |
 | Etiquetas sin ninguna referencia | **0** |
 | Referencias a etiquetas inexistentes | **0** |
 | **Figuras** con `caption`, `label` y mención en el texto | **4 / 4** |
@@ -108,7 +122,12 @@ párrafo que explica qué muestra.
 Se renderizaron páginas a imagen y se inspeccionaron. Páginas revisadas:
 consideraciones de uso, portada, información del proyecto, control de versiones,
 tabla de contenido, las cuatro figuras, una página de estrategia con cuadro y
-cajas, el inicio de los anexos y el Anexo G.
+cajas, el inicio de los anexos, el Anexo G y los cuadros 23, 49 y 72 (definición
+de cobertura, resultados agregados y cobertura de la base).
+
+Las **tres variantes** se revisaron por separado: portada de cada una, una página
+de contenido de la variante final (sin guías ni observaciones) y una página de la
+variante anotada con un bloque de observación junto a la figura que corrige.
 
 | Aspecto | Resultado |
 |---|---|
@@ -118,6 +137,8 @@ cajas, el inicio de los anexos y el Anexo G.
 | Figuras dentro del margen | Sí; las cuatro caben en el ancho de texto |
 | Solapamiento de nodos en los diagramas | Ninguno tras las correcciones de §5 |
 | Cajas de color con su título y sangrado | Correctas; se parten entre páginas cuando procede |
+| Etiqueta de variante en la portada | Presente en trabajo y anotada; ausente en la final, como se pretendía |
+| Bloques de observación | Sólo en la variante anotada, junto al apartado que corrigen |
 | Fichas largas de los anexos | Se parten con encabezado repetido y aviso de continuación |
 
 ## 5. Problemas encontrados y corregidos
@@ -136,6 +157,9 @@ cajas, el inicio de los anexos y el Anexo G.
 | 10 | Fichas largas dejaban media página en blanco | `table[H]` no puede partirse: si no cabe, salta de página entera. | Las seis fichas extensas pasaron a `xltabular` (`longtable` con columnas `X`), con encabezado repetido. |
 | 11 | Los marcadores de fecha se partían como `dd/m-m/aaaa` | Efecto secundario de habilitar la partición en la primera palabra, en columnas de 1,9–2,3 cm. | Se ensancharon a 2,5 cm las seis columnas de fecha; las columnas `Y` absorben la diferencia. |
 | 12 | La compilación abortaba con «Unicode character ≥ (U+2265)» | T1 no incluye `≥`, `×` ni `÷`. | Se declararon esos caracteres y otros ocho en el preámbulo, de modo que el equipo pueda escribirlos directamente. |
+| 13 | COB-01 se definía sobre «requisitos con al menos un caso **aprobado**» | Mezclaba cobertura con resultado: un requisito probado por un caso fallido contaba como no cubierto, de modo que la cobertura bajaba al encontrar defectos. | COB-01 pasa a medir elementos ejercitados con independencia del veredicto; los criterios de salida pasan de tres tipos a cuatro y el resumen de cobertura de la base separa «¿Cubierto?» de «Veredictos». |
+| 14 | Un envoltorio `\begin{ficha}` alrededor de `xltabular` abortaba con «File ended while scanning use of `\TX@get@body`» | `xltabular` busca literalmente su `\end{xltabular}` en la entrada y no lo encuentra si está oculto tras una macro. | Las fichas se escriben con el entorno literal en cada anexo; el patrón queda documentado en el README. |
+| 15 | El pie mostraba «Página ii de 58» en los preliminares | Los preliminares van en romanos y el cuerpo reinicia en arábigos, así que `\pageref{LastPage}` devuelve el último número arábigo, no el total físico. | El interruptor `\ifcontarpaginas` omite «de *N*» fuera del cuerpo. |
 
 ## 6. Lo que esta validación **no** cubre
 
@@ -154,9 +178,18 @@ cajas, el inicio de los anexos y el Anexo G.
 
 ```sh
 make cleanall
-latexmk -pdf main.tex          # debe terminar con código 0
-grep -c "Overfull\|Underfull\|LaTeX Warning" main.log   # debe dar 0
-make final                     # genera plan-pruebas-final.pdf
+make            # plantilla-trabajo.pdf
+make annotated  # plantilla-anotada.pdf
+make final      # plantilla-final.pdf
+
+for v in trabajo anotada final; do
+  grep -c "Overfull\|Underfull\|LaTeX Warning" plantilla-$v.log   # debe dar 0
+done
+
+# las variantes de trabajo y final no deben filtrar el historial de revisión
+for v in trabajo final; do
+  pdftotext plantilla-$v.pdf - | grep -ci "plantilla \(original\|anterior\)"  # debe dar 0
+done
 ```
 
 Para repetir la comprobación de referencias cruzadas basta con verificar que

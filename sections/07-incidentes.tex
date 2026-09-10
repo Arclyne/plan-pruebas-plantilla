@@ -4,12 +4,23 @@
 \section{Gestión de incidentes de prueba}
 \label{sec:gestion-incidentes}
 
-\begin{notanormativa}[Apartado nuevo respecto de la plantilla original]
-La plantilla original no preveía gestión de incidentes. Sin ella, un resultado fallido no
-produce ninguna consecuencia documentada: no puede comunicarse, priorizarse, seguirse ni
-cerrarse. Este apartado desarrolla el proceso de \textbf{reporte de incidentes (IR1–IR2)} de
-\normap{2}. El formato de registro está en el \ref{anx:incidentes}.
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Este apartado desarrolla el proceso de \textbf{reporte de incidentes (IR1–IR2)} de \normap{2}.
+Sin él, un resultado fallido no produce ninguna consecuencia documentada: no puede comunicarse,
+priorizarse, seguirse ni cerrarse. El formato de registro está en el \ref{anx:incidentes}.
 \end{notanormativa}
+
+\begin{observacion}[No existía gestión de incidentes]
+\obsproblema{La plantilla anterior no preveía ningún tratamiento de los incidentes: ni formato,
+ni estados, ni responsables, ni criterios de severidad o prioridad, ni qué hacer con los que
+quedaran abiertos al cierre.}
+\obscambio{Nueva sección con el análisis previo del origen (IR1), escalas separadas de severidad
+y prioridad, ocho estados con responsable de transición y criterios de comunicación, más el
+registro del \ref{anx:incidentes}.}
+\obsjustificacion{Es el eslabón que conecta un veredicto adverso con una acción: sin él, el
+resultado de la prueba se detiene en el registro de ejecución.}
+\obsfuente{OBS §3 y §6 · PDF §1.4 (IR1, IR2)}
+\end{observacion}
 
 % ---------------------------------------------------------------------
 \subsection{Análisis previo al reporte (IR1)}
