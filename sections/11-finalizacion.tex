@@ -1,0 +1,351 @@
+% =====================================================================
+%  PARTE II. Reporte de finalización   (proceso TC de ISO/IEC/IEEE 29119-2)
+% =====================================================================
+
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Esta parte desarrolla el proceso de \textbf{finalización de prueba (TC1–TC4)} de \normap{2}:
+archivar los activos reutilizables (TC1), limpiar y liberar el entorno (TC2), identificar
+lecciones aprendidas (TC3) y reportar la finalización (TC4). Es, según el documento de procesos
+consultado, el proceso más frecuentemente omitido en la práctica, pese a ser el que sostiene la
+mejora continua.
+\end{notanormativa}
+
+\begin{notanormativa}[Corrección estructural respecto de la plantilla original]
+La plantilla original resolvía el cierre con un apartado de «evaluación de la finalización» que
+determinaba el nivel de garantía de calidad \emph{a partir de la cobertura} alcanzada. La
+revisión pide separar seis cosas que allí quedaban mezcladas, y que aquí ocupan apartados
+distintos:
+\begin{enumerate}
+  \item qué actividades se completaron (\ref{sec:resumen-final});
+  \item qué resultados se obtuvieron (\ref{sec:resultados});
+  \item si se cumplieron los criterios de salida (\ref{sec:evaluacion-salida});
+  \item qué incidentes quedan abiertos (\ref{sec:incidentes-abiertos});
+  \item qué riesgos residuales persisten (\ref{sec:residuales});
+  \item la decisión de aceptación y quién la toma (\ref{sec:aceptacion}).
+\end{enumerate}
+Haber ejecutado el 100\,\% de los casos —aun si muchos fallaron— no demuestra que el producto
+sea aceptable.
+\end{notanormativa}
+
+% ---------------------------------------------------------------------
+\section{Resumen de las pruebas realizadas}
+\label{sec:resumen-final}
+
+\begin{instruccion}
+Compare las fechas planificadas con las realmente ejecutadas y presente el cronograma con
+tiempos reales. Indique las incidencias que afectaron el progreso, sus causas y cómo afectaron
+la ejecución del plan. Señale además qué actividades del Cuadro~\ref{tab:actividades} se
+completaron, cuáles se completaron parcialmente y cuáles no se realizaron, con su motivo.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Ejecución real frente a lo planificado.}
+\label{tab:real-vs-plan}
+\begin{tabularx}{\textwidth}{|C{1.4cm}|L{3.2cm}|C{2.0cm}|C{2.0cm}|C{1.9cm}|Y|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Actividad} & \textbf{Fin planificado} & \textbf{Fin real} & \textbf{Estado} & \textbf{Causa de la desviación} \\ \hline
+  \campo{ACT-01} & \campo{Actividad} & \campo{dd/mm} & \campo{dd/mm} & \campo{Completada} & \campo{---} \\ \hline
+  & & & & & \\ \hline
+\end{tabularx}
+\notatabla{Estado: \textit{Completada} · \textit{Parcial} · \textit{No realizada} · \textit{Cancelada}.}
+\end{table}
+
+El Cuadro~\ref{tab:real-vs-plan} documenta qué se hizo realmente y por qué se desvió del plan.
+Responde únicamente a la pregunta de si las actividades se completaron; no dice todavía nada
+sobre la calidad del producto.
+
+% ---------------------------------------------------------------------
+\section{Resultados obtenidos}
+\label{sec:resultados}
+
+\begin{instruccion}
+Presente los resultados agregados de la ejecución, tomados del \ref{anx:ejecuciones}: cuántas
+pruebas se ejecutaron y con qué veredicto, y qué cobertura se alcanzó según las medidas
+definidas en el Cuadro~\ref{tab:cobertura}. Recuerde que el porcentaje de casos ejecutados es
+avance, no cobertura: repórtelos en filas distintas.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Resultados agregados de la ejecución.}
+\label{tab:resultados}
+\begin{tabularx}{\textwidth}{|L{5.2cm}|C{2.6cm}|Y|}
+  \hline
+  \filaenc \textbf{Indicador} & \textbf{Valor} & \textbf{Comentario} \\ \hline
+  Casos de prueba especificados        & \campo{n} & \campo{} \\ \hline
+  Ejecuciones realizadas               & \campo{n} & \campo{Incluye repeticiones} \\ \hline
+  Veredicto \emph{aprobado}            & \campo{n} & \campo{} \\ \hline
+  Veredicto \emph{no aprobado}         & \campo{n} & \campo{} \\ \hline
+  Veredicto \emph{no concluyente}      & \campo{n} & \campo{} \\ \hline
+  Casos bloqueados o no ejecutados     & \campo{n} & \campo{Motivo} \\ \hline
+  Avance de ejecución (\%)             & \campo{\%} & Casos ejecutados ÷ casos planificados \\ \hline
+  \campo{COB-01} — cobertura alcanzada & \campo{\%} & \campo{Según su definición en el Cuadro~\ref{tab:cobertura}} \\ \hline
+  \campo{COB-02} — cobertura alcanzada & \campo{\%} & \campo{} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:resultados} distingue deliberadamente el avance de ejecución de cada medida
+de cobertura, para evitar la confusión que la revisión señaló en la plantilla original.
+
+% ---------------------------------------------------------------------
+\section{Evaluación frente a los criterios de salida}
+\label{sec:evaluacion-salida}
+
+\begin{instruccion}
+Evalúe uno a uno los criterios de finalización definidos en el
+Cuadro~\ref{tab:criterios-salida}, indicando el valor alcanzado y si el criterio se cumple. No
+reformule aquí los criterios: si alguno resultó inaplicable, declárelo como desviación en el
+Cuadro~\ref{tab:desviaciones}.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Cumplimiento de los criterios de finalización.}
+\label{tab:eval-salida}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{2.2cm}|C{2.0cm}|C{2.6cm}|}
+  \hline
+  \filaenc \textbf{Criterio} & \textbf{Enunciado} & \textbf{Valor objetivo} & \textbf{Valor alcanzado} & \textbf{¿Se cumple?} \\ \hline
+  \campo{CS-01} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-02} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:eval-salida} establece si las \emph{actividades de prueba} pueden darse por
+concluidas. Es un insumo de la decisión de aceptación del apartado~\ref{sec:aceptacion}, pero no
+la sustituye.
+
+% ---------------------------------------------------------------------
+\section{Incidentes abiertos al cierre}
+\label{sec:incidentes-abiertos}
+
+\begin{instruccion}
+Relacione los incidentes que permanecen sin cerrar, con su severidad, prioridad y estado. Estos
+incidentes son el principal insumo de los riesgos residuales y de la decisión de aceptación:
+omitirlos convierte el cierre en una formalidad.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Incidentes abiertos o diferidos al cierre del esfuerzo de prueba.}
+\label{tab:incidentes-abiertos}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{1.8cm}|C{1.8cm}|C{1.9cm}|C{2.2cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Resumen} & \textbf{Severidad} & \textbf{Prioridad} & \textbf{Estado} & \textbf{Disposición acordada} \\ \hline
+  \campo{INC-01} & \campo{Resumen} & \campo{Alta} & \campo{Normal} & \campo{Diferido} & \campo{Qué se hará después} \\ \hline
+  & & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:incidentes-abiertos} es el extracto de cierre del \ref{anx:incidentes}; cada
+fila debería tener su correspondencia en el Cuadro~\ref{tab:riesgos-residuales}.
+
+% ---------------------------------------------------------------------
+\section{Métricas de prueba}
+\label{sec:metricas-finales}
+
+\begin{instruccion}
+Presente el cálculo final de las métricas definidas en el Cuadro~\ref{tab:metricas}, junto con
+su análisis y discusión. Interprete cada valor según lo acordado en su definición y señale
+explícitamente lo que la métrica \emph{no} permite concluir.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Valores finales de las métricas de prueba.}
+\label{tab:metricas-finales}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{1.7cm}|C{2.0cm}|Y|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Tipo} & \textbf{Valor final} & \textbf{Análisis e interpretación} \\ \hline
+  \campo{MET-01} & \campo{Producto} & \campo{Valor} & \campo{Qué indica y qué no} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:metricas-finales} cierra el ciclo abierto en el apartado~\ref{sec:metricas}:
+las métricas se interpretan según el criterio acordado \emph{antes} de conocer los resultados.
+
+% ---------------------------------------------------------------------
+\section{Riesgos residuales}
+\label{sec:residuales}
+
+\begin{instruccion}
+Analice qué riesgos pudieron resolverse o evitarse y cuáles persisten y podrían afectar
+procesos posteriores. Incluya al menos tres fuentes: los riesgos de producto no mitigados
+(Cuadro~\ref{tab:riesgos-producto}), las exclusiones del alcance
+(Cuadro~\ref{tab:exclusiones}) y los incidentes abiertos
+(Cuadro~\ref{tab:incidentes-abiertos}).
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Riesgos residuales al cierre del esfuerzo de prueba.}
+\label{tab:riesgos-residuales}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.0cm}|Y|C{1.9cm}|C{2.6cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Origen} & \textbf{Riesgo que persiste y su posible consecuencia} & \textbf{Exposición} & \textbf{Recomendación} \\ \hline
+  \campo{RR-01} & \campo{RP-04 / EX-01 / INC-02} & \campo{Descripción} & \campo{Alta} & \campo{Acción sugerida} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:riesgos-residuales} declara lo que el esfuerzo de prueba \emph{no} llegó a
+descartar. Es la información que la autoridad de aceptación necesita para decidir con
+conocimiento de causa.
+
+% ---------------------------------------------------------------------
+\section{Decisión de aceptación}
+\label{sec:aceptacion}
+
+\begin{notanormativa}[Finalizar no es aceptar]
+Dar por terminadas las actividades de prueba (\ref{sec:evaluacion-salida}) es una decisión
+sobre el \emph{proceso}. Aceptar el producto es una decisión sobre el \emph{riesgo residual} que
+la organización está dispuesta a asumir. Son decisiones distintas, se toman con información
+distinta y, con frecuencia, corresponden a personas distintas. La plantilla original no preveía
+una autoridad de aceptación identificada.
+\end{notanormativa}
+
+\begin{instruccion}
+Registre la decisión, quién la toma y sobre qué base. La decisión debe considerar los resultados
+obtenidos, la cobertura relevante alcanzada, los incidentes abiertos con su severidad y los
+riesgos residuales. Si el equipo de prueba sólo emite una recomendación y la decisión
+corresponde a otra parte, dígalo así.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Decisión de aceptación del resultado de la prueba.}
+\label{tab:aceptacion}
+\begin{tabularx}{\textwidth}{|E{4.6cm}|Y|}
+  \hline
+  Recomendación del equipo de prueba & \campo{Aceptar / aceptar con condiciones / no aceptar} \\ \hline
+  Base de la recomendación & \campo{Resultados, cobertura, incidentes abiertos y riesgos residuales considerados} \\ \hline
+  Condiciones propuestas & \campo{Qué debería ocurrir antes de usar el software} \\ \hline
+  Autoridad de aceptación & \autoridadAceptacion \\ \hline
+  Decisión tomada & \campo{Decisión} \\ \hline
+  Fecha & \campo{dd/mm/aaaa} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:aceptacion} separa explícitamente la recomendación técnica del equipo de
+prueba de la decisión de quien tiene autoridad para asumir el riesgo residual.
+
+\begin{politicaacademica}
+En el contexto del curso, la autoridad de aceptación es \autoridadAceptacion, definida en
+\texttt{config/metadata.tex}. Si el ejercicio académico no contempla una decisión real de
+aceptación, indíquelo así en el cuadro y limite el contenido a la recomendación del equipo: es
+preferible declarar que la decisión no aplica antes que simularla.
+\end{politicaacademica}
+
+% ---------------------------------------------------------------------
+\section{Entregables de la prueba}
+
+\begin{instruccion}
+Relacione los entregables efectivamente producidos, comprometidos en el
+apartado~\ref{sec:entregables} (Cuadro~\ref{tab:entregables}), indicando su
+versión final y dónde se encuentran. Los procedimientos y casos de prueba aplicados se integran
+en los anexos de este documento.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Entregables producidos y su ubicación final.}
+\label{tab:entregables-finales}
+\begin{tabularx}{\textwidth}{|L{4.6cm}|C{2.0cm}|Y|C{1.9cm}|}
+  \hline
+  \filaenc \textbf{Entregable} & \textbf{Versión final} & \textbf{Ubicación} & \textbf{Estado} \\ \hline
+  \campo{Entregable} & \campo{v1.0} & \campo{Ubicación} & \campo{Entregado} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:entregables-finales} permite comprobar que lo prometido en el
+Cuadro~\ref{tab:entregables} se produjo efectivamente.
+
+% ---------------------------------------------------------------------
+\section{Archivo, limpieza y activos reutilizables}
+\label{sec:archivo}
+
+\begin{notanormativa}[Ampliación respecto de la plantilla original]
+La plantilla original pedía identificar «activos reutilizables», pero no decía dónde se
+conservan, quién responde por ellos, qué ocurre con los datos sensibles ni en qué estado se deja
+el entorno. Este apartado desarrolla las actividades \textbf{TC1 «Archivar los activos»} y
+\textbf{TC2 «Limpiar el entorno»} de \normap{2}.
+\end{notanormativa}
+
+\begin{instruccion}
+Complete los dos cuadros siguientes. El primero registra qué se conserva y bajo la
+responsabilidad de quién; el segundo, qué se desmonta, libera o elimina. Ambos deben ser
+coherentes con el control de configuración del Cuadro~\ref{tab:configuracion}.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Activos de prueba conservados y su custodia.}
+\label{tab:archivo}
+\begin{tabularx}{\textwidth}{|L{3.4cm}|C{1.9cm}|Y|C{2.1cm}|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Activo} & \textbf{¿Reutilizable?} & \textbf{Dónde se archiva} & \textbf{Responsable} & \textbf{Periodo de conservación} \\ \hline
+  \campo{Casos de prueba} & \campo{Sí} & \campo{Repositorio} & \campo{Rol} & \campo{Plazo} \\ \hline
+  \campo{Procedimientos} & \campo{Sí} & \campo{Repositorio} & \campo{Rol} & \campo{Plazo} \\ \hline
+  \campo{Guiones automatizados} & \campo{Sí/No} & \campo{Repositorio} & \campo{Rol} & \campo{Plazo} \\ \hline
+  \campo{Evidencias de ejecución} & \campo{---} & \campo{Repositorio} & \campo{Rol} & \campo{Plazo} \\ \hline
+  \campo{Registros de incidentes} & \campo{---} & \campo{Repositorio} & \campo{Rol} & \campo{Plazo} \\ \hline
+  \campo{Datos de prueba} & \campo{Sí/No} & \campo{Repositorio} & \campo{Rol} & \campo{Plazo} \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Limpieza del entorno y liberación de recursos.}
+\label{tab:limpieza}
+\begin{tabularx}{\textwidth}{|L{3.8cm}|Y|C{2.1cm}|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Acción} & \textbf{Qué se hace concretamente} & \textbf{Responsable} & \textbf{Fecha} \\ \hline
+  Restaurar el entorno & \campo{Estado al que se devuelve} & \campo{Rol} & \campo{dd/mm} \\ \hline
+  Liberar recursos y licencias & \campo{Qué se libera} & \campo{Rol} & \campo{dd/mm} \\ \hline
+  Tratar los datos sensibles & \campo{Eliminación segura, anonimización o devolución} & \campo{Rol} & \campo{dd/mm} \\ \hline
+  Retirar accesos y credenciales & \campo{Qué se revoca} & \campo{Rol} & \campo{dd/mm} \\ \hline
+\end{tabularx}
+\notatabla{Si algún conjunto de datos contenía información personal, la eliminación segura no es opcional: documente el procedimiento aplicado.}
+\end{table}
+
+Los Cuadros~\ref{tab:archivo} y~\ref{tab:limpieza} distinguen lo que se \emph{conserva} de lo
+que se \emph{desmonta}; las mejoras que se deriven de este cierre se registran en el
+apartado~\ref{sec:lecciones}. Sin el segundo, un entorno de prueba con datos reales puede sobrevivir
+al proyecto sin dueño ni control.
+
+% ---------------------------------------------------------------------
+\section{Lecciones aprendidas}
+\label{sec:lecciones}
+
+\begin{instruccion}
+Discuta los resultados y plantee las conclusiones principales sobre el producto y sobre el
+proceso. Evalúe el propio proceso de prueba e identifique áreas de mejora. Liste
+recomendaciones justificadas y trazables hasta los resultados que las sustentan.
+
+\textbf{Ampliación respecto de la plantilla original:} indique, para cada lección, a quién se
+comunica y qué debería cambiar como consecuencia. Según el modelo de procesos (actividad TC3),
+las lecciones aprendidas retroalimentan la capa organizacional, tal como muestra el bucle
+externo de la Figura~\ref{fig:procesos}; una lección que no llega a nadie no cierra ese bucle.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Lecciones aprendidas y mejoras propuestas.}
+\label{tab:lecciones}
+\begin{tabularx}{\textwidth}{|C{1.4cm}|C{1.8cm}|Y|C{2.6cm}|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Ámbito} & \textbf{Lección y evidencia que la sustenta} & \textbf{Mejora propuesta} & \textbf{Se comunica a} \\ \hline
+  \campo{LA-01} & \campo{Proceso} & \campo{Qué se aprendió y con qué evidencia} & \campo{Qué debería cambiar} & \campo{Destinatario} \\ \hline
+  \campo{LA-02} & \campo{Producto} & \campo{Lección} & \campo{Mejora} & \campo{Destinatario} \\ \hline
+  \campo{LA-03} & \campo{Proyecto} & \campo{Lección} & \campo{Mejora} & \campo{Destinatario} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Ámbito: \textit{producto} (qué aprendimos sobre el software) · \textit{proceso} (sobre cómo probamos) · \textit{proyecto} (sobre cómo nos organizamos).}
+\end{table}
+
+El Cuadro~\ref{tab:lecciones} exige que cada lección esté sustentada en evidencia registrada y
+tenga un destinatario concreto; así el cierre produce información utilizable en lugar de una
+lista de buenas intenciones.

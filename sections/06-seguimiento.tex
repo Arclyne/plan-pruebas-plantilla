@@ -1,0 +1,180 @@
+% =====================================================================
+%  5. Seguimiento y control   (proceso TMC de ISO/IEC/IEEE 29119-2)
+% =====================================================================
+\section{Seguimiento y control de la prueba}
+\label{sec:seguimiento}
+
+\begin{notanormativa}[Ampliación respecto de la plantilla original]
+La plantilla original resolvía este apartado con un listado de «puntos de revisión»: las
+entregas del curso y sus fechas. Eso cubre los hitos, pero no el \emph{seguimiento}: no dice
+qué se mide, con qué frecuencia, quién compara lo planificado con lo observado, ni qué se hace
+cuando aparece una desviación.
+
+Este apartado desarrolla el proceso de \textbf{monitoreo y control (TMC1–TMC4)} de \normap{2}:
+preparación (establecer indicadores y línea base), monitorear (recolectar y comparar), controlar
+(emitir directivas y, si procede, replanificar) y reportar. Como muestra la
+Figura~\ref{fig:procesos}, este proceso opera de forma \emph{continua y concurrente} con la
+ejecución: no es una etapa que ocurra entre dos entregas.
+\end{notanormativa}
+
+% ---------------------------------------------------------------------
+\subsection{Enfoque de monitoreo (TMC1)}
+
+\begin{instruccion}
+Defina qué se va a observar, con qué frecuencia, quién lo hace y contra qué línea base se
+compara. La línea base es el plan aprobado: sin ella no puede hablarse de desviación.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Enfoque de monitoreo: indicadores, frecuencia y responsables.}
+\label{tab:enfoque-monitoreo}
+\begin{tabularx}{\textwidth}{|L{3.6cm}|Y|C{2.4cm}|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Qué se monitorea} & \textbf{Indicador y fuente del dato} & \textbf{Frecuencia} & \textbf{Responsable} \\ \hline
+  Avance de la ejecución & \campo{Procedimientos ejecutados vs. planificados — \ref{anx:ejecuciones}} & \campo{Semanal} & \campo{Rol} \\ \hline
+  Cobertura alcanzada & \campo{Medidas COB-xx del Cuadro~\ref{tab:cobertura}} & \campo{Semanal} & \campo{Rol} \\ \hline
+  Incidentes & \campo{Altas, estado y severidad — \ref{anx:incidentes}} & \campo{Continua} & \campo{Rol} \\ \hline
+  Riesgos & \campo{Riesgos materializados y riesgos nuevos} & \campo{Semanal} & \campo{Rol} \\ \hline
+  Consumo de esfuerzo & \campo{Horas empleadas vs. estimadas — \ref{sec:actividades}} & \campo{Semanal} & \campo{Rol} \\ \hline
+  Bloqueos & \campo{Pruebas bloqueadas y su causa} & \campo{Continua} & \campo{Rol} \\ \hline
+\end{tabularx}
+\notatabla{Línea base para la comparación: \campo{versión del plan aprobada y fecha}.}
+\end{table}
+
+El Cuadro~\ref{tab:enfoque-monitoreo} materializa la actividad TMC1 y determina qué columnas
+debe traer cada informe de estado del \ref{anx:informes}.
+
+% ---------------------------------------------------------------------
+\subsection{Puntos de revisión e hitos}
+
+\begin{instruccion}
+Describa los informes planificados y los hitos en que se presentarán resultados parciales o
+finales, indicando qué se entrega y en qué fecha.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Puntos de revisión e hitos de entrega.}
+\label{tab:hitos}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.5cm}|Y|C{2.2cm}|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Hito} & \textbf{Fecha} & \textbf{Qué se entrega} & \textbf{Destinatario} & \textbf{Estatus} \\ \hline
+  \campo{H-01} & \campo{dd/mm/aaaa} & \campo{Contenido de la entrega} & \campo{Interesado} & \campo{Pendiente} \\ \hline
+  \campo{H-02} & \campo{dd/mm/aaaa} & \campo{Contenido de la entrega} & \campo{Interesado} & \campo{Pendiente} \\ \hline
+  \campo{H-03} & \campo{dd/mm/aaaa} & \campo{Contenido de la entrega} & \campo{Interesado} & \campo{Pendiente} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:hitos} recoge los momentos de entrega formal; se refleja en el cronograma del
+apartado~\ref{sec:calendario}.
+
+\begin{politicaacademica}
+El plan de clase de la Experiencia Educativa establece \textbf{tres entregas} a lo largo del
+periodo. Consígnelas como hitos en el Cuadro~\ref{tab:hitos} junto con lo que se presentará en
+cada una y sus fechas.
+
+El número de entregas es una regla del curso. Al reutilizar la plantilla, sustitúyalo por los
+hitos que el proyecto requiera: los puntos de revisión deberían fijarse por necesidad de
+decisión de los interesados, no por un número predefinido.
+\end{politicaacademica}
+
+% ---------------------------------------------------------------------
+\subsection{Registro de seguimiento (TMC2–TMC3)}
+
+\begin{instruccion}
+Este es el registro operativo del seguimiento: una fila por periodo. Compare lo previsto con lo
+real, anote lo que se observó y —lo más importante— las acciones correctivas acordadas con su
+responsable y fecha objetivo. La última columna obliga a pronunciarse sobre si la desviación
+exige replanificar.
+
+Si emplea una herramienta de gestión, puede sustituir este cuadro por una referencia a ella,
+siempre que indique dónde está, quién la mantiene y que contenga la misma información.
+\end{instruccion}
+
+{\footnotesize
+\begin{xltabular}{\textwidth}{|L{2.9cm}|Y|Y|}
+\caption{Registro de seguimiento por periodo.}\label{tab:seguimiento}\\ \hline
+\endfirsthead
+\multicolumn{3}{@{}l@{}}{\footnotesize\itshape\tablename~\thetable{} (continuación)}\\ \hline
+\endhead
+\multicolumn{3}{@{}r@{}}{\footnotesize\itshape continúa en la página siguiente}\\
+\endfoot
+\endlastfoot
+  \filaenc \textbf{Campo} & \textbf{Periodo \campo{1}} & \textbf{Periodo \campo{2}} \\ \hline
+  Periodo (fechas)            & \campo{dd/mm – dd/mm} & \campo{} \\ \hline
+  Avance previsto             & \campo{\% o hitos}    & \campo{} \\ \hline
+  Avance real                 & \campo{\% o hitos}    & \campo{} \\ \hline
+  Pruebas ejecutadas          & \campo{n}             & \campo{} \\ \hline
+  Aprobadas                   & \campo{n}             & \campo{} \\ \hline
+  Fallidas                    & \campo{n}             & \campo{} \\ \hline
+  Bloqueadas                  & \campo{n y causa}     & \campo{} \\ \hline
+  Cobertura alcanzada         & \campo{COB-xx = \%}   & \campo{} \\ \hline
+  Incidentes relevantes       & \campo{INC-xx}        & \campo{} \\ \hline
+  Riesgos nuevos              & \campo{Clave y descripción} & \campo{} \\ \hline
+  Esfuerzo utilizado          & \campo{h reales / h estimadas} & \campo{} \\ \hline
+  Bloqueos y su causa         & \campo{Descripción}   & \campo{} \\ \hline
+  Acción correctiva acordada  & \campo{Qué se hará}   & \campo{} \\ \hline
+  Responsable de la acción    & \campo{Rol}           & \campo{} \\ \hline
+  Fecha objetivo              & \campo{dd/mm/aaaa}    & \campo{} \\ \hline
+  ¿Requiere replanificación?  & \campo{Sí/No + motivo}& \campo{} \\ \hline
+\end{xltabular}
+}
+
+El Cuadro~\ref{tab:seguimiento} es el instrumento que conecta lo planificado con lo observado
+periodo a periodo. Duplique la columna tantas veces como periodos tenga el esfuerzo de prueba,
+o use una fila por periodo si prefiere una disposición horizontal.
+
+% ---------------------------------------------------------------------
+\subsection{Acciones de control y replanificación (TMC3)}
+
+\begin{instruccion}
+Defina de antemano qué desviación dispara qué respuesta y quién la autoriza. Distinga las
+acciones que \emph{corrigen la ejecución} (repriorizar, reasignar, ampliar un ciclo) de las que
+\emph{reabren la planificación} (cambiar el alcance, los niveles, los criterios de salida o el
+calendario). Sin esta regla acordada, cada desviación se discute desde cero.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Reglas de control y disparadores de replanificación.}
+\label{tab:control}
+\begin{tabularx}{\textwidth}{|L{3.6cm}|Y|C{2.6cm}|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Situación observada} & \textbf{Respuesta acordada} & \textbf{¿Reabre la planificación?} & \textbf{Autoriza} \\ \hline
+  \campo{Desviación de avance > 20 \%} & \campo{Acción} & \campo{No} & \campo{Rol} \\ \hline
+  \campo{Entorno indisponible > 3 días} & \campo{Acción} & \campo{Sí} & \campo{Rol} \\ \hline
+  \campo{Incidente crítico bloquea un objeto Catastrófico} & \campo{Acción} & \campo{Sí} & \campo{Rol} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:control} cierra el bucle de control representado en la
+Figura~\ref{fig:procesos}: toda replanificación acordada aquí debe producir una nueva versión
+del plan en el Cuadro~\ref{tab:historial} y, si procede, una entrada en el
+Cuadro~\ref{tab:desviaciones}.
+
+% ---------------------------------------------------------------------
+\subsection{Informes de estado (TMC4)}
+\label{sec:informes}
+
+\begin{instruccion}
+Indique quién recibe informes de estado, con qué periodicidad y por qué medio; los
+destinatarios y su frecuencia salen del Cuadro~\ref{tab:interesados}. El formato reutilizable
+del informe está en el \ref{anx:informes}: una copia por periodo.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Plan de comunicación de los informes de estado.}
+\label{tab:comunicacion}
+\begin{tabularx}{\textwidth}{|L{3.4cm}|C{2.4cm}|Y|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Destinatario} & \textbf{Periodicidad} & \textbf{Contenido mínimo} & \textbf{Medio} \\ \hline
+  \campo{Interesado} & \campo{Semanal} & \campo{Avance, cobertura, incidentes, riesgos, acciones} & \campo{Medio} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:comunicacion} evita que el seguimiento quede confinado al equipo de prueba:
+determina qué información sale del equipo, hacia quién y cuándo.

@@ -1,0 +1,56 @@
+% =====================================================================
+%  diagrams/cadena-trazabilidad.tex
+%  Figura: cadena de trazabilidad que la plantilla permite representar,
+%          con el apartado o anexo donde se registra cada eslabón.
+% =====================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  esl/.style ={draw=uvazul, thick, fill=uvazul!8, rounded corners=2pt,
+               text width=2.45cm, align=center, minimum height=0.95cm, inner sep=3pt},
+  ori/.style ={font=\tiny\itshape, text=gray!65, align=center, text width=2.6cm},
+  fl/.style  ={-{Latex[length=4pt]}, draw=uvazul!85, thick}
+]
+
+\node[esl] (r1) at (-5.6,0)  {\textbf{Base de prueba}\\ BP-xx};
+\node[esl] (r2) at (-2.8,0)  {\textbf{Riesgo}\\ RP-xx};
+\node[esl] (r3) at (0,0)     {\textbf{Condición de prueba}\\ COND-xx};
+\node[esl] (r4) at (2.8,0)   {\textbf{Elemento de cobertura}};
+\node[esl] (r5) at (5.6,0)   {\textbf{Caso de prueba}\\ CP-xxx};
+
+% La segunda fila se dispone de derecha a izquierda («en boustrophedon»)
+% para que el enlace entre CP-xxx y PP-xxx sea un salto vertical corto y
+% no una línea que atraviese todo el diagrama.
+\node[esl] (r6) at (5.6,-2.6)  {\textbf{Procedimiento}\\ PP-xxx};
+\node[esl] (r7) at (2.8,-2.6)  {\textbf{Ejecución}\\ EJ-xxx};
+\node[esl] (r8) at (0,-2.6)    {\textbf{Evidencia}\\ EVID-xxx};
+\node[esl] (r9) at (-2.8,-2.6) {\textbf{Incidente}\\ INC-xx};
+
+\foreach \a/\b in {r1/r2, r2/r3, r3/r4, r4/r5, r6/r7, r7/r8, r8/r9} { \draw[fl] (\a) -- (\b); }
+\draw[fl] (r5.south) -- (r6.north);
+
+\node[ori] at (-5.6,-1.0) {Cuadro~\ref{tab:base-prueba}};
+\node[ori] at (-2.8,-1.0) {Cuadro~\ref{tab:riesgos-producto}};
+\node[ori] at (0,-1.0)    {Cuadro~\ref{tab:condiciones}};
+\node[ori] at (2.8,-1.0)  {Cuadro~\ref{tab:condiciones}};
+\node[ori] at (5.6,-1.0)  {Anexo A};
+
+\node[ori] at (5.6,-3.6)  {Anexo B};
+\node[ori] at (2.8,-3.6)  {Anexo C};
+\node[ori] at (0,-3.6)    {Anexo C};
+\node[ori] at (-2.8,-3.6) {Anexo D};
+
+\node[align=left, font=\scriptsize, text width=15.2cm] at (0,-4.8)
+  {\textbf{Cómo leer la figura.} Cada eslabón se registra en el cuadro o anexo indicado bajo él.
+   La cadena se recorre en ambos sentidos: hacia adelante, para comprobar que un requisito quedó
+   verificado; hacia atrás, para saber qué requisito y qué riesgo justificaron una prueba que
+   reveló un incidente. No todos los proyectos necesitan todos los eslabones; la plantilla
+   permite representarlos, no obliga a usarlos.};
+
+\end{tikzpicture}
+\caption[Cadena de trazabilidad representable en la plantilla]%
+{Cadena de trazabilidad desde la base de prueba hasta el incidente, con el cuadro o anexo en
+que se registra cada eslabón.}
+\label{fig:trazabilidad}
+\end{figure}

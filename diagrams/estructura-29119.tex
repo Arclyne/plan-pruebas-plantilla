@@ -1,0 +1,105 @@
+% =====================================================================
+%  diagrams/estructura-29119.tex
+%  Figura: estructura general de ISO/IEC/IEEE 29119 y su relación
+%          con las partes de este documento.
+%
+%  CORRECCIONES respecto del diagrama original («normal general.png»):
+%   1. El original colgaba «Procesos organizacionales · política y
+%      estrategia» de la Parte 1. Los procesos —incluido el
+%      organizacional— pertenecen a la Parte 2; la Parte 1 aporta
+%      conceptos generales y vocabulario.
+%   2. Se elimina toda sugerencia de que una parte sustituye o contiene
+%      a otra: son partes complementarias de una misma norma.
+%   3. Se añade la correspondencia explícita con las secciones y anexos
+%      de este documento, que el original no representaba.
+%
+%  Nota de mantenimiento: los nodos se colocan con «positioning»
+%  (below=… of …) en lugar de coordenadas absolutas, de modo que al
+%  cambiar el texto de un cuadro los demás se desplacen y nunca se
+%  superpongan.
+% =====================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  node distance=4mm,
+  raiz/.style   ={draw=uvazul, very thick, fill=uvazul!12, rounded corners=3pt,
+                  text width=5.0cm, align=center, inner sep=4pt},
+  parte/.style  ={draw=uvazul, thick, fill=uvazul!7, rounded corners=2pt,
+                  text width=2.35cm, align=center, inner sep=4pt},
+  sub/.style    ={draw=gray!70, fill=gray!8, rounded corners=2pt,
+                  text width=2.35cm, align=center, inner sep=4pt},
+  doc/.style    ={draw=instrverde, thick, fill=instrverde!8, rounded corners=2pt,
+                  text width=3.7cm, align=center, inner sep=4pt},
+  fl/.style     ={-{Latex[length=4pt]}, draw=uvazul!80},
+  mapa/.style   ={-{Latex[length=4pt]}, draw=instrverde!85, dashed}
+]
+
+% ------------------------------- raíz --------------------------------
+\node[raiz] (n) {\textbf{ISO/IEC/IEEE 29119}\\ Prueba de software (norma multiparte)};
+
+% ------------------------------ partes -------------------------------
+\node[parte, below=10mm of n] (p3) {\textbf{Parte 3}\\ Documentación de prueba};
+\node[parte, left=6mm of p3]  (p2) {\textbf{Parte 2}\\ Procesos de prueba};
+\node[parte, left=6mm of p2]  (p1) {\textbf{Parte 1}\\ Conceptos generales y vocabulario};
+\node[parte, right=6mm of p3] (p4) {\textbf{Parte 4}\\ Técnicas de prueba};
+\node[parte, right=6mm of p4] (p5) {\textbf{Parte 5}\\ Pruebas por palabras clave};
+
+\foreach \d in {p1,p2,p3,p4,p5} { \draw[fl] (n) -- (\d); }
+
+% --------------------------- contenido -------------------------------
+% Parte 1
+\node[sub, below=of p1] (v1) {Vocabulario y conceptos que usan las demás partes};
+\draw[fl] (p1) -- (v1);
+
+% Parte 2: las tres capas de procesos
+\node[sub, below=of p2] (c1) {Capa organizacional};
+\node[sub, below=of c1] (c2) {Gestión de la prueba};
+\node[sub, below=of c2] (c3) {Procesos dinámicos};
+\draw[fl] (p2) -- (c1); \draw[fl] (c1) -- (c2); \draw[fl] (c2) -- (c3);
+
+% Parte 3: tipos de documentación
+\node[sub, below=of p3] (d1) {Documentos de gestión};
+\node[sub, below=of d1] (d2) {Especificaciones de nivel};
+\node[sub, below=of d2] (d3) {Registros de ejecución e incidentes};
+\draw[fl] (p3) -- (d1); \draw[fl] (d1) -- (d2); \draw[fl] (d2) -- (d3);
+
+% Parte 4: familias de técnicas
+\node[sub, below=of p4] (t1) {Basadas en especificación};
+\node[sub, below=of t1] (t2) {Basadas en estructura};
+\node[sub, below=of t2] (t3) {Basadas en experiencia};
+\draw[fl] (p4) -- (t1); \draw[fl] (t1) -- (t2); \draw[fl] (t2) -- (t3);
+
+% Parte 5
+\node[sub, below=of p5] (k1) {Enfoque opcional; se usa sólo si el proyecto lo adopta};
+\draw[fl] (p5) -- (k1);
+
+% ------------------- correspondencia con este documento --------------
+\node[fit=(v1)(c3)(d3)(t3)(k1), inner sep=0pt, draw=none] (todos) {};
+
+\node[align=center, font=\scriptsize\bfseries, text=instrverde,
+      below=7mm of todos.south] (rot) {ESTE DOCUMENTO};
+
+\node[doc, below=3mm of rot] (e2) {\textbf{Parte II}\\ Reporte de finalización};
+\node[doc, left=5mm of e2]   (e1) {\textbf{Parte I}\\ Plan de prueba (secciones 1--9)};
+\node[doc, right=5mm of e2]  (e3) {\textbf{Anexos A--G}\\ casos, procedimientos, ejecuciones, incidentes, informes, entorno, trazabilidad};
+
+\draw[mapa] (c2.west) to[out=190,in=100] (e1.north);
+\draw[mapa] (d1.east) to[out=0,in=90]    (e2.north east);
+\draw[mapa] (d3.east) to[out=350,in=110] (e3.north west);
+\draw[mapa] (t3.south) to[out=280,in=80] (e3.north);
+
+% ------------------------------ leyenda ------------------------------
+\node[align=left, font=\scriptsize, text width=15.2cm, below=5mm of e2] (leg)
+  {\textbf{Cómo leer la figura.} Las flechas azules indican \emph{qué contiene} cada parte de la
+   norma; las verdes discontinuas, \emph{dónde} se refleja ese contenido en este documento.
+   Ninguna parte sustituye a otra: el plan no reemplaza a los registros que producen los procesos
+   dinámicos, ni las técnicas de la Parte~4 son obligatorias en su totalidad.};
+
+\end{tikzpicture}
+\caption[Estructura de ISO/IEC/IEEE 29119 y su relación con este documento]%
+{Estructura general de \norma\ y correspondencia de sus partes con las secciones y anexos de
+este documento. Versión corregida del diagrama de referencia: los procesos organizacionales se
+sitúan en la Parte~2, no en la Parte~1.}
+\label{fig:estructura}
+\end{figure}

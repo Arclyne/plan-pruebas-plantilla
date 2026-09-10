@@ -1,0 +1,85 @@
+% =====================================================================
+%  ANEXO A. Especificación de casos de prueba
+% =====================================================================
+\section{Especificación de casos de prueba}
+\label{anx:casos}
+
+\begin{notanormativa}[Qué es y qué no es un caso de prueba]
+Un caso de prueba describe \textbf{qué debería ejecutarse y qué debería ocurrir}. Es un
+artefacto de diseño y se mantiene estable entre ejecuciones. Lo que \emph{sucedió} al ejecutarlo
+—resultado real, veredicto, evidencia— no se escribe aquí: se registra en el
+\ref{anx:ejecuciones}. Esta separación es la corrección más importante que introduce esta
+plantilla respecto de la original, y es lo que permite ejecutar el mismo caso muchas veces sin
+sobrescribir su historial.
+\end{notanormativa}
+
+\begin{instruccion}
+Reproduzca la ficha siguiente una vez por cada caso de prueba. Un caso queda derivado de una
+condición de prueba (apartado~\ref{sec:diseno}, Cuadro~\ref{tab:condiciones}), que a su vez
+procede de la base de prueba y
+de un riesgo: por eso la ficha pide esas tres claves. El Cuadro~\ref{tab:indice-casos} sirve
+como índice de todos los casos especificados.
+
+Si mantiene los casos en una herramienta externa, conserve al menos los mismos campos e indique
+su ubicación en el Cuadro~\ref{tab:configuracion}.
+\end{instruccion}
+
+\subsection*{Ficha de caso de prueba}
+
+\begin{xltabular}{\textwidth}{|E{4.4cm}|Y|}
+\caption{Formato de especificación de un caso de prueba.}\label{tab:ficha-caso}\\ \hline
+\endfirsthead
+\multicolumn{2}{@{}l@{}}{\footnotesize\itshape\tablename~\thetable{} (continuación)}\\ \hline
+\endhead
+\multicolumn{2}{@{}r@{}}{\footnotesize\itshape continúa en la página siguiente}\\
+\endfoot
+\endlastfoot
+  Identificador del caso        & \campo{CP-001} \\ \hline
+  Versión del caso              & \campo{v1} \\ \hline
+  Objeto de prueba              & \campo{OP-01 (Cuadro~\ref{tab:objetos})} \\ \hline
+  Base de prueba                & \campo{BP-01 (Cuadro~\ref{tab:base-prueba})} \\ \hline
+  Riesgo asociado               & \campo{RP-01 (Cuadro~\ref{tab:riesgos-producto})} \\ \hline
+  Condición de prueba           & \campo{COND-01 (Cuadro~\ref{tab:condiciones})} \\ \hline
+  Objetivo del caso             & \campo{Qué pretende evidenciar este caso en particular} \\ \hline
+  Nivel de prueba               & \campo{Componente / integración / sistema / aceptación} \\ \hline
+  Técnica aplicada              & \campo{Cuadro~\ref{tab:tecnicas}} \\ \hline
+  Elemento(s) de cobertura      & \campo{Qué partición, valor límite, decisión o transición ejercita} \\ \hline
+  Prioridad                     & \campo{Alta / media / baja, según el riesgo} \\ \hline
+  Precondiciones                & \campo{Estado que debe tener el sistema antes de ejecutar} \\ \hline
+  Datos de entrada              & \campo{Valores concretos y conjunto de datos (DAT-xx)} \\ \hline
+  Acciones / pasos              & \campo{1. …\quad 2. …\quad 3. …} \\ \hline
+  Resultado esperado            & \campo{Qué debe ocurrir; indique el oráculo del que se deriva} \\ \hline
+  Postcondiciones               & \campo{Estado en que queda el sistema tras la ejecución} \\ \hline
+  Limpieza requerida            & \campo{Qué debe deshacerse o restaurarse después} \\ \hline
+  Dependencias                  & \campo{Otros casos que deban ejecutarse antes} \\ \hline
+  Autor y fecha                 & \campo{Nombre — dd/mm/aaaa} \\ \hline
+\end{xltabular}
+
+El Cuadro~\ref{tab:ficha-caso} es el formato que debe replicarse por cada caso. Sus campos de
+base, riesgo y condición son los que alimentan la matriz de trazabilidad del
+\ref{anx:trazabilidad}; el campo «resultado esperado» es el que se referencia —no se copia—
+desde cada ejecución.
+
+\subsection*{Índice de casos de prueba especificados}
+
+\begin{longtable}{|C{1.6cm}|L{4.0cm}|C{1.6cm}|C{1.6cm}|C{1.9cm}|C{1.6cm}|}
+\caption{Índice de casos de prueba especificados.}
+\label{tab:indice-casos} \\
+\hline
+\filaenc \textbf{ID} & \textbf{Título del caso} & \textbf{Objeto} & \textbf{Condición} & \textbf{Técnica} & \textbf{Prioridad} \\ \hline
+\endfirsthead
+\hline
+\filaenc \textbf{ID} & \textbf{Título del caso} & \textbf{Objeto} & \textbf{Condición} & \textbf{Técnica} & \textbf{Prioridad} \\ \hline
+\endhead
+\hline \multicolumn{6}{|r|}{\footnotesize\textit{continúa en la página siguiente}} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+\campo{CP-001} & \campo{Título} & \campo{OP-01} & \campo{COND-01} & \campo{Valores límite} & \campo{Alta} \\ \hline
+ & & & & & \\ \hline
+ & & & & & \\ \hline
+ & & & & & \\ \hline
+\end{longtable}
+
+El Cuadro~\ref{tab:indice-casos} permite ver de un vistazo el conjunto diseñado y detectar
+condiciones sin casos o técnicas declaradas que no se usaron.

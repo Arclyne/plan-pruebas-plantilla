@@ -1,0 +1,131 @@
+% =====================================================================
+%  1. Introducción
+% =====================================================================
+\section{Introducción}
+
+\subsection{Presentación del documento}
+
+\begin{instruccion}
+Explique el objetivo del plan de prueba, su estructura y, de forma general, el contenido de
+cada apartado. Indique además a quién va dirigido el documento y en qué momento del proyecto
+se emite. Conviene señalar explícitamente qué partes de \norma\ se han tomado como referencia
+y cuáles no, para no dar a entender una conformidad que no se ha demostrado.
+\end{instruccion}
+
+\campo{Redacte aquí la presentación del documento}
+
+\begin{notanormativa}[Relación entre las partes de la norma y este documento]
+\normap{2} describe los \emph{procesos} de prueba; \normap{3}, la \emph{documentación} que
+esos procesos producen; \normap{4}, las \emph{técnicas} de diseño de pruebas. Por lo tanto,
+el contenido de este plan \textbf{no sustituye} a los registros que se generan al diseñar,
+ejecutar, controlar y cerrar las pruebas: los complementa. La Figura~\ref{fig:estructura}
+muestra esa relación y señala qué apartados de este documento se apoyan en cada parte.
+\end{notanormativa}
+
+\input{diagrams/estructura-29119}
+
+La Figura~\ref{fig:estructura} presenta la relación conceptual entre las partes de \norma\ y
+las secciones y anexos de esta plantilla. Debe leerse como un mapa de correspondencias, no
+como una jerarquía de sustitución: ninguna parte de la norma reemplaza a otra, y disponer de
+este plan no acredita por sí solo la aplicación de los procesos que la norma describe.
+
+\input{diagrams/procesos-prueba}
+
+La Figura~\ref{fig:procesos} resume el flujo del proceso de prueba en las tres capas que define
+\normap{2} —organizacional, de gestión y dinámica— y, sobre todo, los bucles de
+retroalimentación que impiden leerlo como una cascada: el seguimiento y control opera de forma
+\emph{concurrente} con la ejecución, los incidentes y los riesgos nuevos pueden reabrir la
+planificación, y las lecciones aprendidas del cierre retroalimentan la capa organizacional. Este
+plan corresponde a la capa de gestión; los anexos documentan lo que ocurre en la capa dinámica.
+
+\begin{notanormativa}[Declaración de alcance de esta plantilla]
+Esta plantilla \textbf{no declara conformidad} con \norma. Organiza la planificación y el
+cierre de un esfuerzo de prueba tomando como referencia el modelo de procesos de la parte~2 y
+la estructura documental de la parte~3. Demostrar conformidad exigiría, además, evidencia de
+que las actividades se realizaron y de que sus resultados fueron los especificados, y una
+revisión del texto normativo completo de la edición elegida.
+\end{notanormativa}
+
+% ---------------------------------------------------------------------
+\subsection{Referentes utilizados}
+
+\begin{instruccion}
+Relacione los documentos que sirvieron de base al plan: referencias normativas y documentación
+técnica del proyecto a probar. Incluya como mínimo nombre, descripción y, para documentos
+digitales, la URL y el nombre del archivo con su extensión.
+
+\textbf{Corrección respecto de la plantilla original:} cite siempre la \emph{edición} (año) de
+cada norma y la \emph{versión} de cada fuente técnica. Una referencia como «\normap{4}, Anexo~A,
+pp.~32--38» es ambigua sin el año, porque la paginación cambia entre ediciones. Cuando cite una
+cláusula o anexo, verifíquelo en la edición que realmente consultó.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Referentes normativos y técnicos utilizados en la elaboración del plan.}
+\label{tab:referentes}
+\begin{tabularx}{\textwidth}{|C{1.3cm}|L{4.6cm}|Y|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Documento (con edición/versión)} & \textbf{Descripción y uso en el plan} & \textbf{Ubicación} \\ \hline
+  \campo{REF-01} & \campo{Norma, edición y cláusula verificada} & \campo{Para qué se usó} & \campo{URL/archivo} \\ \hline
+  \campo{REF-02} & \campo{Especificación de requisitos v1.2} & \campo{Base de prueba} & \campo{URL/archivo} \\ \hline
+  & & & \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\notatabla{Distinga los referentes \textit{normativos} (normas y estándares) de los \textit{técnicos} (documentación del proyecto a probar). Ambos son citables desde los apartados posteriores mediante su clave.}
+\end{table}
+
+El Cuadro~\ref{tab:referentes} concentra las fuentes en que se apoya el plan y les asigna una
+clave; esa clave se reutiliza en el apartado~\ref{sec:objeto-base} para identificar cuáles de
+ellas constituyen la \emph{base de prueba}.
+
+% ---------------------------------------------------------------------
+\subsection{Glosario}
+
+\begin{instruccion}
+Defina los términos, acrónimos y abreviaturas relevantes cuyo significado deba explicitarse.
+Incluya los términos del dominio de la aplicación que faciliten comprender el caso de estudio.
+Se recomienda separar acrónimos y términos en dos subapartados, en formato de lista tipo
+diccionario. Indique la fuente de las definiciones tomadas de una norma o de un cuerpo de
+conocimiento.
+\end{instruccion}
+
+\subsubsection*{Acrónimos}
+
+\begin{description}[style=nextline,leftmargin=2.6cm,labelwidth=2.4cm,font=\bfseries]
+  \item[\campo{SIL}] \campo{Software Integrity Level. Nivel de integridad del software; véase el apartado~\ref{sec:criticidad}.}
+  \item[\campo{ACR-02}] \campo{Significado}
+\end{description}
+
+\subsubsection*{Términos}
+
+\begin{instruccion}
+Los seis términos siguientes se ofrecen ya redactados porque la revisión de la plantilla
+original detectó que se confundían entre sí. Consérvelos, ajústelos si su proyecto usa otra
+terminología y añada los términos propios del dominio de la aplicación.
+\end{instruccion}
+
+\begin{description}[style=nextline,leftmargin=2.6cm,labelwidth=2.4cm,font=\bfseries]
+  \item[Objeto de prueba] Elemento que se somete a prueba: sistema, subsistema, módulo,
+        componente, servicio, API o interfaz. Responde a \emph{qué se prueba}.
+  \item[Base de prueba] Conjunto de documentos y fuentes de los que se deriva lo que debe
+        verificarse: requisitos, historias de usuario, casos de uso, reglas de negocio,
+        arquitectura o diseño. Responde a \emph{contra qué se juzga el objeto}.
+  \item[Condición de prueba] Aspecto verificable del objeto de prueba, derivado de la base de
+        prueba y de los riesgos, a partir del cual se diseñan casos.
+  \item[Defecto] Imperfección en un producto de trabajo que puede hacer que no cumpla sus
+        requisitos. Es estático y reside en el artefacto.
+  \item[Fallo] Evento en el que el servicio entregado se desvía del correcto; es la
+        manifestación externa observable de un defecto activado.
+  \item[Incidente de prueba] Evento ocurrido durante la prueba que requiere investigación o
+        acción adicional. Es un registro documental: un incidente puede deberse a un defecto
+        del objeto, del entorno, de los datos o del propio caso de prueba.
+  \item[\campo{Término del dominio}] \campo{Definición}
+\end{description}
+
+\begin{notanormativa}[Fuente de las definiciones anteriores]
+Las definiciones de defecto, fallo e incidente siguen la delimitación empleada en
+ISO/IEC/IEEE 24765 y en \normap{1}, recogida en la sección~3.1 del documento
+\emph{Plan de trabajo 29119} incluido en \texttt{sources/}. Un mismo defecto puede producir
+varios fallos distintos y un mismo fallo puede tener varios defectos como causa.
+\end{notanormativa}

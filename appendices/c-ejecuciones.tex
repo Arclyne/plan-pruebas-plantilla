@@ -1,0 +1,85 @@
+% =====================================================================
+%  ANEXO C. Registro de ejecución de pruebas
+% =====================================================================
+\section{Registro de ejecución de pruebas}
+\label{anx:ejecuciones}
+
+\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
+Este registro corresponde a la actividad \textbf{TE3 «Registrar la ejecución de la prueba»} de
+\normap{2}, y es independiente de la especificación del caso:
+
+\begin{itemize}
+  \item El \textbf{caso de prueba} (\ref{anx:casos}) describe \emph{qué debería ejecutarse}.
+  \item La \textbf{ejecución} registra \emph{qué ocurrió una vez determinada}: en qué versión,
+        en qué entorno, con qué datos, quién la realizó y con qué veredicto.
+\end{itemize}
+
+Un mismo caso puede ejecutarse muchas veces —en distintas versiones, tras una corrección, en
+una campaña de regresión—. Cada una es una \textbf{ejecución distinta} con su propio
+identificador. \textbf{Nunca sobrescriba el diseño del caso con el resultado de una ejecución}:
+al hacerlo se pierde el historial y deja de poder demostrarse cuándo se corrigió un defecto.
+\end{notanormativa}
+
+\begin{instruccion}
+Use la ficha detallada para las ejecuciones que requieran documentación amplia (típicamente las
+no aprobadas) y la tabla resumen para el conjunto. Los campos de versión, configuración y
+entorno son los que hacen reproducible el resultado: tómelos del Cuadro~\ref{tab:configuracion}.
+\end{instruccion}
+
+\subsection*{Ficha de ejecución}
+
+\begin{xltabular}{\textwidth}{|E{4.4cm}|Y|}
+\caption{Formato de registro de una ejecución de prueba.}\label{tab:ficha-ejecucion}\\ \hline
+\endfirsthead
+\multicolumn{2}{@{}l@{}}{\footnotesize\itshape\tablename~\thetable{} (continuación)}\\ \hline
+\endhead
+\multicolumn{2}{@{}r@{}}{\footnotesize\itshape continúa en la página siguiente}\\
+\endfoot
+\endlastfoot
+  Identificador de ejecución      & \campo{EJ-014} \\ \hline
+  Caso o procedimiento ejecutado  & \campo{CP-001 (v1) / PP-001 (v1)} \\ \hline
+  Ciclo o campaña                 & \campo{Ciclo 2 — regresión} \\ \hline
+  Versión del software probado    & \campo{v1.2.1 — identificación exacta de la compilación} \\ \hline
+  Configuración utilizada         & \campo{Parámetros, banderas, navegador, sistema operativo} \\ \hline
+  Entorno                         & \campo{ENT-xx y estado verificado (Anexo~F)} \\ \hline
+  Datos utilizados                & \campo{DAT-xx, versión del conjunto} \\ \hline
+  Fecha y hora                    & \campo{dd/mm/aaaa hh:mm} \\ \hline
+  Ejecutor                        & \campo{Nombre} \\ \hline
+  Entradas efectivamente usadas   & \campo{Valores concretos, si difieren de los especificados} \\ \hline
+  Resultado esperado (referencia) & \campo{Referencia al campo del caso; no se transcribe} \\ \hline
+  Resultado real observado        & \campo{Qué ocurrió realmente} \\ \hline
+  Veredicto                       & \campo{Aprobado / no aprobado / no concluyente / bloqueado} \\ \hline
+  Evidencia                       & \campo{EVID-014 — ruta, captura, registro o archivo} \\ \hline
+  Incidente asociado              & \campo{INC-05, si el veredicto no fue aprobado} \\ \hline
+  Observaciones                   & \campo{Anomalías del entorno, desviaciones del procedimiento} \\ \hline
+\end{xltabular}
+\notatabla{Veredicto \textit{no concluyente}: no pudo determinarse si el comportamiento fue correcto. \textit{Bloqueado}: la ejecución no pudo completarse por una causa externa al objeto de prueba.}
+
+El Cuadro~\ref{tab:ficha-ejecucion} conserva, para cada intento, las condiciones exactas en que
+se obtuvo el veredicto. Es el eslabón que une el caso diseñado con la evidencia y el incidente.
+
+\subsection*{Registro consolidado de ejecuciones}
+
+\begin{longtable}{|C{1.5cm}|C{1.6cm}|C{1.5cm}|C{1.7cm}|C{1.5cm}|C{1.9cm}|C{1.5cm}|C{1.5cm}|}
+\caption{Registro consolidado de ejecuciones de prueba.}
+\label{tab:registro-ejecuciones} \\
+\hline
+\filaenc \textbf{ID ejec.} & \textbf{Caso/proc.} & \textbf{Versión SW} & \textbf{Entorno} & \textbf{Fecha} & \textbf{Ejecutor} & \textbf{Veredicto} & \textbf{Incidente} \\ \hline
+\endfirsthead
+\hline
+\filaenc \textbf{ID ejec.} & \textbf{Caso/proc.} & \textbf{Versión SW} & \textbf{Entorno} & \textbf{Fecha} & \textbf{Ejecutor} & \textbf{Veredicto} & \textbf{Incidente} \\ \hline
+\endhead
+\hline \multicolumn{8}{|r|}{\footnotesize\textit{continúa en la página siguiente}} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+\campo{EJ-001} & \campo{CP-001} & \campo{v1.2.0} & \campo{ENT-01} & \campo{dd/mm} & \campo{Nombre} & \campo{No aprob.} & \campo{INC-05} \\ \hline
+\campo{EJ-014} & \campo{CP-001} & \campo{v1.2.1} & \campo{ENT-01} & \campo{dd/mm} & \campo{Nombre} & \campo{Aprobado} & \campo{INC-05 (conf.)} \\ \hline
+ & & & & & & & \\ \hline
+ & & & & & & & \\ \hline
+\end{longtable}
+
+El Cuadro~\ref{tab:registro-ejecuciones} muestra el patrón esperado: el mismo caso CP-001
+aparece dos veces, con identificadores de ejecución distintos y versiones distintas del
+software. La segunda es la \emph{prueba de confirmación} del incidente INC-05
+(apartado~\ref{sec:confirmacion-regresion}); la primera no se borra ni se modifica.

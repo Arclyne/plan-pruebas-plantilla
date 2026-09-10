@@ -1,0 +1,87 @@
+% =====================================================================
+%  PLANTILLA DE PLAN DE PRUEBAS DE SOFTWARE
+%  Basada en ISO/IEC/IEEE 29119 (partes 2, 3 y 4)
+%
+%  Universidad Veracruzana · Facultad de Estadística e Informática
+%  Licenciatura en Ingeniería de Software · EE. Pruebas de Software
+%
+%  Compilación:   latexmk -pdf main.tex      (o simplemente: make)
+%  Limpieza:      make clean
+%
+%  Este archivo NO contiene contenido del plan: sólo configuración,
+%  metadatos y el orden de inclusión de los módulos.
+%  El contenido está en sections/ , appendices/ y diagrams/.
+% =====================================================================
+\documentclass[11pt,a4paper,oneside]{article}
+
+\input{config/preamble}    % paquetes, geometría, encabezados, estilos
+\input{config/metadata}    % <-- EDITE AQUÍ los datos del equipo/proyecto
+\input{config/commands}    % cajas de la plantilla y comandos propios
+
+\hypersetup{
+  pdftitle={Plan de pruebas de software},
+  pdfsubject={Plantilla basada en ISO/IEC/IEEE 29119},
+  pdfkeywords={pruebas de software, ISO 29119, plan de prueba, plantilla}
+}
+
+\begin{document}
+
+% ---------------------------------------------------------------------
+% Preliminares
+% ---------------------------------------------------------------------
+\pagenumbering{roman}
+
+\input{sections/00-portada}
+\input{sections/01-control-versiones}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{part}{Tabla de contenido}
+\tableofcontents
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{part}{Índice de cuadros y figuras}
+\listoftables
+\vspace{1\baselineskip}
+\listoffigures
+
+% ---------------------------------------------------------------------
+% PARTE I. PLAN DE PRUEBA
+% ---------------------------------------------------------------------
+\clearpage
+\pagenumbering{arabic}
+
+\parteplan{PARTE I}{PLAN DE PRUEBA}
+
+\input{sections/02-introduccion}
+\input{sections/03-contexto}
+\input{sections/04-riesgos}
+\input{sections/05-estrategia}
+\input{sections/06-seguimiento}
+\input{sections/07-incidentes}
+\input{sections/08-actividades}
+\input{sections/09-equipo}
+\input{sections/10-calendarizacion}
+
+% ---------------------------------------------------------------------
+% PARTE II. REPORTE DE FINALIZACIÓN DE LA PRUEBA
+% ---------------------------------------------------------------------
+\parteplan{PARTE II}{REPORTE DE FINALIZACIÓN DE LA PRUEBA}
+
+\input{sections/11-finalizacion}
+
+% ---------------------------------------------------------------------
+% ANEXOS · formatos reutilizables de registro
+% ---------------------------------------------------------------------
+\iniciaranexos
+
+\input{appendices/a-casos-prueba}
+\input{appendices/b-procedimientos}
+\input{appendices/c-ejecuciones}
+\input{appendices/d-incidentes}
+\input{appendices/e-informes-estado}
+\input{appendices/f-preparacion-entorno}
+\input{appendices/g-trazabilidad}
+
+\end{document}

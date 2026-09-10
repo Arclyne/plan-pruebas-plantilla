@@ -1,0 +1,597 @@
+% =====================================================================
+%  4. Estrategia de prueba   (actividad TP5 de ISO/IEC/IEEE 29119-2)
+% =====================================================================
+\section{Estrategia de prueba}
+\label{sec:estrategia}
+
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Este apartado desarrolla la actividad \textbf{TP5 «Diseñar la estrategia de prueba»} de
+\normap{2}: seleccionar niveles, tipos y técnicas coherentes con los riesgos; definir criterios
+de entrada, salida, suspensión y reanudación; y establecer el enfoque de repetición y
+regresión, los requisitos de entorno y las métricas. Cada decisión de este apartado debería
+poder justificarse con un riesgo del apartado~\ref{sec:riesgos}.
+\end{notanormativa}
+
+% ---------------------------------------------------------------------
+\subsection{Niveles de prueba}
+\label{sec:niveles}
+
+\begin{instruccion}
+Identifique los niveles (subprocesos) de prueba que se ejecutarán, en qué consisten y en qué
+orden se realizarán.
+
+\textbf{Corrección respecto de la plantilla original:} la redacción anterior sugería que los
+cuatro niveles habituales debían ejecutarse siempre. No es así: \emph{elija y justifique} los
+niveles aplicables a su proyecto. Un nivel que no se ejecuta debe declararse como no aplicable
+con su motivo, no omitirse en silencio. Separe con claridad componente, integración, sistema y
+aceptación: no son sinónimos ni etapas intercambiables.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Niveles de prueba seleccionados, con su justificación y orden de realización.}
+\label{tab:niveles}
+\begin{tabularx}{\textwidth}{|L{2.6cm}|C{1.9cm}|Y|C{1.5cm}|C{2.2cm}|}
+  \hline
+  \filaenc \textbf{Nivel} & \textbf{¿Se aplica?} & \textbf{En qué consiste en este proyecto / por qué se aplica o no} & \textbf{Orden} & \textbf{Objetos (\ref{tab:objetos})} \\ \hline
+  Componente   & \campo{Sí/No} & \campo{Justificación} & \campo{1} & \campo{OP-01} \\ \hline
+  Integración  & \campo{Sí/No} & \campo{Justificación} & \campo{2} & \campo{OP-01, OP-02} \\ \hline
+  Sistema      & \campo{Sí/No} & \campo{Justificación} & \campo{3} & \campo{OP-01} \\ \hline
+  Aceptación   & \campo{Sí/No} & \campo{Justificación} & \campo{4} & \campo{OP-01} \\ \hline
+  \campo{Otro} & \campo{Sí/No} & \campo{Justificación} & \campo{} & \campo{} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:niveles} declara qué niveles se ejecutan y cuáles se descartan con su
+motivo; el orden indicado condiciona el calendario del apartado~\ref{sec:calendario}.
+
+% ---------------------------------------------------------------------
+\subsection{Tipos de prueba}
+
+\begin{instruccion}
+Indique los tipos de prueba que se aplicarán (funcional, rendimiento, seguridad, usabilidad,
+compatibilidad, entre otros) y con qué característica del alcance no funcional
+(Cuadro~\ref{tab:alcance-nf}) o funcional (Cuadro~\ref{tab:alcance-f}) se corresponde cada uno.
+Un tipo de prueba sin característica asociada suele indicar que el alcance está incompleto.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Tipos de prueba a aplicar y su correspondencia con el alcance.}
+\label{tab:tipos}
+\begin{tabularx}{\textwidth}{|L{3.0cm}|C{2.4cm}|Y|C{2.3cm}|}
+  \hline
+  \filaenc \textbf{Tipo de prueba} & \textbf{Nivel(es)} & \textbf{Qué pretende evidenciar} & \textbf{Característica} \\ \hline
+  \campo{Funcional} & \campo{Sistema} & \campo{Objetivo} & \campo{CF-01} \\ \hline
+  \campo{Seguridad} & \campo{Sistema} & \campo{Objetivo} & \campo{CNF-01} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:tipos} evita una omisión frecuente: declarar características no funcionales
+en el alcance (apartado~\ref{sec:alcance}) y no prever ningún tipo de prueba capaz de
+evaluarlas en alguno de los niveles seleccionados en el apartado~\ref{sec:niveles}.
+
+% ---------------------------------------------------------------------
+\subsection{Diseño e implementación: condiciones y elementos de cobertura}
+\label{sec:diseno}
+
+\begin{notanormativa}[Cadena de derivación de \normap{2}]
+Las actividades \textbf{TD1–TD6} definen una cadena trazable que va de la base de prueba al
+procedimiento ejecutable: identificar conjuntos de características (TD1) $\rightarrow$ derivar
+condiciones de prueba (TD2) $\rightarrow$ derivar elementos de cobertura (TD3) $\rightarrow$
+derivar casos de prueba (TD4) $\rightarrow$ ensamblar conjuntos (TD5) $\rightarrow$ derivar
+procedimientos (TD6). La revisión señaló que la plantilla original saltaba de los elementos de
+prueba directamente a los casos, perdiendo los eslabones intermedios que hacen verificable la
+cobertura.
+\end{notanormativa}
+
+\begin{instruccion}
+Registre aquí las condiciones de prueba derivadas de la base de prueba y de los riesgos, y los
+elementos de cobertura que cada técnica genera sobre ellas. Los casos concretos se documentan
+en el \ref{anx:casos}; este cuadro es el eslabón que los justifica.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Condiciones de prueba y elementos de cobertura derivados.}
+\label{tab:condiciones}
+\begin{tabularx}{\textwidth}{|C{1.6cm}|C{1.6cm}|C{1.4cm}|Y|C{2.6cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Base (\ref{tab:base-prueba})} & \textbf{Riesgo} & \textbf{Condición de prueba (enunciado verificable)} & \textbf{Elementos de cobertura} \\ \hline
+  \campo{COND-01} & \campo{BP-01} & \campo{RP-01} & \campo{El total se calcula correctamente para cada combinación de descuento e impuesto} & \campo{4 particiones + 6 valores límite} \\ \hline
+  & & & & \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:condiciones} materializa las actividades TD2 y TD3 y es el origen de la
+columna «condición» de la matriz de trazabilidad del \ref{anx:trazabilidad}.
+
+% ---------------------------------------------------------------------
+\subsection{Técnicas de diseño de prueba}
+\label{sec:tecnicas}
+
+\begin{instruccion}
+Indique y justifique las técnicas específicas que se aplicarán en cada nivel y sobre cada
+objeto, según su naturaleza. \textbf{No es obligatorio usar todas las técnicas}: hay que elegir
+las pertinentes y explicar su relación con los objetivos y los riesgos. Para cada técnica
+seleccionada complete: objetivo, elemento al que aplica, justificación, cobertura que produce y
+riesgo que ayuda a reducir.
+\end{instruccion}
+
+\input{diagrams/tecnicas-prueba}
+
+La Figura~\ref{fig:tecnicas} clasifica las técnicas de diseño más habituales en tres familias
+—basadas en especificación, basadas en estructura y basadas en experiencia— e indica qué tipo
+de elemento de cobertura genera cada una. Sirve como menú de selección: se elige de él lo que
+el riesgo justifique, no todo su contenido.
+
+\begin{notanormativa}[Corrección respecto del diagrama original de técnicas]
+El diagrama de técnicas del que parte esta plantilla presentaba «100\,\% de cobertura mínima»
+para sentencias y decisiones. Ese valor \textbf{no procede de \norma}: es, a lo sumo, un
+objetivo que un proyecto puede fijarse. En la Figura~\ref{fig:tecnicas} los porcentajes se han
+retirado y sustituido por el \emph{elemento de cobertura} que cada técnica produce; el objetivo
+numérico se declara, con su justificación, en el apartado~\ref{sec:cobertura}. Alcanzar una
+cobertura determinada tampoco demuestra la ausencia de defectos.
+\end{notanormativa}
+
+\begin{table}[H]
+\centering
+\caption{Técnicas de diseño seleccionadas y su justificación.}
+\label{tab:tecnicas}
+\begin{tabularx}{\textwidth}{|L{2.9cm}|C{1.6cm}|C{1.6cm}|Y|C{1.5cm}|}
+  \hline
+  \filaenc \textbf{Técnica} & \textbf{Familia} & \textbf{Nivel / objeto} & \textbf{Justificación y elemento de cobertura que produce} & \textbf{Riesgo} \\ \hline
+  \campo{Valores límite} & \campo{Especificación} & \campo{Componente / OP-01} & \campo{Por qué esta técnica y qué cubre} & \campo{RP-01} \\ \hline
+  & & & & \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Familias: \textit{basada en especificación} (caja negra) · \textit{basada en estructura} (caja blanca) · \textit{basada en experiencia}.}
+\end{table}
+
+El Cuadro~\ref{tab:tecnicas} justifica cada técnica frente a un riesgo concreto; una técnica
+sin riesgo asociado suele indicar esfuerzo no priorizado.
+
+\begin{politicaacademica}
+El curso exige someter a prueba la totalidad de los elementos con criticidad
+\emph{Catastrófico} empleando pruebas basadas en casos de uso. Las demás técnicas se
+seleccionan justificando su elección. Registre esa obligación en la columna de justificación
+del Cuadro~\ref{tab:tecnicas} indicando que el motivo es la política del curso, para no
+confundirla con una decisión basada en riesgo.
+\end{politicaacademica}
+
+\begin{instruccion}
+Si emplea pruebas por palabras clave (\emph{keyword-driven testing}, \normap{5}) u otro enfoque
+no listado en la Figura~\ref{fig:tecnicas}, agréguelo al Cuadro~\ref{tab:tecnicas} con la misma
+justificación. Su ausencia del diagrama no lo excluye.
+\end{instruccion}
+
+% ---------------------------------------------------------------------
+\subsection{Definición de la cobertura}
+\label{sec:cobertura}
+
+\begin{notanormativa}[Corrección respecto de la plantilla original]
+Un porcentaje de cobertura es ininteligible si no se declara sobre qué se mide. La revisión
+señaló además un error frecuente: \textbf{la proporción de casos ejecutados es avance de
+ejecución, no cobertura}. Ejecutar el 90\,\% de los casos no significa haber cubierto el 90\,\%
+de los requisitos, de las particiones ni de las decisiones del código.
+\end{notanormativa}
+
+\begin{instruccion}
+Para cada medida de cobertura que vaya a reportar, declare las siete columnas del cuadro
+siguiente. Si no puede llenar el numerador y el denominador, la medida no es utilizable como
+criterio de salida.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Definición operativa de cada medida de cobertura utilizada.}
+\label{tab:cobertura}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|L{2.4cm}|Y|C{1.5cm}|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Elemento medido} & \textbf{Numerador / denominador y fórmula} & \textbf{Objetivo} & \textbf{Fuente del dato} \\ \hline
+  \campo{COB-01} & \campo{Requisitos} & \campo{Requisitos con al menos un caso aprobado ÷ requisitos en el alcance} & \campo{100 \%} & \campo{Anexo G} \\ \hline
+  \campo{COB-02} & \campo{Particiones de equivalencia} & \campo{Particiones ejercitadas ÷ particiones identificadas} & \campo{80 \%} & \campo{Anexo A} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Elementos posibles: requisitos · escenarios · particiones de equivalencia · valores límite · sentencias · decisiones · ramas · estados y transiciones · reglas de una tabla de decisión.}
+\end{table}
+
+\begin{instruccion}
+Añada bajo el cuadro la \textbf{interpretación} de cada medida: qué conclusión permite extraer
+y cuál no. Por ejemplo: «COB-01 al 100\,\% indica que ningún requisito del alcance quedó sin
+ejercitar; no indica que el software esté libre de defectos ni que los casos hayan sido
+adecuados.»
+\end{instruccion}
+
+\campo{Interpretación de cada medida de cobertura}
+
+El Cuadro~\ref{tab:cobertura} convierte los porcentajes de la política académica
+(apartado~\ref{sec:criticidad}) en medidas calculables y auditables. Sus objetivos se retoman
+como criterios de salida en el apartado~\ref{sec:criterios-salida}.
+
+% ---------------------------------------------------------------------
+\subsection{Criterios de entrada}
+\label{sec:criterios-entrada}
+
+\begin{notanormativa}[Apartado nuevo respecto de la plantilla original]
+La plantilla original carecía de criterios de entrada. Sin ellos no puede decidirse cuándo es
+legítimo empezar a ejecutar, y las ejecuciones fallidas por causas evitables (versión
+equivocada, entorno no listo, datos ausentes) se confunden con defectos del producto. La
+actividad \textbf{TE1} de \normap{2} incluye explícitamente «verificar el cumplimiento de los
+criterios de entrada» antes de ejecutar.
+\end{notanormativa}
+
+\begin{notanormativa}[Criterio de entrada $\neq$ precondición de un caso de prueba]
+Un \textbf{criterio de entrada} es una condición de \emph{proceso}: habilita el inicio de un
+ciclo, nivel o campaña de ejecución y se verifica una vez, por un responsable identificado. Una
+\textbf{precondición} es una condición de \emph{estado del sistema} necesaria para que un caso
+concreto sea ejecutable, y se establece en cada ejecución de ese caso (véase el
+\ref{anx:casos}). Confundirlas hace imposible auditar por qué se inició una campaña.
+\end{notanormativa}
+
+\begin{instruccion}
+Defina los criterios que deben cumplirse antes de iniciar cada ciclo o nivel de prueba, y quién
+los verifica. El registro de la verificación efectiva se lleva en el \ref{anx:entorno}.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Criterios de entrada para iniciar un ciclo o nivel de prueba.}
+\label{tab:criterios-entrada}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{2.6cm}|C{2.3cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Criterio: qué debe estar listo} & \textbf{Cómo se verifica (evidencia)} & \textbf{Quién verifica} \\ \hline
+  CE-01 & La versión del objeto de prueba está identificada y desplegada en el entorno. & \campo{Evidencia} & \campo{Rol} \\ \hline
+  CE-02 & Los casos de prueba del ciclo están especificados y revisados. & \campo{Evidencia} & \campo{Rol} \\ \hline
+  CE-03 & Los procedimientos de prueba están disponibles y ordenados. & \campo{Evidencia} & \campo{Rol} \\ \hline
+  CE-04 & El entorno de prueba está preparado y verificado. & \campo{Evidencia} & \campo{Rol} \\ \hline
+  CE-05 & Los datos de prueba están disponibles, cargados y en su versión correcta. & \campo{Evidencia} & \campo{Rol} \\ \hline
+  CE-06 & Las personas responsables de ejecutar están asignadas y disponibles. & \campo{Evidencia} & \campo{Rol} \\ \hline
+  \campo{CE-07} & \campo{Criterio adicional propio del proyecto} & \campo{Evidencia} & \campo{Rol} \\ \hline
+\end{tabularx}
+\notatabla{Estos seis criterios son el mínimo recomendado por la revisión; amplíelos según el proyecto. Si un ciclo se inicia sin cumplir alguno, regístrelo como desviación (\ref{sec:desviaciones}).}
+\end{table}
+
+El Cuadro~\ref{tab:criterios-entrada} fija las condiciones que habilitan el inicio de la
+ejecución y nombra a quién las comprueba; su verificación efectiva, ciclo por ciclo, se
+documenta en el \ref{anx:entorno}.
+
+% ---------------------------------------------------------------------
+\subsection{Criterios de finalización (criterios de salida)}
+\label{sec:criterios-salida}
+
+\begin{notanormativa}[Corrección respecto de la plantilla original]
+La plantilla original resolvía la finalización por cobertura alcanzada, argumentando que en el
+curso no se reparan los defectos encontrados. Eso mezcla tres cosas distintas que la revisión
+pide separar: (i)~haber \emph{completado las actividades} planificadas, (ii)~los
+\emph{resultados obtenidos}, y (iii)~la \emph{decisión de aceptación} del producto. Este
+apartado define únicamente cuándo se dan por terminadas las actividades de prueba. La decisión
+de aceptación se trata en el apartado~\ref{sec:aceptacion}.
+\end{notanormativa}
+
+\begin{instruccion}
+Describa las condiciones bajo las cuales se considerarán completadas las actividades de prueba.
+Combine al menos un criterio de cobertura (del Cuadro~\ref{tab:cobertura}) con criterios sobre
+los resultados y sobre los incidentes abiertos. Indique qué ocurre si un criterio no se alcanza:
+suspender, ampliar el esfuerzo o cerrar documentando la desviación.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Criterios de finalización de las actividades de prueba.}
+\label{tab:criterios-salida}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.4cm}|Y|C{3.0cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Tipo de criterio} & \textbf{Enunciado y valor objetivo} & \textbf{Si no se alcanza} \\ \hline
+  \campo{CS-01} & \campo{Cobertura} & \campo{COB-01 ≥ 100 \% en objetos Catastróficos} & \campo{Ampliar / documentar desviación} \\ \hline
+  \campo{CS-02} & \campo{Ejecución} & \campo{Todos los procedimientos planificados ejecutados o formalmente cancelados} & \campo{Acción} \\ \hline
+  \campo{CS-03} & \campo{Incidentes} & \campo{Ningún incidente de severidad crítica sin analizar} & \campo{Acción} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:criterios-salida} distingue criterios de cobertura, de ejecución y de
+incidentes, de modo que el cierre no dependa de una sola cifra. Su evaluación efectiva se
+reporta en el apartado~\ref{sec:evaluacion-salida}.
+
+% ---------------------------------------------------------------------
+\subsection{Criterios de suspensión y reanudación}
+
+\begin{instruccion}
+Especifique los criterios para suspender o reanudar las actividades de prueba, quién autoriza
+cada decisión y qué actividades deberán repetirse tras una suspensión. Un caso típico de
+suspensión es un entorno inestable que invalida los veredictos obtenidos.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Criterios de suspensión y reanudación de las actividades de prueba.}
+\label{tab:suspension}
+\begin{tabularx}{\textwidth}{|C{2.3cm}|Y|C{2.4cm}|C{3.0cm}|}
+  \hline
+  \filaenc \textbf{Situación} & \textbf{Criterio} & \textbf{Autoriza} & \textbf{Qué se repite al reanudar} \\ \hline
+  Suspensión & \campo{p.\,ej. el entorno deja de ser representativo} & \campo{Rol} & \campo{Alcance de la repetición} \\ \hline
+  Reanudación & \campo{Condición que debe restablecerse} & \campo{Rol} & \campo{Alcance de la repetición} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:suspension} evita una discusión frecuente al reanudar: qué resultados
+obtenidos antes de la suspensión siguen siendo válidos y cuáles deben volver a obtenerse.
+
+% ---------------------------------------------------------------------
+\subsection{Prueba de confirmación y prueba de regresión}
+\label{sec:confirmacion-regresion}
+
+\begin{notanormativa}[Corrección: no son lo mismo]
+\begin{itemize}
+  \item \textbf{Prueba de confirmación} (\emph{retesting}): se vuelve a ejecutar el caso que
+        reveló un defecto, sobre la versión corregida, para comprobar que \emph{ese defecto
+        concreto} quedó resuelto.
+  \item \textbf{Prueba de regresión}: se ejecuta un conjunto de pruebas sobre funcionalidad que
+        \emph{ya funcionaba}, para detectar efectos adversos introducidos por el cambio.
+\end{itemize}
+La revisión detectó que el diagrama de procesos original rotulaba la actividad «verificar
+correcciones» como prueba de regresión. Es prueba de confirmación. Llamar «regresión» a
+cualquier verificación de una corrección oculta que la segunda actividad —comprobar que no se
+rompió nada más— puede no estarse realizando. La Figura~\ref{fig:procesos} representa ambas
+por separado.
+\end{notanormativa}
+
+\begin{instruccion}
+Especifique, por separado, cuándo se ejecuta cada una, qué conjunto de pruebas se selecciona y
+con qué criterio. Para la regresión, indique el criterio de selección: todo el conjunto,
+selección por riesgo, por área afectada por el cambio, o priorización.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Enfoque de prueba de confirmación y de prueba de regresión.}
+\label{tab:confirmacion-regresion}
+\begin{tabularx}{\textwidth}{|L{3.0cm}|Y|Y|}
+  \hline
+  \filaenc  & \textbf{Prueba de confirmación} & \textbf{Prueba de regresión} \\ \hline
+  Qué verifica & Que el defecto reportado quedó corregido. & Que el cambio no introdujo efectos adversos en lo que ya funcionaba. \\ \hline
+  Cuándo se ejecuta & \campo{Disparador} & \campo{Disparador} \\ \hline
+  Qué se selecciona & \campo{Criterio de selección} & \campo{Criterio de selección} \\ \hline
+  Responsable & \campo{Rol} & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:confirmacion-regresion} obliga a decidir las dos actividades por separado;
+cada nueva ejecución resultante se registra como una ejecución independiente en el
+\ref{anx:ejecuciones}, sin sobrescribir la anterior.
+
+\begin{politicaacademica}
+El curso establece que el equipo de prueba \emph{no repara} los defectos encontrados. Esto no
+elimina este apartado, pero condiciona su aplicación: declare si el equipo desarrollador
+entregará correcciones durante el periodo y, en caso afirmativo, cómo se confirmarán. Si no
+habrá correcciones, regístrelo como limitación y deje constancia de los defectos pendientes al
+cierre (apartado~\ref{sec:incidentes-abiertos}).
+\end{politicaacademica}
+
+\campo{Declare aquí si habrá correcciones durante el periodo y cómo se tratarán}
+
+% ---------------------------------------------------------------------
+\subsection{Requisitos de entorno de prueba}
+\label{sec:entorno}
+
+\begin{instruccion}
+Especifique los requisitos del entorno: hardware, software, redes, herramientas de prueba,
+interfaces simuladas y fichas técnicas de los equipos necesarios. Incluya el procedimiento de
+instalación y configuración.
+
+\textbf{Ampliación respecto de la plantilla original:} además de \emph{describir} el entorno,
+prevea cómo se \emph{comprueba} que está listo, quién lo mantiene, cómo se controlan sus
+versiones y cómo se restaura a un estado conocido entre ejecuciones. Estas tareas corresponden
+a las actividades \textbf{ES1 «Establecer el entorno»} y \textbf{ES2 «Mantener el entorno»} de
+\normap{2}. El registro de cada preparación concreta se lleva en el \ref{anx:entorno}.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Requisitos del entorno de prueba.}
+\label{tab:req-entorno}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.2cm}|Y|C{2.2cm}|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Componente} & \textbf{Especificación técnica requerida} & \textbf{Versión objetivo} & \textbf{Responsable} \\ \hline
+  \campo{ENT-01} & \campo{Servidor de aplicación} & \campo{Especificación} & \campo{v0.0} & \campo{Rol} \\ \hline
+  \campo{ENT-02} & \campo{Base de datos} & \campo{Especificación} & \campo{v0.0} & \campo{Rol} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Gestión del entorno: preparación, verificación, mantenimiento y restauración.}
+\label{tab:gestion-entorno}
+\begin{tabularx}{\textwidth}{|L{3.4cm}|Y|C{2.6cm}|}
+  \hline
+  \filaenc \textbf{Aspecto} & \textbf{Enfoque acordado} & \textbf{Responsable} \\ \hline
+  Preparación (ES1) & \campo{Procedimiento de instalación y configuración} & \campo{Rol} \\ \hline
+  Verificación de disponibilidad & \campo{Cómo se comprueba que el entorno está listo (criterio CE-04)} & \campo{Rol} \\ \hline
+  Control de versiones del entorno & \campo{Cómo se identifica la configuración usada en cada ejecución} & \campo{Rol} \\ \hline
+  Mantenimiento (ES2) & \campo{Gestión de cambios durante el periodo} & \campo{Rol} \\ \hline
+  Restauración entre ejecuciones & \campo{Cuándo y cómo se devuelve el entorno a un estado conocido} & \campo{Rol} \\ \hline
+  Liberación al cierre & \campo{Qué se desmonta y qué se conserva (\ref{sec:archivo})} & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:req-entorno} describe \emph{qué} entorno se necesita y el
+Cuadro~\ref{tab:gestion-entorno}, \emph{cómo se gobierna} a lo largo del esfuerzo. Sin el
+segundo, los veredictos registrados no son reproducibles.
+
+% ---------------------------------------------------------------------
+\subsection{Requisitos de datos de prueba}
+\label{sec:datos}
+
+\begin{instruccion}
+Especifique los datos fuente relevantes para la prueba: qué conjuntos se necesitan, de dónde
+provienen, dónde se almacenan y cómo se cargan. Indique si deben anonimizarse o sustituirse por
+razones de confidencialidad o protección de datos personales, y quién es responsable de ello.
+
+\textbf{Ampliación respecto de la plantilla original:} los datos también tienen versión. Debe
+poder saberse qué conjunto de datos, en qué versión, se usó en cada ejecución; de lo contrario
+un resultado no puede reproducirse ni discutirse.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Conjuntos de datos de prueba requeridos.}
+\label{tab:datos}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|L{2.9cm}|Y|C{1.8cm}|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Conjunto de datos} & \textbf{Contenido, origen y forma de obtención} & \textbf{Versión} & \textbf{Tratamiento de confidencialidad} \\ \hline
+  \campo{DAT-01} & \campo{Catálogo de clientes} & \campo{Origen y volumen} & \campo{v1} & \campo{Anonimizado / sintético} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Si algún conjunto contiene datos personales reales, indique la base legal de su uso y el procedimiento de eliminación segura al cierre (\ref{sec:archivo}).}
+\end{table}
+
+El Cuadro~\ref{tab:datos} identifica y versiona los datos; su preparación efectiva, ciclo por
+ciclo, se registra junto con la del entorno en el \ref{anx:entorno}.
+
+% ---------------------------------------------------------------------
+\subsection{Gestión de configuración de los activos de prueba}
+\label{sec:configuracion}
+
+\begin{notanormativa}[Ampliación respecto de la plantilla original]
+La plantilla original limitaba el control de versiones al propio documento. Para que un
+resultado sea reproducible debe poder identificarse la versión de \emph{todos} los activos que
+intervinieron en él. La actividad \textbf{TP9} de \normap{2} exige colocar el plan bajo gestión
+de configuración, y \textbf{TE3} exige registrar versión y configuración en cada ejecución.
+\end{notanormativa}
+
+\begin{instruccion}
+Indique dónde se almacena cada tipo de activo, cómo se identifica su versión y quién lo
+mantiene. No es necesario un repositorio distinto por tipo: basta con que el plan diga dónde
+está cada cosa y cómo se nombra.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Control de configuración de los activos de prueba.}
+\label{tab:configuracion}
+\begin{tabularx}{\textwidth}{|L{3.2cm}|Y|C{3.0cm}|C{2.1cm}|}
+  \hline
+  \filaenc \textbf{Activo} & \textbf{Ubicación / repositorio} & \textbf{Esquema de identificación de versión} & \textbf{Responsable} \\ \hline
+  Software bajo prueba & \campo{Ubicación} & \campo{p.\,ej. etiqueta de versión o commit} & \campo{Rol} \\ \hline
+  Plan de prueba & \campo{Ubicación} & \campo{Ver. del documento} & \campo{Rol} \\ \hline
+  Casos de prueba & \campo{Ubicación} & \campo{Esquema} & \campo{Rol} \\ \hline
+  Procedimientos & \campo{Ubicación} & \campo{Esquema} & \campo{Rol} \\ \hline
+  Guiones automatizados & \campo{Ubicación} & \campo{Esquema} & \campo{Rol} \\ \hline
+  Datos de prueba & \campo{Ubicación} & \campo{Esquema} & \campo{Rol} \\ \hline
+  Configuración del entorno & \campo{Ubicación} & \campo{Esquema} & \campo{Rol} \\ \hline
+  Evidencias y registros & \campo{Ubicación} & \campo{Esquema} & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:configuracion} es la referencia que hace utilizables las columnas «versión»
+y «configuración» del registro de ejecución (\ref{anx:ejecuciones}) y sostiene el archivo de
+activos al cierre (apartado~\ref{sec:archivo}).
+
+% ---------------------------------------------------------------------
+\subsection{Métricas a recopilar}
+\label{sec:metricas}
+
+\begin{instruccion}
+Describa las métricas que se calcularán a partir de la información recopilada durante la
+prueba. Para cada una indique fórmula, fuente del dato, periodicidad y —sobre todo— cómo se
+interpretará el resultado. Una métrica cuya interpretación no se ha acordado de antemano
+suele terminar usándose para justificar una decisión ya tomada.
+
+Distinga las métricas de las medidas de cobertura del apartado~\ref{sec:cobertura}: la
+cobertura es un tipo particular de métrica y ya está definida allí.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Métricas de prueba a recopilar, con su fórmula e interpretación.}
+\label{tab:metricas}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{1.7cm}|L{3.1cm}|Y|C{2.0cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Tipo} & \textbf{Fórmula de cálculo} & \textbf{Interpretación acordada: qué indica y qué no} & \textbf{Fuente} \\ \hline
+  \campo{MET-01} & \campo{Producto} & \campo{Fórmula} & \campo{Interpretación} & \campo{Anexo D} \\ \hline
+  \campo{MET-02} & \campo{Proceso} & \campo{Fórmula} & \campo{Interpretación} & \campo{Anexo C} \\ \hline
+  \campo{MET-03} & \campo{Proyecto} & \campo{Fórmula} & \campo{Interpretación} & \campo{Anexo E} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:metricas} define las métricas antes de recolectarlas; sus valores finales se
+presentan y discuten en el apartado~\ref{sec:metricas-finales}.
+
+\begin{politicaacademica}
+Como requisito de acreditación, deben incluirse al menos \textbf{dos métricas de cada tipo}:
+\begin{itemize}
+  \item \textbf{De proceso}: permiten identificar mejoras en la eficiencia del proceso de
+        desarrollo o de prueba.
+  \item \textbf{De producto}: permiten medir la calidad del software.
+  \item \textbf{De proyecto}: permiten medir la eficiencia del equipo o de las herramientas.
+\end{itemize}
+El número mínimo es una regla del curso. Fuera de él, la cantidad de métricas debe responder a
+las preguntas que los interesados necesitan responder (Cuadro~\ref{tab:interesados}), no a una
+cuota.
+\end{politicaacademica}
+
+% ---------------------------------------------------------------------
+\subsection{Entregables de la prueba}
+\label{sec:entregables}
+
+\begin{instruccion}
+Identifique los documentos y registros que se generarán. Indique para cada uno su formato, dónde
+se mantendrá y quién es responsable. Los anexos de esta plantilla ya proporcionan formatos
+listos para usar; si emplea una herramienta externa (gestor de incidencias, hoja de cálculo,
+repositorio), basta con indicar dónde está y quién la mantiene, tal como admite la revisión.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Entregables del esfuerzo de prueba.}
+\label{tab:entregables}
+\begin{tabularx}{\textwidth}{|L{4.4cm}|C{2.4cm}|Y|C{1.9cm}|}
+  \hline
+  \filaenc \textbf{Entregable} & \textbf{Formato} & \textbf{Ubicación / herramienta} & \textbf{Responsable} \\ \hline
+  Plan de prueba (Parte I) & Este documento & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Reporte de finalización (Parte II) & Este documento & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Especificación de casos de prueba & \ref{anx:casos} & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Especificación de procedimientos & \ref{anx:procedimientos} & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Registro de ejecución & \ref{anx:ejecuciones} & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Registro de incidentes & \ref{anx:incidentes} & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Informes de estado & \ref{anx:informes} & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Registro de preparación de entorno y datos & \ref{anx:entorno} & \campo{Ubicación} & \campo{Rol} \\ \hline
+  Matriz de trazabilidad & \ref{anx:trazabilidad} & \campo{Ubicación} & \campo{Rol} \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:entregables} reúne los productos documentales del esfuerzo de prueba; los
+seis últimos no existían en la plantilla original y son los que permiten reconstruir qué se
+probó, en qué condiciones y con qué resultado.
+
+% ---------------------------------------------------------------------
+\subsection{Desviaciones respecto de la estrategia acordada}
+\label{sec:desviaciones}
+
+\begin{instruccion}
+Indique cualquier aspecto de este plan que se aparte de la política o estrategia de prueba
+aplicable (apartado~\ref{sec:supuestos}), con su justificación y la persona que la autoriza.
+Registre aquí también las adaptaciones realizadas al reutilizar esta plantilla fuera del curso:
+sustitución de umbrales académicos, cambio de la autoridad de aprobación o exclusión de algún
+proceso.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Desviaciones respecto de la estrategia acordada.}
+\label{tab:desviaciones}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|L{3.0cm}|Y|C{2.4cm}|C{2.5cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Aspecto que se desvía} & \textbf{Justificación} & \textbf{Autoriza} & \textbf{Fecha} \\ \hline
+  \campo{DES-01} & \campo{Aspecto} & \campo{Motivo} & \autoridadAprobacion & \campo{dd/mm/aaaa} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:desviaciones} deja constancia de lo que se hizo distinto y con qué
+autorización; sin él, una adaptación legítima resulta indistinguible de un incumplimiento.

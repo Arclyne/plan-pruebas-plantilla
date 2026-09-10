@@ -1,0 +1,89 @@
+% =====================================================================
+%  Control de versiones del documento, revisiones y aprobaciones
+% =====================================================================
+\clearpage
+\section*{Control de versiones}
+\phantomsection
+\addcontentsline{toc}{part}{Control de versiones}
+
+\begin{instruccion}
+Registre aquí la evolución de \emph{este documento}. La revisión de la plantilla original
+señaló que conviene distinguir tres cosas que allí aparecían mezcladas: el \textbf{historial}
+de cambios (quién modificó qué), la \textbf{revisión} (alguien leyó el documento y emitió
+observaciones) y la \textbf{aprobación formal} (alguien con autoridad acepta el documento como
+válido). Se han separado en tres cuadros.
+\end{instruccion}
+
+\begin{notanormativa}[Alcance de este apartado]
+Este control de versiones cubre únicamente el \emph{documento}. El control de versiones de los
+demás activos de prueba —software bajo prueba, casos, procedimientos, guiones, datos y
+configuración del entorno— se define en el apartado~\ref{sec:configuracion} y se registra en
+cada ejecución (\ref{anx:ejecuciones}). Mantener sólo el historial del documento fue una de las
+carencias identificadas en la revisión.
+\end{notanormativa}
+
+% ------------------------------ Historial ----------------------------
+\subsection*{Historial de cambios}
+
+\begin{table}[H]
+\centering
+\caption{Historial de cambios del documento.}
+\label{tab:historial}
+\begin{tabularx}{\textwidth}{|C{2.5cm}|C{1.8cm}|L{3.4cm}|Y|}
+  \hline
+  \filaenc \textbf{Fecha} & \textbf{Versión} & \textbf{Autor} & \textbf{Descripción del cambio} \\ \hline
+  \campo{dd/mm/aaaa} & \campo{0.1} & \campo{Nombre} & \campo{Qué se agregó, modificó o eliminó} \\ \hline
+  & & & \\ \hline
+  & & & \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:historial} deja constancia de cada versión emitida del plan; debe
+actualizarse \emph{antes} de cada entrega, no después.
+
+% ------------------------------ Revisiones ---------------------------
+\subsection*{Revisiones}
+
+\begin{table}[H]
+\centering
+\caption{Revisiones realizadas al documento.}
+\label{tab:revisiones}
+\begin{tabularx}{\textwidth}{|C{2.5cm}|C{1.5cm}|L{2.9cm}|Y|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Fecha} & \textbf{Versión} & \textbf{Revisor} & \textbf{Observaciones} & \textbf{Resultado} \\ \hline
+  \campo{dd/mm/aaaa} & \campo{0.1} & \campo{Nombre y rol} & \campo{Hallazgos de la revisión} & \campo{Ver nota} \\ \hline
+  & & & & \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Resultado: \textit{Sin observaciones} · \textit{Con observaciones menores} · \textit{Con observaciones mayores}. La revisión no equivale a la aprobación.}
+\end{table}
+
+El Cuadro~\ref{tab:revisiones} registra quién leyó el documento y qué observó. Una revisión
+puede cerrarse sin que el documento quede aprobado.
+
+% ----------------------------- Aprobaciones --------------------------
+\subsection*{Aprobación formal}
+
+\begin{table}[H]
+\centering
+\caption{Aprobación formal del documento.}
+\label{tab:aprobaciones}
+\begin{tabularx}{\textwidth}{|C{2.5cm}|C{1.5cm}|L{3.4cm}|Y|C{2.2cm}|}
+  \hline
+  \filaenc \textbf{Fecha} & \textbf{Versión} & \textbf{Autoridad que aprueba} & \textbf{Ámbito de la aprobación} & \textbf{Estatus} \\ \hline
+  \campo{dd/mm/aaaa} & \campo{1.0} & \autoridadAprobacion & \campo{Plan completo / apartado} & \campo{Ver nota} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Estatus: \textit{Aprobado} · \textit{Aprobado con correcciones} · \textit{No aprobado}. Corresponde a la tarea TP8 «Lograr consenso sobre el plan» de \normap{2}.}
+\end{table}
+
+El Cuadro~\ref{tab:aprobaciones} identifica a quién autorizó el plan y sobre qué versión lo
+hizo; sin esa firma, el plan permanece en borrador y no debería dirigir la ejecución.
+
+\begin{politicaacademica}
+Durante el curso, la autoridad de aprobación del plan y de cualquier desviación respecto de la
+estrategia acordada es \autoridadAprobacion. Al reutilizar la plantilla fuera del curso,
+sustituya ese valor en \texttt{config/metadata.tex} por el rol que corresponda en la
+organización (líder de pruebas, responsable de calidad, patrocinador del proyecto).
+\end{politicaacademica}

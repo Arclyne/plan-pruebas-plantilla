@@ -1,0 +1,57 @@
+% =====================================================================
+%  config/metadata.tex
+%  ---------------------------------------------------------------
+%  ÚNICO archivo que el equipo necesita editar para personalizar la
+%  identificación del documento. No contiene contenido del plan.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% 1. Identificación institucional (encabezado y pie de página)
+% ---------------------------------------------------------------------
+\newcommand{\uvUniversidad}{UNIVERSIDAD VERACRUZANA}
+\newcommand{\uvFacultad}{Facultad de Estadística e Informática}
+\newcommand{\uvPrograma}{Licenciatura en Ingeniería de Software}
+\newcommand{\uvEE}{EE. Pruebas de Software}
+\newcommand{\uvActividad}{PROYECTO FINAL}
+\newcommand{\uvBandaHeader}{Proyecto de Pruebas}
+
+% ---------------------------------------------------------------------
+% 2. Identificación del documento
+% ---------------------------------------------------------------------
+\newcommand{\docTitulo}{Proyecto de pruebas de software}
+\newcommand{\docProyecto}{\campo{Nombre del proyecto}}
+\newcommand{\docFecha}{\campo{dd/mm/aaaa}}
+\newcommand{\docEquipo}{\campo{Nombre del equipo}}
+\newcommand{\docIntegrantes}{\campo{Matrícula y nombre de cada integrante}}
+\newcommand{\docVersionPlantilla}{Ver. 01/10/25}   % versión de la PLANTILLA
+\newcommand{\docVersionDoc}{\campo{0.1}}           % versión del DOCUMENTO del equipo
+
+% ---------------------------------------------------------------------
+% 3. Autoridad de aprobación
+%    Quién autoriza desviaciones respecto de la estrategia acordada.
+%    En el curso es el profesor; en un proyecto profesional cámbielo.
+% ---------------------------------------------------------------------
+\newcommand{\autoridadAprobacion}{\campo{Profesor de la Experiencia Educativa}}
+\newcommand{\autoridadAceptacion}{\campo{Rol con autoridad para aceptar el riesgo residual}}
+
+% ---------------------------------------------------------------------
+% 4. Interruptores de la plantilla
+%    Cambie a \...false para producir la versión final de entrega.
+% ---------------------------------------------------------------------
+\newif\ifmostrarinstrucciones
+\mostrarinstruccionestrue      % \mostrarinstruccionesfalse  -> oculta las guías
+\newif\ifmostrarejemplos
+\mostrarejemplostrue           % \mostrarejemplosfalse       -> oculta los ejemplos
+
+% «make final» compila una vez más definiendo \VERSIONFINAL, lo que apaga
+% ambos interruptores sin tocar este archivo y deja el PDF de entrega en
+% plan-pruebas-final.pdf. Editar las dos líneas de arriba produce el mismo
+% resultado de forma permanente.
+\ifdefined\VERSIONFINAL
+  \mostrarinstruccionesfalse
+  \mostrarejemplosfalse
+\fi
+
+% Las cajas de "Política académica" NO se ocultan con los interruptores
+% anteriores: son contenido vigente del plan mientras el curso las exija.
+% Si reutiliza la plantilla fuera del curso, elimine o sustituya esas cajas.
