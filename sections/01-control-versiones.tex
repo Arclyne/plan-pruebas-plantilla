@@ -7,20 +7,30 @@
 \addcontentsline{toc}{part}{Control de versiones}
 
 \begin{instruccion}
-Registre aquí la evolución de \emph{este documento}. La revisión de la plantilla original
-señaló que conviene distinguir tres cosas que allí aparecían mezcladas: el \textbf{historial}
-de cambios (quién modificó qué), la \textbf{revisión} (alguien leyó el documento y emitió
-observaciones) y la \textbf{aprobación formal} (alguien con autoridad acepta el documento como
-válido). Se han separado en tres cuadros.
+Registre aquí la evolución de \emph{este documento}, distinguiendo tres cosas: el
+\textbf{historial} de cambios (quién modificó qué), la \textbf{revisión} (alguien leyó el
+documento y emitió observaciones) y la \textbf{aprobación formal} (alguien con autoridad acepta
+el documento como válido). Cada una tiene su propio cuadro.
 \end{instruccion}
 
 \begin{notanormativa}[Alcance de este apartado]
 Este control de versiones cubre únicamente el \emph{documento}. El control de versiones de los
 demás activos de prueba —software bajo prueba, casos, procedimientos, guiones, datos y
 configuración del entorno— se define en el apartado~\ref{sec:configuracion} y se registra en
-cada ejecución (\ref{anx:ejecuciones}). Mantener sólo el historial del documento fue una de las
-carencias identificadas en la revisión.
+cada ejecución (\ref{anx:ejecuciones}).
 \end{notanormativa}
+
+\begin{observacion}[Revisión y aprobación no son lo mismo]
+\obsproblema{La plantilla anterior resolvía las revisiones con un único cuadro cuya columna
+«Estatus» mezclaba el resultado de una revisión con la aprobación formal del documento, y
+limitaba todo el control de versiones al propio archivo Word.}
+\obscambio{El apartado se divide en historial, revisiones y aprobación formal; el control de
+versiones del resto de los activos pasa al apartado~\ref{sec:configuracion}.}
+\obsjustificacion{Una revisión puede cerrarse con observaciones sin que el documento quede
+aprobado, y un resultado de prueba no es reproducible si sólo se versiona el documento que lo
+describe.}
+\obsfuente{OBS §2 y §3}
+\end{observacion}
 
 % ------------------------------ Historial ----------------------------
 \subsection*{Historial de cambios}

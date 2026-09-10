@@ -1,7 +1,7 @@
 % =====================================================================
 %  config/commands.tex
 %  ---------------------------------------------------------------
-%  Sistema de marcado de la plantilla. Define CUATRO tipos de bloque
+%  Sistema de marcado de la plantilla. Define CINCO tipos de bloque
 %  visualmente distinguibles, de modo que quien lea el documento
 %  identifique de inmediato la naturaleza de cada texto:
 %
@@ -9,6 +9,8 @@
 %    ejemplo            -> ilustración; NO es contenido a conservar
 %    politicaacademica  -> regla local del curso, NO requisito de la norma
 %    notanormativa      -> referencia o aclaración conceptual con fuente
+%    observacion        -> origen de una corrección respecto de la plantilla
+%                          anterior; SÓLO aparece en la variante anotada
 %
 %  Requiere que config/metadata.tex se cargue ANTES que este archivo,
 %  porque aquí se consultan los interruptores \ifmostrarinstrucciones
@@ -77,6 +79,42 @@
   colback=normfondo, colframe=normgris,
   coltitle=white, colbacktitle=normgris,
   title={#1}}
+
+% ---------------------------------------------------------------------
+% 5. OBSERVACIÓN DE LA REVISIÓN — trazabilidad del cambio.
+%    Sólo se compone en la variante anotada (make annotated). No forma
+%    parte del plan: documenta por qué la plantilla es como es.
+%
+%    \begin{observacion}[Título corto]
+%      \obsproblema{Qué estaba mal en la plantilla anterior.}
+%      \obscambio{Qué se hizo en su lugar.}
+%      \obsjustificacion{Por qué ese cambio resuelve el problema.}
+%      \obsfuente{OBS §4.4}
+%    \end{observacion}
+%
+%    Las claves de \obsfuente siguen el criterio de docs/MATRIZ_CAMBIOS.md:
+%      OBS §n  -> Observaciones_plantilla_pruebas_ISO_29119.docx, apartado n
+%      PDF §n  -> Plan_de_trabajo_29119_AngelAguilar.pdf, sección n
+%      DIAG    -> análisis de los diagramas de referencia
+%      PROPIA  -> criterio de esta reingeniería
+% ---------------------------------------------------------------------
+\newcommand{\obsitem}[2]{%
+  \par\addvspace{2pt}%
+  \noindent\textbf{\textcolor{obsmorado}{#1}}\enspace #2\par}
+\newcommand{\obsproblema}[1]{\obsitem{Problema identificado.}{#1}}
+\newcommand{\obscambio}[1]{\obsitem{Cambio aplicado.}{#1}}
+\newcommand{\obsjustificacion}[1]{\obsitem{Justificación.}{#1}}
+\newcommand{\obsfuente}[1]{\obsitem{Fuente.}{#1\ \textperiodcentered\ detalle completo en \texttt{docs/MATRIZ\_CAMBIOS.md}}}
+
+\ifmostrarobservaciones
+  \newtcolorbox{observacion}[1][]{%
+    cajaplantilla,
+    colback=obsfondo, colframe=obsmorado,
+    coltitle=white, colbacktitle=obsmorado,
+    title={Observación de la revisión\ifstrempty{#1}{}{: #1}}}
+\else
+  \excludecomment{observacion}
+\fi
 
 % ---------------------------------------------------------------------
 % Marcador de campo por rellenar

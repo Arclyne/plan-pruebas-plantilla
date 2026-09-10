@@ -10,10 +10,8 @@ consultado, el proceso más frecuentemente omitido en la práctica, pese a ser e
 mejora continua.
 \end{notanormativa}
 
-\begin{notanormativa}[Corrección estructural respecto de la plantilla original]
-La plantilla original resolvía el cierre con un apartado de «evaluación de la finalización» que
-determinaba el nivel de garantía de calidad \emph{a partir de la cobertura} alcanzada. La
-revisión pide separar seis cosas que allí quedaban mezcladas, y que aquí ocupan apartados
+\begin{notanormativa}[Seis preguntas distintas en el cierre]
+El cierre responde a seis preguntas que conviene no mezclar, y que aquí ocupan apartados
 distintos:
 \begin{enumerate}
   \item qué actividades se completaron (\ref{sec:resumen-final});
@@ -26,6 +24,17 @@ distintos:
 Haber ejecutado el 100\,\% de los casos —aun si muchos fallaron— no demuestra que el producto
 sea aceptable.
 \end{notanormativa}
+
+\begin{observacion}[«Evaluación de la finalización» basada en cobertura]
+\obsproblema{La plantilla anterior resolvía el cierre con un único apartado que determinaba «el
+nivel de garantía de calidad logrado con base a la cobertura de las pruebas realizadas», sin
+distinguir actividades completadas, resultados, incidentes abiertos, riesgo residual ni
+autoridad de aceptación.}
+\obscambio{El cierre se desglosa en los seis apartados enumerados arriba, con un cuadro de
+decisión de aceptación que separa la recomendación técnica del equipo de la decisión de quien
+asume el riesgo residual.}
+\obsfuente{OBS §4.6}
+\end{observacion}
 
 % ---------------------------------------------------------------------
 \section{Resumen de las pruebas realizadas}
@@ -93,8 +102,8 @@ del primero.
 \end{tabularx}
 \end{table}
 
-El Cuadro~\ref{tab:resultados} separa en tres bloques el avance, la cobertura y los veredictos,
-para evitar la confusión que la revisión señaló en la plantilla original. Leídos juntos
+El Cuadro~\ref{tab:resultados} separa en tres bloques el avance, la cobertura y los veredictos.
+Leídos juntos
 responden a la pregunta que interesa al cierre: cuánto se probó, sobre qué y con qué resultado.
 Ninguno de los tres bloques basta por sí solo para sostener la decisión de aceptación del
 apartado~\ref{sec:aceptacion}.
@@ -117,7 +126,7 @@ cobertura cumplido al 100\,\% no compensa un criterio de resultados incumplido.
 \begin{instruccion}[Advertencia]
 Si algún criterio de salida quedó redactado sobre «casos aprobados» pero clasificado como
 criterio de \emph{cobertura}, corríjalo antes de evaluarlo: pertenece al tipo
-\emph{Resultados}. Es el error que la revisión detectó en la plantilla original.
+\emph{Resultados}.
 \end{instruccion}
 
 \begin{table}[H]
@@ -227,8 +236,8 @@ conocimiento de causa.
 Dar por terminadas las actividades de prueba (\ref{sec:evaluacion-salida}) es una decisión
 sobre el \emph{proceso}. Aceptar el producto es una decisión sobre el \emph{riesgo residual} que
 la organización está dispuesta a asumir. Son decisiones distintas, se toman con información
-distinta y, con frecuencia, corresponden a personas distintas. La plantilla original no preveía
-una autoridad de aceptación identificada.
+distinta y, con frecuencia, corresponden a personas distintas, por lo que el plan debe nombrar
+una autoridad de aceptación.
 \end{notanormativa}
 
 \begin{instruccion}
@@ -292,12 +301,21 @@ Cuadro~\ref{tab:entregables} se produjo efectivamente.
 \section{Archivo, limpieza y activos reutilizables}
 \label{sec:archivo}
 
-\begin{notanormativa}[Ampliación respecto de la plantilla original]
-La plantilla original pedía identificar «activos reutilizables», pero no decía dónde se
-conservan, quién responde por ellos, qué ocurre con los datos sensibles ni en qué estado se deja
-el entorno. Este apartado desarrolla las actividades \textbf{TC1 «Archivar los activos»} y
-\textbf{TC2 «Limpiar el entorno»} de \normap{2}.
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Este apartado desarrolla las actividades \textbf{TC1 «Archivar los activos»} y \textbf{TC2
+«Limpiar el entorno»} de \normap{2}: no basta con identificar qué activos son reutilizables, hay
+que decir dónde se conservan, quién responde por ellos, qué ocurre con los datos sensibles y en
+qué estado se deja el entorno.
 \end{notanormativa}
+
+\begin{observacion}[Archivo y limpieza sin custodia]
+\obsproblema{La plantilla anterior pedía identificar los activos reutilizables, pero no su
+ubicación, su responsable ni su periodo de conservación, y no contemplaba la liberación del
+entorno ni el tratamiento de los datos sensibles al cierre.}
+\obscambio{Dos cuadros: custodia de los activos archivados (TC1) y limpieza, liberación de
+recursos, revocación de accesos y eliminación segura de datos (TC2).}
+\obsfuente{OBS §3}
+\end{observacion}
 
 \begin{instruccion}
 Complete los dos cuadros siguientes. El primero registra qué se conserva y bajo la
@@ -350,10 +368,10 @@ Discuta los resultados y plantee las conclusiones principales sobre el producto 
 proceso. Evalúe el propio proceso de prueba e identifique áreas de mejora. Liste
 recomendaciones justificadas y trazables hasta los resultados que las sustentan.
 
-\textbf{Ampliación respecto de la plantilla original:} indique, para cada lección, a quién se
-comunica y qué debería cambiar como consecuencia. Según el modelo de procesos (actividad TC3),
-las lecciones aprendidas retroalimentan la capa organizacional, tal como muestra el bucle
-externo de la Figura~\ref{fig:procesos}; una lección que no llega a nadie no cierra ese bucle.
+Indique, para cada lección, a quién se comunica y qué debería cambiar como consecuencia. Según
+el modelo de procesos (actividad TC3), las lecciones aprendidas retroalimentan la capa
+organizacional, tal como muestra el bucle externo de la Figura~\ref{fig:procesos}; una lección
+que no llega a nadie no cierra ese bucle.
 \end{instruccion}
 
 \begin{table}[H]

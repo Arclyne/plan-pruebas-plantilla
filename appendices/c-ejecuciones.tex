@@ -4,7 +4,7 @@
 \section{Registro de ejecución de pruebas}
 \label{anx:ejecuciones}
 
-\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
+\begin{notanormativa}[La ejecución es un registro independiente del caso]
 Este registro corresponde a la actividad \textbf{TE3 «Registrar la ejecución de la prueba»} de
 \normap{2}, y es independiente de la especificación del caso:
 
@@ -19,6 +19,19 @@ una campaña de regresión—. Cada una es una \textbf{ejecución distinta} con 
 identificador. \textbf{Nunca sobrescriba el diseño del caso con el resultado de una ejecución}:
 al hacerlo se pierde el historial y deja de poder demostrarse cuándo se corrigió un defecto.
 \end{notanormativa}
+
+\begin{observacion}[No existía registro de ejecución]
+\obsproblema{La plantilla anterior no preveía dónde registrar lo ocurrido al ejecutar. El
+resultado real acababa escribiéndose sobre el propio caso de prueba, de modo que repetir un caso
+—tras una corrección o en una campaña de regresión— borraba el resultado anterior y hacía
+imposible demostrar cuándo se resolvió un defecto.}
+\obscambio{Nuevo anexo con identificador propio de ejecución, versión del software,
+configuración, entorno, datos, ejecutor, resultado real, veredicto, evidencia e incidente
+asociado, más un registro consolidado.}
+\obsjustificacion{«El resultado real se conserva en la ejecución para permitir repetir el mismo
+caso sin sobrescribir su historial.»}
+\obsfuente{OBS §3 y §6 · PDF §1.4 (TE3)}
+\end{observacion}
 
 \begin{instruccion}
 Use la ficha detallada para las ejecuciones que requieran documentación amplia (típicamente las

@@ -36,22 +36,48 @@
 
 % ---------------------------------------------------------------------
 % 4. Interruptores de la plantilla
-%    Cambie a \...false para producir la versión final de entrega.
+%
+%    Una sola fuente LaTeX produce tres variantes del documento. Lo
+%    habitual es NO tocar estas líneas y elegir la variante desde el
+%    Makefile (make · make annotated · make final), que define la macro
+%    correspondiente al compilar. Edítelas sólo si desea fijar una
+%    combinación distinta de forma permanente.
+%
+%      Variante   | instrucciones | ejemplos | observaciones
+%      -----------+---------------+----------+---------------
+%      trabajo    |      sí       |    sí    |      no
+%      anotada    |      sí       |    sí    |      sí
+%      final      |      no       |    no    |      no
 % ---------------------------------------------------------------------
-\newif\ifmostrarinstrucciones
-\mostrarinstruccionestrue      % \mostrarinstruccionesfalse  -> oculta las guías
-\newif\ifmostrarejemplos
-\mostrarejemplostrue           % \mostrarejemplosfalse       -> oculta los ejemplos
+\newif\ifmostrarinstrucciones   \mostrarinstruccionestrue
+\newif\ifmostrarejemplos        \mostrarejemplostrue
+\newif\ifmostrarobservaciones   \mostrarobservacionesfalse
 
-% «make final» compila una vez más definiendo \VERSIONFINAL, lo que apaga
-% ambos interruptores sin tocar este archivo y deja el PDF de entrega en
-% plan-pruebas-final.pdf. Editar las dos líneas de arriba produce el mismo
-% resultado de forma permanente.
-\ifdefined\VERSIONFINAL
+\ifdefined\VARIANTEANOTADA      % make annotated
+  \mostrarinstruccionestrue
+  \mostrarejemplostrue
+  \mostrarobservacionestrue
+\fi
+\ifdefined\VARIANTEFINAL        % make final
   \mostrarinstruccionesfalse
   \mostrarejemplosfalse
+  \mostrarobservacionesfalse
 \fi
 
-% Las cajas de "Política académica" NO se ocultan con los interruptores
-% anteriores: son contenido vigente del plan mientras el curso las exija.
-% Si reutiliza la plantilla fuera del curso, elimine o sustituya esas cajas.
+% Etiqueta que identifica la variante en la portada. Queda vacía en la
+% versión final, que es la que se entrega y no debe anunciarse como
+% plantilla.
+\newcommand{\varianteetiqueta}{%
+  \ifmostrarobservaciones
+    Versión anotada · documenta el origen de las correcciones%
+  \else
+    \ifmostrarinstrucciones Versión de trabajo · plantilla por rellenar\fi
+  \fi}
+
+% Las cajas de «Política académica» y las notas conceptuales NO se ocultan
+% con los interruptores anteriores: son contenido vigente del plan. Las
+% políticas académicas siguen vigentes mientras el curso las exija; si
+% reutiliza la plantilla fuera del curso, sustitúyalas por las de su
+% organización. Las notas conceptuales explican distinciones que el plan
+% necesita (cobertura frente a veredicto, confirmación frente a regresión),
+% no el historial de la plantilla.

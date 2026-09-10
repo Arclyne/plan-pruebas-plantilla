@@ -66,18 +66,28 @@ alcanzó; sin esa columna, el objetivo no es verificable al cierre.
 \subsection{Objeto de prueba y base de prueba}
 \label{sec:objeto-base}
 
-\begin{notanormativa}[Corrección respecto de la plantilla original]
-La plantilla original equiparaba los «elementos de prueba» con los \emph{casos de uso}. Son
-cosas distintas y conviene registrarlas por separado:
+\begin{notanormativa}[Objeto de prueba y base de prueba]
+Son cosas distintas y conviene registrarlas por separado:
 \begin{itemize}
   \item El \textbf{objeto de prueba} es lo que se somete a prueba: sistema, subsistema,
-        módulo, componente, servicio, API o interfaz.
+        módulo, componente, servicio, API o interfaz. Responde a \emph{qué se prueba}.
   \item La \textbf{base de prueba} es la fuente contra la que se juzga ese objeto: requisitos,
-        historias de usuario, casos de uso, reglas de negocio, arquitectura o diseño.
+        historias de usuario, casos de uso, reglas de negocio, arquitectura o diseño. Responde
+        a \emph{contra qué se juzga}.
 \end{itemize}
-Un caso de uso es, casi siempre, base de prueba y no objeto de prueba. Separarlos permite
-aplicar esta plantilla a proyectos que no estén documentados mediante casos de uso.
+Un caso de uso es, casi siempre, base de prueba y no objeto de prueba.
 \end{notanormativa}
+
+\begin{observacion}[El caso de uso no es el elemento de prueba]
+\obsproblema{La plantilla anterior equiparaba los «elementos de prueba» con los casos de uso,
+lo que dejaba fuera a los proyectos documentados con requisitos, historias de usuario o reglas
+de negocio, y hacía imposible nombrar el módulo o servicio realmente probado.}
+\obscambio{El apartado se divide en objeto de prueba y base de prueba, con un cuadro para cada
+uno y claves independientes (OP-xx y BP-xx).}
+\obsjustificacion{Separarlos permite aplicar la plantilla a proyectos que no usan casos de uso
+y es el punto de partida de la cadena de trazabilidad del \ref{anx:trazabilidad}.}
+\obsfuente{OBS §4.3}
+\end{observacion}
 
 \begin{instruccion}
 Identifique primero los objetos bajo prueba con su versión exacta, y después la base de prueba
@@ -132,14 +142,25 @@ criterio.
 \end{politicaacademica}
 
 \begin{notanormativa}[Por qué esta escala no se atribuye a \norma]
-La revisión señaló que las etiquetas anteriores se presentaban como si procedieran de \norma.
-No es así: \norma\ no define esa escala de cuatro niveles. El marco internacional para niveles
-de integridad es \textbf{ISO/IEC/IEEE 15026-3} (\emph{Systems and software assurance —
+\norma\ no define una escala de criticidad de cuatro niveles. El marco internacional para
+niveles de integridad es \textbf{ISO/IEC/IEEE 15026-3} (\emph{Systems and software assurance —
 Integrity levels}), que exige definir los niveles, los requisitos asociados a cada uno y el
-método de asignación. Mientras esos elementos no se definan y verifiquen contra dicha norma,
-la escala debe tratarse como una clasificación académica interna y no como un nivel de
+método de asignación. Mientras esos elementos no se definan y verifiquen contra dicha norma, la
+escala del curso debe tratarse como una clasificación académica interna y no como un nivel de
 integridad en sentido normativo.
 \end{notanormativa}
+
+\begin{observacion}[Uso de las etiquetas SIL]
+\obsproblema{La plantilla anterior empleaba «Catastrófico, Crítico, Marginal, Despreciable»
+como si fueran un esquema normativo, sin definir qué significa cada nivel, quién lo asigna ni
+con qué criterio.}
+\obscambio{Las etiquetas se conservan como política académica y se añade un cuadro que obliga a
+declarar significado, asignador y efecto sobre la estrategia, más la remisión a
+ISO/IEC/IEEE 15026-3.}
+\obsjustificacion{Un nivel de criticidad sin definición ni método de asignación no puede
+justificar decisiones de cobertura ni de técnicas.}
+\obsfuente{OBS §4.5}
+\end{observacion}
 
 \begin{instruccion}
 Complete el cuadro siguiente antes de usar la escala. Un nivel de criticidad sin definición ni
@@ -168,13 +189,22 @@ asignación debe ser la \emph{consecuencia de un fallo}, no la dificultad de pro
 \subsection{Alcance de la prueba}
 \label{sec:alcance}
 
-\begin{notanormativa}[Corrección respecto de la plantilla original]
-La plantilla original orientaba las características a probar únicamente hacia los
-\emph{requisitos no funcionales}. El alcance debe declarar explícitamente ambos tipos:
-características \textbf{funcionales} (calcular un total, autorizar una operación) y
-\textbf{no funcionales} (rendimiento, seguridad, usabilidad, compatibilidad). Además, toda
-exclusión debe justificarse y relacionarse con el riesgo que se asume al excluirla.
+\begin{notanormativa}[Qué debe declarar el alcance]
+El alcance debe declarar explícitamente los dos tipos de característica: \textbf{funcionales}
+(calcular un total, autorizar una operación) y \textbf{no funcionales} (rendimiento, seguridad,
+usabilidad, compatibilidad). Además, toda exclusión debe justificarse y relacionarse con el
+riesgo que se asume al excluirla.
 \end{notanormativa}
+
+\begin{observacion}[Alcance reducido a lo no funcional]
+\obsproblema{La plantilla anterior orientaba las características a probar únicamente hacia los
+requisitos no funcionales, y pedía identificar exclusiones sin ligarlas a ningún riesgo.}
+\obscambio{El alcance se divide en tres cuadros: características funcionales, no funcionales y
+exclusiones con el riesgo que se asume al excluirlas.}
+\obsjustificacion{Un alcance que no nombra lo funcional deja sin cubrir la mayor parte del
+comportamiento del sistema, y una exclusión sin riesgo asociado desaparece del cierre.}
+\obsfuente{OBS §4.2}
+\end{observacion}
 
 \begin{instruccion}
 Llene los tres cuadros siguientes. Para las características no funcionales puede apoyarse en el

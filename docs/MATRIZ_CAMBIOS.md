@@ -28,6 +28,15 @@ original.
 Las referencias a apartados nuevos (`§2.3`, `§4.5`…) corresponden a la numeración
 del PDF generado por esta plantilla, no a la del Word original.
 
+## Relación con la variante anotada del PDF
+
+`make annotated` genera `plantilla-anotada.pdf`, que incorpora bloques
+*Observación de la revisión* junto al apartado que corrigen. Esos bloques son un
+**resumen de cuatro campos** (problema, cambio, justificación y fuente) pensado
+para leerse en contexto; **este documento es la versión completa** y es al que
+remite cada bloque. La información no se duplica: si necesita ampliar un bloque
+del PDF, busque aquí la fila correspondiente por su clave de fuente.
+
 ---
 
 ## 1. Portada, control de versiones e identificación

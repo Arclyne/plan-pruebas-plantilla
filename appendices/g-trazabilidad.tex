@@ -4,12 +4,19 @@
 \section{Matriz de trazabilidad}
 \label{anx:trazabilidad}
 
-\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
-La plantilla original pedía «elaborar una tabla de trazabilidad» para los elementos de prueba,
-sin indicar qué debía encadenar. La revisión pide poder recorrer la cadena completa, en ambos
-sentidos: desde un requisito hasta el resultado que lo evidencia, y desde un incidente hasta el
-requisito y el riesgo que justificaron probarlo.
+\begin{notanormativa}[Para qué sirve la trazabilidad]
+La cadena debe poder recorrerse en ambos sentidos: desde un requisito hasta el resultado que lo
+evidencia, y desde un incidente hasta el requisito y el riesgo que justificaron probarlo.
 \end{notanormativa}
+
+\begin{observacion}[Trazabilidad sin cadena definida]
+\obsproblema{La plantilla anterior pedía «elaborar una tabla de trazabilidad» para los elementos
+de prueba, sin indicar qué debía encadenar ni con qué identificadores.}
+\obscambio{Matriz de nueve columnas —base, riesgo, condición, elemento de cobertura, caso,
+procedimiento, ejecución, evidencia e incidente—, con la Figura~\ref{fig:trazabilidad} que
+señala dónde se registra cada eslabón y un resumen de cobertura de la base de prueba.}
+\obsfuente{OBS §6}
+\end{observacion}
 
 \input{diagrams/cadena-trazabilidad}
 
@@ -55,16 +62,15 @@ BP-01 & RP-01 & COND-01 & Partición P3 & CP-007 & PP-001 & EJ-014 & EVID-014 & 
 \end{footnotesize}
 
 La primera fila del Cuadro~\ref{tab:trazabilidad} está rellena a modo de ejemplo y reproduce la
-cadena ilustrativa de la revisión: el requisito BP-01, motivado por el riesgo RP-01, generó la
+cadena completa: el requisito BP-01, motivado por el riesgo RP-01, generó la
 condición COND-01, cuya partición P3 se ejercita mediante el caso CP-007, incluido en el
 procedimiento PP-001; su ejecución EJ-014 produjo la evidencia EVID-014 y dio origen al
 incidente INC-05. Sustituya esa fila por los datos reales del proyecto.
 
 \begin{instruccion}
 Si el volumen de filas hace inmanejable esta matriz en el documento, manténgala en una hoja de
-cálculo o herramienta y deje aquí la referencia a su ubicación y responsable, tal como admite la
-revisión para el resto de los registros. Lo que no es admisible es no poder reconstruir la
-cadena.
+cálculo o herramienta y deje aquí la referencia a su ubicación y responsable, igual que con el
+resto de los registros. Lo que no es admisible es no poder reconstruir la cadena.
 \end{instruccion}
 
 \subsection*{Cobertura de la base de prueba}
@@ -101,6 +107,5 @@ fila BP-03 es una \textbf{brecha de cobertura}: un elemento de la base que qued�
 y que, si no se justifica como exclusión en el Cuadro~\ref{tab:exclusiones}, debe aparecer
 entre los riesgos residuales del apartado~\ref{sec:residuales}. La fila BP-02, en cambio,
 está plenamente cubierta y aun así arroja un \textbf{resultado adverso}: sus dos casos
-fallaron. Sumarlas en una sola columna haría desaparecer una de las dos —y con COB-01 definida
-sobre casos aprobados, BP-02 se habría contado como no cubierta, ocultando que la prueba sí se
-realizó y encontró un defecto.
+fallaron. Fundir ambas columnas en una sola haría desaparecer una de las dos situaciones, y
+contar BP-02 como «no cubierta» ocultaría que la prueba sí se realizó y encontró un defecto.

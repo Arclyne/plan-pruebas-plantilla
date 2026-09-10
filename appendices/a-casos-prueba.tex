@@ -8,8 +8,7 @@
 Un caso de prueba describe \textbf{qué debería ejecutarse y qué debería ocurrir}. Es un
 artefacto de diseño y se mantiene estable entre ejecuciones. Lo que \emph{sucedió} al ejecutarlo
 —resultado real, veredicto, evidencia— no se escribe aquí: se registra en el
-\ref{anx:ejecuciones}. Esta separación es la corrección más importante que introduce esta
-plantilla respecto de la original, y es lo que permite ejecutar el mismo caso muchas veces sin
+\ref{anx:ejecuciones}. Esa separación es la que permite ejecutar el mismo caso muchas veces sin
 sobrescribir su historial.
 \end{notanormativa}
 
@@ -23,6 +22,16 @@ como índice de todos los casos especificados.
 Si mantiene los casos en una herramienta externa, conserve al menos los mismos campos e indique
 su ubicación en el Cuadro~\ref{tab:configuracion}.
 \end{instruccion}
+
+\begin{observacion}[Anexo sin formato]
+\obsproblema{El anexo equivalente de la plantilla anterior decía únicamente «incluir los casos
+de prueba aplicados», sin campos ni estructura, y el apartado que lo invocaba mezclaba el diseño
+del caso con el resultado de su ejecución.}
+\obscambio{Ficha completa con base, riesgo, condición, técnica, elemento de cobertura,
+precondiciones, datos, pasos, resultado esperado, postcondiciones y limpieza, más un índice de
+casos. Los campos de resultado se trasladan al \ref{anx:ejecuciones}.}
+\obsfuente{OBS §2 y §6}
+\end{observacion}
 
 \subsection*{Ficha de caso de prueba}
 

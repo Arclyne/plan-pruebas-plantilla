@@ -67,6 +67,8 @@
 \definecolor{ejemfondo}{HTML}{EAF1F8}
 \definecolor{normgris}{HTML}{4A4A4A}
 \definecolor{normfondo}{HTML}{F4F4F4}
+\definecolor{obsmorado}{HTML}{6B3FA0}  % observación de la revisión (variante anotada)
+\definecolor{obsfondo}{HTML}{F3EEFA}
 \definecolor{campoamar}{HTML}{FFF2CC}
 \definecolor{campotexto}{HTML}{9A3412}  % marcador de campo por rellenar
 
@@ -113,6 +115,12 @@
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 
+% Los preliminares se numeran en romanos y el cuerpo reinicia en arábigos,
+% de modo que «de N» sólo tiene sentido dentro del cuerpo: \pageref{LastPage}
+% devuelve el último número arábigo, no el total físico de páginas.
+% main.tex activa este interruptor al llamar a \pagenumbering{arabic}.
+\newif\ifcontarpaginas
+
 \newcommand{\bandaEncabezado}{%
   \setlength{\tabcolsep}{4pt}%
   \renewcommand{\arraystretch}{1.05}%
@@ -131,7 +139,7 @@
   \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedleft\arraybackslash}p{5.4cm}|}
     \hline
     \textbf{\uvUniversidad}\ \textperiodcentered\ \uvFacultad
-      & Página \thepage\ de \pageref{LastPage}\quad \docVersionPlantilla \\ \hline
+      & Página \thepage\ifcontarpaginas\ de \pageref{LastPage}\fi\quad \docVersionPlantilla \\ \hline
   \end{tabularx}%
 }
 
@@ -158,6 +166,7 @@
 \titlespacing*{\subsubsection}{0pt}{10pt}{3pt}
 
 % ---------------------- Cajas de la plantilla ------------------------
+\usepackage{etoolbox}
 \usepackage[most]{tcolorbox}
 \usepackage{comment}
 
