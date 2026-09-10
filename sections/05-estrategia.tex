@@ -178,6 +178,31 @@ ejecución, no cobertura}. Ejecutar el 90\,\% de los casos no significa haber cu
 de los requisitos, de las particiones ni de las decisiones del código.
 \end{notanormativa}
 
+\begin{notanormativa}[Tres preguntas distintas: avance, cobertura y veredicto]
+Al reportar una prueba se mezclan con frecuencia tres magnitudes que responden a preguntas
+diferentes y que esta plantilla mantiene separadas de principio a fin:
+
+\medskip
+\begin{center}
+\begin{tabular}{|L{2.6cm}|L{5.0cm}|L{5.4cm}|}
+  \hline
+  \filaenc \textbf{Magnitud} & \textbf{Pregunta que responde} & \textbf{Dónde se registra} \\ \hline
+  \textbf{Avance de ejecución} & ¿Cuánto del trabajo planificado se ha realizado ya? & Registro de ejecución (\ref{anx:ejecuciones}) y seguimiento (\ref{sec:seguimiento}) \\ \hline
+  \textbf{Cobertura} & ¿Qué elementos han quedado \emph{ejercitados}? & Este apartado y \ref{anx:trazabilidad} \\ \hline
+  \textbf{Veredicto} & De lo ejercitado, ¿qué se comportó como se esperaba? & Registro de ejecución (\ref{anx:ejecuciones}) e incidentes (\ref{anx:incidentes}) \\ \hline
+\end{tabular}
+\end{center}
+\medskip
+
+De aquí se sigue una regla que conviene respetar al definir cualquier medida del cuadro
+siguiente: \textbf{el numerador de una medida de cobertura nunca debe condicionarse al
+veredicto}. Un requisito ejercitado por un caso que \emph{falló} está cubierto —la prueba lo
+alcanzó y además encontró algo—; contarlo como no cubierto haría que la cobertura
+\emph{bajara} al detectar defectos, que es justo lo contrario de lo que la medida pretende
+indicar. Si necesita saber cuántos elementos se comportaron correctamente, ésa es una medida
+de resultado y se reporta aparte.
+\end{notanormativa}
+
 \begin{instruccion}
 Para cada medida de cobertura que vaya a reportar, declare las siete columnas del cuadro
 siguiente. Si no puede llenar el numerador y el denominador, la medida no es utilizable como
@@ -191,18 +216,20 @@ criterio de salida.
 \begin{tabularx}{\textwidth}{|C{1.5cm}|L{2.4cm}|Y|C{1.5cm}|C{2.0cm}|}
   \hline
   \filaenc \textbf{Clave} & \textbf{Elemento medido} & \textbf{Numerador / denominador y fórmula} & \textbf{Objetivo} & \textbf{Fuente del dato} \\ \hline
-  \campo{COB-01} & \campo{Requisitos} & \campo{Requisitos con al menos un caso aprobado ÷ requisitos en el alcance} & \campo{100 \%} & \campo{Anexo G} \\ \hline
+  \campo{COB-01} & \campo{Requisitos} & \campo{Requisitos con al menos un caso ejecutado, sea cual sea su veredicto ÷ requisitos del alcance} & \campo{100 \%} & \campo{Anexo G} \\ \hline
   \campo{COB-02} & \campo{Particiones de equivalencia} & \campo{Particiones ejercitadas ÷ particiones identificadas} & \campo{80 \%} & \campo{Anexo A} \\ \hline
   & & & & \\ \hline
 \end{tabularx}
-\notatabla{Elementos posibles: requisitos · escenarios · particiones de equivalencia · valores límite · sentencias · decisiones · ramas · estados y transiciones · reglas de una tabla de decisión.}
+\notatabla{Elementos posibles: requisitos · escenarios · particiones de equivalencia · valores límite · sentencias · decisiones · ramas · estados y transiciones · reglas de una tabla de decisión.\par
+Compruebe que ningún numerador contenga las palabras «aprobado», «correcto» o «sin defectos»: eso convertiría la medida en un resultado de prueba. Un elemento ejercitado por un caso fallido \textbf{sí} está cubierto.}
 \end{table}
 
 \begin{instruccion}
 Añada bajo el cuadro la \textbf{interpretación} de cada medida: qué conclusión permite extraer
 y cuál no. Por ejemplo: «COB-01 al 100\,\% indica que ningún requisito del alcance quedó sin
-ejercitar; no indica que el software esté libre de defectos ni que los casos hayan sido
-adecuados.»
+ejercitar. No indica cuántos requisitos se comportaron correctamente —eso lo dicen los
+veredictos del Cuadro~\ref{tab:resultados}—, ni que el software esté libre de defectos, ni que
+los casos diseñados hayan sido adecuados.»
 \end{instruccion}
 
 \campo{Interpretación de cada medida de cobertura}
@@ -273,9 +300,16 @@ de aceptación se trata en el apartado~\ref{sec:aceptacion}.
 
 \begin{instruccion}
 Describa las condiciones bajo las cuales se considerarán completadas las actividades de prueba.
-Combine al menos un criterio de cobertura (del Cuadro~\ref{tab:cobertura}) con criterios sobre
-los resultados y sobre los incidentes abiertos. Indique qué ocurre si un criterio no se alcanza:
-suspender, ampliar el esfuerzo o cerrar documentando la desviación.
+
+Combine criterios de los \textbf{cuatro} tipos, porque cada uno responde a una pregunta
+distinta y ninguno sustituye a los demás: \emph{avance} (¿se hizo el trabajo previsto?),
+\emph{cobertura} (¿se ejercitó lo que había que ejercitar?), \emph{resultados} (¿qué veredicto
+se obtuvo?) e \emph{incidentes} (¿qué quedó sin resolver?). Un criterio de cobertura no informa
+sobre el veredicto: si sólo exige cobertura, un conjunto de pruebas íntegramente fallido
+cumpliría el criterio de salida.
+
+Indique qué ocurre si un criterio no se alcanza: suspender, ampliar el esfuerzo o cerrar
+documentando la desviación.
 \end{instruccion}
 
 \begin{table}[H]
@@ -285,16 +319,20 @@ suspender, ampliar el esfuerzo o cerrar documentando la desviación.
 \begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.4cm}|Y|C{3.0cm}|}
   \hline
   \filaenc \textbf{Clave} & \textbf{Tipo de criterio} & \textbf{Enunciado y valor objetivo} & \textbf{Si no se alcanza} \\ \hline
-  \campo{CS-01} & \campo{Cobertura} & \campo{COB-01 ≥ 100 \% en objetos Catastróficos} & \campo{Ampliar / documentar desviación} \\ \hline
-  \campo{CS-02} & \campo{Ejecución} & \campo{Todos los procedimientos planificados ejecutados o formalmente cancelados} & \campo{Acción} \\ \hline
-  \campo{CS-03} & \campo{Incidentes} & \campo{Ningún incidente de severidad crítica sin analizar} & \campo{Acción} \\ \hline
+  \campo{CS-01} & \campo{Cobertura} & \campo{COB-01 ≥ 100 \% en los objetos de criticidad Catastrófico (todos ejercitados, con independencia del veredicto)} & \campo{Ampliar / documentar desviación} \\ \hline
+  \campo{CS-02} & \campo{Avance de ejecución} & \campo{Todos los procedimientos planificados ejecutados o formalmente cancelados} & \campo{Acción} \\ \hline
+  \campo{CS-03} & \campo{Resultados} & \campo{Todo requisito Catastrófico con al menos una ejecución de veredicto \emph{aprobado} sobre la última versión probada} & \campo{Acción} \\ \hline
+  \campo{CS-04} & \campo{Incidentes} & \campo{Ningún incidente de severidad crítica sin analizar} & \campo{Acción} \\ \hline
   & & & \\ \hline
 \end{tabularx}
 \end{table}
 
-El Cuadro~\ref{tab:criterios-salida} distingue criterios de cobertura, de ejecución y de
-incidentes, de modo que el cierre no dependa de una sola cifra. Su evaluación efectiva se
-reporta en el apartado~\ref{sec:evaluacion-salida}.
+El Cuadro~\ref{tab:criterios-salida} separa los criterios de avance, de cobertura, de
+resultados y de incidentes, de modo que el cierre no dependa de una sola cifra y, en
+particular, para que ninguna medida de cobertura tenga que cargar con una afirmación sobre la
+calidad del producto. Su evaluación efectiva se reporta en el
+apartado~\ref{sec:evaluacion-salida}, y la decisión de aceptación —distinta de todo lo
+anterior— en el apartado~\ref{sec:aceptacion}.
 
 % ---------------------------------------------------------------------
 \subsection{Criterios de suspensión y reanudación}

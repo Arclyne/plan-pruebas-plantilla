@@ -70,25 +70,37 @@ cadena.
 \subsection*{Cobertura de la base de prueba}
 
 \begin{instruccion}
-Este cuadro resume la matriz anterior desde el punto de vista de la base de prueba: sirve para
-calcular la medida de cobertura COB-01 del Cuadro~\ref{tab:cobertura} y para detectar
-requisitos sin verificar.
+Este cuadro resume la matriz anterior desde el punto de vista de la base de prueba. Es la
+fuente del dato de la medida COB-01 del Cuadro~\ref{tab:cobertura} y sirve para detectar
+elementos de la base que quedaron sin ejercitar.
+
+Las dos últimas columnas responden a preguntas distintas y \textbf{no deben fundirse}:
+«¿Cubierto?» dice si el elemento llegó a ejercitarse; «Veredictos» dice cómo se comportó. Un
+requisito ejercitado por casos que fallaron está \emph{cubierto} y además tiene un
+\emph{resultado adverso}: cuenta en el numerador de COB-01 y, a la vez, en los incidentes del
+\ref{anx:incidentes}.
 \end{instruccion}
 
 \begin{table}[H]
 \centering
-\caption{Resumen de cobertura de la base de prueba.}
+\caption{Resumen de cobertura de la base de prueba y de sus resultados.}
 \label{tab:cobertura-base}
-\begin{tabularx}{\textwidth}{|C{1.7cm}|Y|C{2.0cm}|C{2.2cm}|C{2.4cm}|}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{1.9cm}|C{1.9cm}|C{2.2cm}|C{2.3cm}|}
   \hline
-  \filaenc \textbf{Base} & \textbf{Descripción} & \textbf{N.º de casos} & \textbf{Ejecutados} & \textbf{¿Cubierto?} \\ \hline
-  \campo{BP-01} & \campo{Descripción} & \campo{3} & \campo{3} & \campo{Sí} \\ \hline
-  \campo{BP-02} & \campo{Descripción} & \campo{0} & \campo{0} & \campo{No — brecha} \\ \hline
-  & & & & \\ \hline
+  \filaenc \textbf{Base} & \textbf{Descripción} & \textbf{Casos asociados} & \textbf{Casos ejecutados} & \textbf{¿Cubierto? (COB-01)} & \textbf{Veredictos (apr. / no apr.)} \\ \hline
+  \campo{BP-01} & \campo{Descripción} & \campo{3} & \campo{3} & \campo{Sí} & \campo{3 / 0} \\ \hline
+  \campo{BP-02} & \campo{Descripción} & \campo{2} & \campo{2} & \campo{Sí} & \campo{0 / 2} \\ \hline
+  \campo{BP-03} & \campo{Descripción} & \campo{0} & \campo{0} & \campo{No — brecha} & \campo{---} \\ \hline
+  & & & & & \\ \hline
 \end{tabularx}
+\notatabla{«¿Cubierto?» es \textit{Sí} en cuanto el elemento tiene al menos un caso ejecutado, cualquiera que sea el veredicto. Sólo las columnas de casos ejecutados y de veredictos cambian al repetir una prueba; la de cobertura no retrocede.}
 \end{table}
 
-El Cuadro~\ref{tab:cobertura-base} hace visibles las brechas: cada fila con «No» es un elemento
-de la base de prueba que quedó sin verificar y que, si no se justifica como exclusión en el
-Cuadro~\ref{tab:exclusiones}, debe aparecer entre los riesgos residuales del
-apartado~\ref{sec:residuales}.
+El Cuadro~\ref{tab:cobertura-base} hace visibles dos situaciones que conviene no confundir. La
+fila BP-03 es una \textbf{brecha de cobertura}: un elemento de la base que quedó sin ejercitar
+y que, si no se justifica como exclusión en el Cuadro~\ref{tab:exclusiones}, debe aparecer
+entre los riesgos residuales del apartado~\ref{sec:residuales}. La fila BP-02, en cambio,
+está plenamente cubierta y aun así arroja un \textbf{resultado adverso}: sus dos casos
+fallaron. Sumarlas en una sola columna haría desaparecer una de las dos —y con COB-01 definida
+sobre casos aprobados, BP-02 se habría contado como no cubierta, ocultando que la prueba sí se
+realizó y encontró un defecto.

@@ -60,10 +60,14 @@ sobre la calidad del producto.
 \label{sec:resultados}
 
 \begin{instruccion}
-Presente los resultados agregados de la ejecución, tomados del \ref{anx:ejecuciones}: cuántas
-pruebas se ejecutaron y con qué veredicto, y qué cobertura se alcanzó según las medidas
-definidas en el Cuadro~\ref{tab:cobertura}. Recuerde que el porcentaje de casos ejecutados es
-avance, no cobertura: repórtelos en filas distintas.
+Presente los resultados agregados de la ejecución, tomados del \ref{anx:ejecuciones} y del
+Cuadro~\ref{tab:cobertura-base}. El cuadro está dividido en los tres bloques que el
+apartado~\ref{sec:cobertura} mantiene separados —avance, cobertura y veredicto—; respete la
+división al rellenarlo y no traslade cifras de un bloque a otro.
+
+En particular, la cobertura se calcula sobre lo \emph{ejercitado}: un elemento probado por un
+caso que falló cuenta en el bloque de cobertura \textbf{y} en el de resultados. No lo descuente
+del primero.
 \end{instruccion}
 
 \begin{table}[H]
@@ -73,20 +77,27 @@ avance, no cobertura: repórtelos en filas distintas.
 \begin{tabularx}{\textwidth}{|L{5.2cm}|C{2.6cm}|Y|}
   \hline
   \filaenc \textbf{Indicador} & \textbf{Valor} & \textbf{Comentario} \\ \hline
+  \multicolumn{3}{|l|}{\cellcolor{uvgrisc}\textbf{Avance} — ¿cuánto del trabajo previsto se realizó?} \\ \hline
   Casos de prueba especificados        & \campo{n} & \campo{} \\ \hline
-  Ejecuciones realizadas               & \campo{n} & \campo{Incluye repeticiones} \\ \hline
-  Veredicto \emph{aprobado}            & \campo{n} & \campo{} \\ \hline
-  Veredicto \emph{no aprobado}         & \campo{n} & \campo{} \\ \hline
-  Veredicto \emph{no concluyente}      & \campo{n} & \campo{} \\ \hline
+  Ejecuciones realizadas               & \campo{n} & \campo{Incluye repeticiones y regresiones} \\ \hline
   Casos bloqueados o no ejecutados     & \campo{n} & \campo{Motivo} \\ \hline
   Avance de ejecución (\%)             & \campo{\%} & Casos ejecutados ÷ casos planificados \\ \hline
-  \campo{COB-01} — cobertura alcanzada & \campo{\%} & \campo{Según su definición en el Cuadro~\ref{tab:cobertura}} \\ \hline
-  \campo{COB-02} — cobertura alcanzada & \campo{\%} & \campo{} \\ \hline
+  \multicolumn{3}{|l|}{\cellcolor{uvgrisc}\textbf{Cobertura} — ¿qué elementos quedaron ejercitados?} \\ \hline
+  \campo{COB-01} — cobertura alcanzada & \campo{\%} & Elementos ejercitados, \emph{con independencia del veredicto}; fuente: Cuadro~\ref{tab:cobertura-base} \\ \hline
+  \campo{COB-02} — cobertura alcanzada & \campo{\%} & \campo{Según su definición en el Cuadro~\ref{tab:cobertura}} \\ \hline
+  Elementos del alcance sin ejercitar  & \campo{n} & \campo{Brechas de cobertura; deben reaparecer en \ref{sec:residuales}} \\ \hline
+  \multicolumn{3}{|l|}{\cellcolor{uvgrisc}\textbf{Resultados} — de lo ejercitado, ¿qué se comportó como se esperaba?} \\ \hline
+  Veredicto \emph{aprobado}            & \campo{n} & \campo{} \\ \hline
+  Veredicto \emph{no aprobado}         & \campo{n} & \campo{Origina los incidentes del \ref{anx:incidentes}} \\ \hline
+  Veredicto \emph{no concluyente}      & \campo{n} & \campo{} \\ \hline
 \end{tabularx}
 \end{table}
 
-El Cuadro~\ref{tab:resultados} distingue deliberadamente el avance de ejecución de cada medida
-de cobertura, para evitar la confusión que la revisión señaló en la plantilla original.
+El Cuadro~\ref{tab:resultados} separa en tres bloques el avance, la cobertura y los veredictos,
+para evitar la confusión que la revisión señaló en la plantilla original. Leídos juntos
+responden a la pregunta que interesa al cierre: cuánto se probó, sobre qué y con qué resultado.
+Ninguno de los tres bloques basta por sí solo para sostener la decisión de aceptación del
+apartado~\ref{sec:aceptacion}.
 
 % ---------------------------------------------------------------------
 \section{Evaluación frente a los criterios de salida}
@@ -97,24 +108,38 @@ Evalúe uno a uno los criterios de finalización definidos en el
 Cuadro~\ref{tab:criterios-salida}, indicando el valor alcanzado y si el criterio se cumple. No
 reformule aquí los criterios: si alguno resultó inaplicable, declárelo como desviación en el
 Cuadro~\ref{tab:desviaciones}.
+
+Tome cada valor del bloque que le corresponde en el Cuadro~\ref{tab:resultados}: los criterios
+de avance, de cobertura y de resultados se evalúan con cifras distintas. Un criterio de
+cobertura cumplido al 100\,\% no compensa un criterio de resultados incumplido.
+\end{instruccion}
+
+\begin{instruccion}[Advertencia]
+Si algún criterio de salida quedó redactado sobre «casos aprobados» pero clasificado como
+criterio de \emph{cobertura}, corríjalo antes de evaluarlo: pertenece al tipo
+\emph{Resultados}. Es el error que la revisión detectó en la plantilla original.
 \end{instruccion}
 
 \begin{table}[H]
 \centering
 \caption{Cumplimiento de los criterios de finalización.}
 \label{tab:eval-salida}
-\begin{tabularx}{\textwidth}{|C{1.5cm}|Y|C{2.2cm}|C{2.0cm}|C{2.6cm}|}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.2cm}|Y|C{1.9cm}|C{1.9cm}|C{1.9cm}|}
   \hline
-  \filaenc \textbf{Criterio} & \textbf{Enunciado} & \textbf{Valor objetivo} & \textbf{Valor alcanzado} & \textbf{¿Se cumple?} \\ \hline
-  \campo{CS-01} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
-  \campo{CS-02} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
-  & & & & \\ \hline
+  \filaenc \textbf{Criterio} & \textbf{Tipo} & \textbf{Enunciado} & \textbf{Valor objetivo} & \textbf{Valor alcanzado} & \textbf{¿Se cumple?} \\ \hline
+  \campo{CS-01} & \campo{Cobertura} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-02} & \campo{Avance} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-03} & \campo{Resultados} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  \campo{CS-04} & \campo{Incidentes} & \campo{Enunciado} & \campo{Objetivo} & \campo{Real} & \campo{Sí/No} \\ \hline
+  & & & & & \\ \hline
 \end{tabularx}
+\notatabla{La columna «Tipo» debe coincidir con la del Cuadro~\ref{tab:criterios-salida}. Sirve para comprobar de un vistazo que el cierre no se sostiene sobre un solo tipo de criterio.}
 \end{table}
 
 El Cuadro~\ref{tab:eval-salida} establece si las \emph{actividades de prueba} pueden darse por
-concluidas. Es un insumo de la decisión de aceptación del apartado~\ref{sec:aceptacion}, pero no
-la sustituye.
+concluidas, y la columna «Tipo» deja ver sobre qué se apoya esa conclusión. Es un insumo de la
+decisión de aceptación del apartado~\ref{sec:aceptacion}, pero no la sustituye: cumplir los
+criterios de salida significa que se hizo lo previsto, no que el resultado sea aceptable.
 
 % ---------------------------------------------------------------------
 \section{Incidentes abiertos al cierre}
