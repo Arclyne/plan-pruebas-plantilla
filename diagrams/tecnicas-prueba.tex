@@ -1,0 +1,75 @@
+% =====================================================================
+%  diagrams/tecnicas-prueba.tex
+%  Figura: mapa de técnicas de diseño de prueba.
+%
+%  CORRECCIONES respecto del diagrama original («tenicas de prueba.png»):
+%   1. El original fijaba «cobertura mínima: 100 %» para sentencias y
+%      decisiones, atribuyéndolo implícitamente a la norma. Los
+%      porcentajes se han retirado: cada técnica indica ahora el
+%      ELEMENTO DE COBERTURA que produce, y el objetivo numérico se
+%      declara —con su justificación— en el apartado 4.5 del plan.
+%   2. Se añade la advertencia de que el mapa es un menú de selección:
+%      no hay obligación de aplicar todas las técnicas.
+%   3. Se añade el enfoque por palabras clave, ausente del original, con
+%      su carácter opcional explícito.
+% =====================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  fam/.style  ={draw=uvazul, very thick, fill=uvazul!12, rounded corners=2pt,
+                text width=4.4cm, align=center, minimum height=1.0cm, inner sep=3pt},
+  tec/.style  ={draw=gray!70, fill=gray!6, rounded corners=2pt,
+                text width=4.4cm, align=left, minimum height=0.9cm, inner sep=4pt},
+  nota/.style ={draw=polinaranja, fill=polfondo, rounded corners=2pt,
+                text width=14.6cm, align=left, inner sep=5pt}
+]
+
+% ------------------------- familias (columnas) ------------------------
+\node[fam] (f1) at (-5.2,0) {\textbf{Basadas en especificación}\\ \emph{caja negra}};
+\node[fam] (f2) at (0,0)    {\textbf{Basadas en estructura}\\ \emph{caja blanca}};
+\node[fam] (f3) at (5.2,0)  {\textbf{Basadas en experiencia}};
+
+% ------------------------- columna 1: especificación ------------------
+\node[tec] (a1) at (-5.2,-1.35) {\textbf{Particiones de equivalencia}\\ \emph{cubre:} cada clase válida e inválida};
+\node[tec] (a2) at (-5.2,-2.65) {\textbf{Análisis de valores límite}\\ \emph{cubre:} bordes de cada partición};
+\node[tec] (a3) at (-5.2,-3.95) {\textbf{Tablas de decisión}\\ \emph{cubre:} cada regla de la tabla};
+\node[tec] (a4) at (-5.2,-5.25) {\textbf{Transiciones de estado}\\ \emph{cubre:} estados y transiciones};
+\node[tec] (a5) at (-5.2,-6.55) {\textbf{Basadas en casos de uso}\\ \emph{cubre:} flujo básico y alternativos};
+
+% ------------------------- columna 2: estructura ----------------------
+\node[tec] (b1) at (0,-1.35) {\textbf{Cobertura de sentencias}\\ \emph{cubre:} cada sentencia ejecutable};
+\node[tec] (b2) at (0,-2.65) {\textbf{Cobertura de decisiones}\\ \emph{cubre:} cada salida de cada decisión};
+\node[tec] (b3) at (0,-3.95) {\textbf{Cobertura de condiciones}\\ \emph{cubre:} cada condición simple};
+\node[tec] (b4) at (0,-5.25) {\textbf{Condiciones múltiples}\\ \emph{cubre:} combinaciones booleanas};
+\node[tec] (b5) at (0,-6.55) {\textbf{Cobertura de rutas y bucles}\\ \emph{cubre:} rutas seleccionadas; 0, 1, N iteraciones};
+
+% ------------------------- columna 3: experiencia ---------------------
+\node[tec] (c1) at (5.2,-1.35) {\textbf{Pruebas exploratorias}\\ \emph{útil cuando} la base de prueba es escasa};
+\node[tec] (c2) at (5.2,-2.65) {\textbf{Basadas en listas de verificación}\\ \emph{cubre:} los puntos de la lista};
+\node[tec] (c3) at (5.2,-3.95) {\textbf{Pruebas por ataque}\\ \emph{útil para} riesgos de seguridad};
+\node[tec] (c4) at (5.2,-5.25) {\textbf{Conjetura de errores}\\ \emph{apoyada en} defectos históricos};
+\node[tec] (c5) at (5.2,-6.55) {\textbf{Palabras clave} (\normap{5})\\ \emph{enfoque opcional de implementación}};
+
+% ------------------------------ enlaces -------------------------------
+\foreach \a/\b in {f1/a1, f2/b1, f3/c1} { \draw[-{Latex[length=4pt]}, uvazul!80] (\a) -- (\b); }
+\foreach \a/\b in {a1/a2, a2/a3, a3/a4, a4/a5,
+                   b1/b2, b2/b3, b3/b4, b4/b5,
+                   c1/c2, c2/c3, c3/c4, c4/c5} { \draw[gray!55] (\a) -- (\b); }
+
+% ------------------------------- nota ---------------------------------
+\node[nota] at (0,-8.15) {%
+  \textbf{Este mapa es un menú de selección, no una lista de obligaciones.} Se eligen las
+  técnicas que el riesgo justifique (Cuadro~\ref{tab:tecnicas}). Los \emph{elementos de
+  cobertura} indicados son lo que cada técnica genera; el \emph{objetivo numérico} de cobertura
+  no procede de la norma y debe declararse, con su justificación, en el
+  apartado~\ref{sec:cobertura}. Alcanzar una cobertura determinada no demuestra la ausencia de
+  defectos.};
+
+\end{tikzpicture}
+\caption[Mapa de técnicas de diseño de prueba y su elemento de cobertura]%
+{Mapa de técnicas de diseño de prueba, agrupadas en tres familias, con el elemento de cobertura
+que cada una produce. Versión corregida del diagrama de referencia: se han retirado los
+porcentajes de cobertura mínima que se atribuían a la norma.}
+\label{fig:tecnicas}
+\end{figure}

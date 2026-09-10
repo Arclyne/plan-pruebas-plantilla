@@ -1,0 +1,119 @@
+% =====================================================================
+%  diagrams/procesos-prueba.tex
+%  Figura: flujo del proceso de prueba en tres capas, con sus bucles
+%          de retroalimentación.
+%
+%  CORRECCIONES respecto del diagrama original («Procesos de prueba.png»):
+%   1. El original rotulaba «verificar correcciones» como prueba de
+%      regresión. Aquí se representan por separado la prueba de
+%      CONFIRMACIÓN (el defecto quedó corregido) y la de REGRESIÓN (el
+%      cambio no dañó lo que ya funcionaba).
+%   2. El original se leía como una secuencia lineal. Aquí el monitoreo
+%      y control aparece como proceso CONCURRENTE y se dibujan los tres
+%      bucles de retroalimentación: control, replanificación y mejora.
+%   3. El original situaba el entorno y los datos dentro de la
+%      preparación de pruebas; en la edición 2021 constituyen un proceso
+%      propio (ES1/ES2), y así se representa.
+%   4. El original sólo contemplaba el análisis de riesgos del proyecto;
+%      la planificación abarca riesgos de producto y de proyecto.
+% =====================================================================
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  font=\scriptsize,
+  proc/.style   ={draw=uvazul, thick, fill=uvazul!8, rounded corners=2pt,
+                  text width=2.8cm, align=center, minimum height=1.0cm, inner sep=3pt},
+  procm/.style  ={draw=polinaranja, very thick, fill=polfondo, rounded corners=2pt,
+                  text width=2.9cm, align=center, minimum height=1.5cm, inner sep=3pt},
+  salida/.style ={draw=gray!70, fill=gray!8, rounded corners=2pt,
+                  text width=2.6cm, align=center, minimum height=0.7cm, inner sep=3pt},
+  conf/.style   ={draw=instrverde, thick, fill=instrverde!8, rounded corners=2pt,
+                  text width=2.7cm, align=center, minimum height=0.9cm, inner sep=3pt},
+  fl/.style     ={-{Latex[length=4pt]}, draw=uvazul!85, thick},
+  fb/.style     ={-{Latex[length=4pt]}, draw=polinaranja, thick, dashed},
+  mej/.style    ={-{Latex[length=4pt]}, draw=instrverde, thick, dashdotted},
+  et/.style     ={font=\tiny, inner sep=1pt, fill=white}
+]
+
+% ============================ CAPA ORGANIZACIONAL =====================
+\node[proc] (ot) at (-4.6,0) {\textbf{Proceso organizacional}\\ OT1 desarrollar · OT2 monitorear · OT3 actualizar};
+\node[salida] (pol) at (-0.6,0) {Política de prueba\\ y estrategia organizacional};
+\draw[fl] (ot) -- (pol);
+
+% ============================ CAPA DE GESTIÓN =========================
+\node[proc] (tp) at (-5.6,-2.6) {\textbf{Planificación}\\ TP1--TP9\\ \emph{riesgos de producto y de proyecto}};
+\node[salida] (plan) at (-5.6,-4.3) {Plan de prueba};
+\draw[fl] (tp) -- (plan);
+
+\node[procm] (tmc) at (-0.4,-3.3) {\textbf{Monitoreo y control}\\ TMC1--TMC4\\ \emph{concurrente con la ejecución}};
+
+\node[proc] (tc) at (4.6,-3.3) {\textbf{Finalización}\\ TC1 archivar · TC2 limpiar entorno · TC3 lecciones · TC4 reportar};
+
+\draw[fl] (pol) to[out=250,in=70] node[et,pos=0.5]{gobierna} (tp.north);
+
+% ============================ CAPA DINÁMICA ===========================
+\node[proc] (es) at (-6.0,-6.6) {\textbf{Entorno y datos}\\ ES1 establecer\\ ES2 mantener};
+\node[proc] (td) at (-2.6,-6.6) {\textbf{Diseño e implementación}\\ TD1--TD6};
+\node[proc] (te) at (0.8,-6.6)  {\textbf{Ejecución}\\ TE1 ejecutar · TE2 comparar · TE3 registrar};
+\node[proc] (ir) at (4.2,-6.6)  {\textbf{Reporte de incidentes}\\ IR1 analizar · IR2 reportar};
+
+\draw[fl] (es) -- (td);
+\draw[fl] (td) -- (te);
+\draw[fl] (te) -- node[et,pos=0.5]{no aprobado} (ir);
+
+\draw[fl] (plan.south) to[out=270,in=120] node[et,pos=0.25]{dirige} (es.north);
+
+% ------------- bucle interno: corrección, confirmación, regresión -----
+\node[salida] (nv) at (4.2,-8.5) {Nueva versión del elemento de prueba};
+\draw[fl] (ir) -- node[et,pos=0.5]{corrección} (nv);
+
+\node[conf] (pc) at (0.3,-8.5)  {\textbf{Prueba de confirmación}\\ ¿se corrigió \emph{ese} defecto?};
+\node[conf] (pr) at (0.3,-10.4) {\textbf{Prueba de regresión}\\ ¿el cambio dañó lo que ya funcionaba?};
+\draw[fl] (nv.west) -- (pc.east);
+\draw[fl] (nv.south) to[out=250,in=340] (pr.east);
+
+\draw[fl] (pc.north) -- node[et,pos=0.5]{nueva ejecución} (te.south);
+\draw[fl] (pr.west) to[out=180,in=250,looseness=1.2] (te.south west);
+
+% ======================= BUCLES DE RETROALIMENTACIÓN ==================
+% 1) bucle de control corto: dinámica -> monitoreo -> dinámica
+\draw[fb] (te.north) to[out=100,in=280] node[et,pos=0.5]{medidas y estado} (tmc.south);
+\draw[fb] (tmc.west) to[out=200,in=80] node[et,pos=0.55]{directivas de control} (td.north);
+
+% 2) bucle de replanificación: monitoreo -> planificación
+\draw[fb] (tmc.north west) to[out=150,in=20] node[et,pos=0.5]{replanificación} (tp.east);
+
+% 3) bucle de mejora organizacional: finalización -> capa organizacional
+% se rodea por encima de la capa organizacional para no atravesar ningún nodo
+\draw[mej] (tc.north) |- ($(ot.north)+(0,1.25)$)
+             node[et,pos=0.72]{lecciones aprendidas} -- (ot.north);
+
+% cierre hacia finalización
+\draw[fl] (ir.east) to[out=20,in=250] node[et,pos=0.5]{criterios de salida} (tc.south);
+
+% ============================ BANDAS DE CAPA ==========================
+\begin{scope}[on background layer]
+  \node[fit=(ot)(pol), draw=gray!45, dashed, inner sep=7pt, rounded corners] (b1) {};
+  \node[fit=(tp)(plan)(tmc)(tc), draw=gray!45, dashed, inner sep=7pt, rounded corners] (b2) {};
+  \node[fit=(es)(td)(te)(ir)(nv)(pc)(pr), draw=gray!45, dashed, inner sep=7pt, rounded corners] (b3) {};
+\end{scope}
+\node[et, text=gray!60, anchor=west, font=\tiny\bfseries] at (b1.north west) {CAPA ORGANIZACIONAL};
+\node[et, text=gray!60, anchor=west, font=\tiny\bfseries] at (b2.north west) {CAPA DE GESTIÓN DE LA PRUEBA};
+\node[et, text=gray!60, anchor=west, font=\tiny\bfseries] at (b3.north west) {CAPA DINÁMICA (iterativa)};
+
+% ============================== LEYENDA ===============================
+\node[align=left, font=\scriptsize, text width=14.8cm] at (0,-12.4)
+  {\textbf{Cómo leer la figura.} Las flechas azules continuas indican el flujo principal; las
+   naranjas discontinuas, los bucles de control y de replanificación; la verde de trazo mixto,
+   el bucle lento de mejora organizacional. El monitoreo y control \emph{no} ocupa un lugar fijo
+   en la secuencia: acompaña a la ejecución de principio a fin. Los pasos de la capa dinámica se
+   repiten por conjunto de pruebas, incremento o iteración hasta cumplir los criterios de salida.};
+
+\end{tikzpicture}
+\caption[Flujo del proceso de prueba con sus bucles de retroalimentación]%
+{Flujo del proceso de prueba en las tres capas de \normap{2}, con el monitoreo y control
+representado como proceso concurrente y con los bucles de control, replanificación y mejora.
+Versión corregida del diagrama de referencia: la prueba de confirmación y la de regresión
+aparecen como actividades distintas.}
+\label{fig:procesos}
+\end{figure}
