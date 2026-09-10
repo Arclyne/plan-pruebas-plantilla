@@ -292,6 +292,31 @@ Si su Experiencia Educativa espera que el documento entregado incluya ese marco
 conceptual, ponga `\mostrardiagramastrue` dentro del bloque `\VARIANTEFINAL` de
 `config/metadata.tex` y volverán a aparecer.
 
+### El documento se refiere a sí mismo según la variante
+
+Mientras se rellena es una plantilla; una vez entregado es un plan de prueba. El
+interruptor `\ifversionfinal` —derivado de `mostrarinstrucciones`, no independiente—
+permite ajustar la redacción sin duplicar párrafos:
+
+```latex
+\segunvariante{Esta plantilla}{Este plan} \textbf{no declara conformidad} con …
+```
+
+Para suprimir un bloque entero en la entrega (por ejemplo, la leyenda de los
+bloques de color, que no tiene sentido en un documento ya rellenado):
+
+```latex
+\ifversionfinal\else
+  … contenido que sólo existe mientras es plantilla …
+\fi
+```
+
+Si añade texto que hable del documento como plantilla, o que explique cómo
+compilarlo, envuélvalo así: la versión de entrega no debe contener ninguna
+referencia a los colores, a los interruptores ni a los objetivos del Makefile.
+
+### Menciones a las figuras
+
 Las menciones a las figuras dentro del texto van envueltas en `\sidiag{...}`, de
 modo que la frase siga siendo correcta cuando la figura no está. Si añade una
 mención nueva, use el mismo envoltorio y redacte la frase de manera que se

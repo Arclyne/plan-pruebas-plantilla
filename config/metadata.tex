@@ -71,6 +71,14 @@
   \mostrardiagramasfalse
 \fi
 
+% \ifversionfinal se DERIVA de los interruptores anteriores: la versión de
+% entrega es aquella que ya no lleva guías de redacción. Se usa para ajustar
+% la redacción del texto que habla del documento («esta plantilla» pasa a
+% «este plan de prueba») y para suprimir lo que explica cómo usar la
+% plantilla. No lo active a mano: cambie los interruptores de arriba.
+\newif\ifversionfinal
+\ifmostrarinstrucciones \versionfinalfalse \else \versionfinaltrue \fi
+
 % Etiqueta que identifica la variante en la portada. Queda vacía en la
 % versión final, que es la que se entrega y no debe anunciarse como
 % plantilla.
