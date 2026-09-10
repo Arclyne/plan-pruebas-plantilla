@@ -1,0 +1,138 @@
+% =====================================================================
+%  config/commands.tex
+%  ---------------------------------------------------------------
+%  Sistema de marcado de la plantilla. Define CUATRO tipos de bloque
+%  visualmente distinguibles, de modo que quien lea el documento
+%  identifique de inmediato la naturaleza de cada texto:
+%
+%    instruccion        -> qué debe escribir el equipo (guía de la plantilla)
+%    ejemplo            -> ilustración; NO es contenido a conservar
+%    politicaacademica  -> regla local del curso, NO requisito de la norma
+%    notanormativa      -> referencia o aclaración conceptual con fuente
+%
+%  Requiere que config/metadata.tex se cargue ANTES que este archivo,
+%  porque aquí se consultan los interruptores \ifmostrarinstrucciones
+%  y \ifmostrarejemplos.
+% =====================================================================
+
+% ---------------------------------------------------------------------
+% Estilo base común a todas las cajas
+% ---------------------------------------------------------------------
+\tcbset{
+  cajaplantilla/.style={
+    enhanced, breakable,
+    boxrule=0.6pt, arc=2pt,
+    left=6pt, right=6pt, top=5pt, bottom=5pt,
+    fonttitle=\bfseries\footnotesize,
+    fontupper=\small,
+    attach boxed title to top left={xshift=6pt, yshift=-2pt},
+    boxed title style={boxrule=0pt, arc=1pt, left=4pt, right=4pt, top=1pt, bottom=1pt},
+    toptitle=2pt,
+    before skip=8pt, after skip=8pt
+  }
+}
+
+% ---------------------------------------------------------------------
+% 1. INSTRUCCIÓN — guía de la plantilla (se oculta en la versión final)
+% ---------------------------------------------------------------------
+\ifmostrarinstrucciones
+  \newtcolorbox{instruccion}[1][Qué debe documentarse en este apartado]{%
+    cajaplantilla,
+    colback=instrfondo, colframe=instrverde,
+    coltitle=white, colbacktitle=instrverde,
+    title={#1}}
+\else
+  \excludecomment{instruccion}
+\fi
+
+% ---------------------------------------------------------------------
+% 2. EJEMPLO — ilustrativo, se elimina en la versión final
+% ---------------------------------------------------------------------
+\ifmostrarejemplos
+  \newtcolorbox{ejemplo}[1][Ejemplo ilustrativo]{%
+    cajaplantilla,
+    colback=ejemfondo, colframe=ejemazul,
+    coltitle=white, colbacktitle=ejemazul,
+    title={#1}}
+\else
+  \excludecomment{ejemplo}
+\fi
+
+% ---------------------------------------------------------------------
+% 3. POLÍTICA ACADÉMICA — regla local del curso. SIEMPRE visible.
+%    Se conserva porque el curso la exige, pero queda marcada para que
+%    nunca se confunda con un requisito de ISO/IEC/IEEE 29119.
+% ---------------------------------------------------------------------
+\newtcolorbox{politicaacademica}[1][Política académica de la Experiencia Educativa]{%
+  cajaplantilla,
+  colback=polfondo, colframe=polinaranja,
+  coltitle=white, colbacktitle=polinaranja,
+  title={#1}}
+
+% ---------------------------------------------------------------------
+% 4. NOTA NORMATIVA / CONCEPTUAL — con fuente identificable
+% ---------------------------------------------------------------------
+\newtcolorbox{notanormativa}[1][Referencia normativa]{%
+  cajaplantilla,
+  colback=normfondo, colframe=normgris,
+  coltitle=white, colbacktitle=normgris,
+  title={#1}}
+
+% ---------------------------------------------------------------------
+% Marcador de campo por rellenar
+% ---------------------------------------------------------------------
+% Se compone como texto normal (no como caja) para que pueda partirse
+% entre líneas dentro de las celdas estrechas de las tablas. El color y
+% los corchetes bastan para localizarlo; al sustituirlo por contenido
+% real, el marcador desaparece por completo.
+\newcommand{\campo}[1]{{\color{campotexto}\itshape[\hspace{0pt}#1\hspace{0pt}]}}
+
+% Marcador breve dentro de tablas (sin caja, para no romper filas)
+\newcommand{\pordef}[1][\ ]{\textit{\textcolor{gray}{#1}}}
+
+% ---------------------------------------------------------------------
+% Divisor de PARTE (PARTE I / PARTE II)
+% ---------------------------------------------------------------------
+\newcommand{\parteplan}[2]{%
+  \clearpage
+  \phantomsection
+  \addcontentsline{toc}{part}{#1. #2}%
+  \vspace*{5\baselineskip}
+  \begin{center}
+    {\Large\bfseries\color{uvazul} #1}\\[10pt]
+    {\LARGE\bfseries\color{uvazul} #2}
+  \end{center}
+  \vspace{2\baselineskip}
+  \setcounter{section}{0}%
+  \clearpage
+}
+
+% ---------------------------------------------------------------------
+% Inicio de los anexos: la numeración pasa de 1,2,3 a ANEXO A, B, C…
+% ---------------------------------------------------------------------
+\newcommand{\iniciaranexos}{%
+  \clearpage
+  \setcounter{section}{0}%
+  \renewcommand{\thesection}{ANEXO \Alph{section}}%
+  \renewcommand{\thesubsection}{\Alph{section}.\arabic{subsection}}%
+  % ensancha la caja del número en el índice sólo a partir de los anexos
+  \addtocontents{toc}{\protect\cftsetindents{section}{1.5em}{6.4em}}%
+  \phantomsection
+  \addcontentsline{toc}{part}{ANEXOS}%
+}
+
+% ---------------------------------------------------------------------
+% Nota al pie de una tabla (fuente / aclaración)
+% ---------------------------------------------------------------------
+\newcommand{\notatabla}[1]{\par\vspace{3pt}{\footnotesize\itshape #1\par}}
+
+% ---------------------------------------------------------------------
+% Encabezado de tabla sombreado
+% ---------------------------------------------------------------------
+\newcommand{\filaenc}{\rowcolor{uvgris}}
+
+% ---------------------------------------------------------------------
+% Abreviatura de la norma, para citarla siempre igual
+% ---------------------------------------------------------------------
+\newcommand{\norma}{ISO/IEC/IEEE 29119}
+\newcommand{\normap}[1]{ISO/IEC/IEEE 29119-#1}

@@ -1,0 +1,177 @@
+% =====================================================================
+%  config/preamble.tex
+%  ---------------------------------------------------------------
+%  Paquetes, geometría, tipografía, encabezados y estilo de tablas.
+%  Todo lo aquí usado forma parte de una instalación estándar de
+%  TeX Live / MacTeX. No se requieren paquetes exóticos ni servicios web.
+% =====================================================================
+
+% ------------------------- Codificación e idioma ---------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[spanish,mexico,es-nolists,es-noindentfirst]{babel}
+% Nota: la opción «mexico» usa punto decimal.
+%
+% Rótulos: la plantilla Word original habla de «cuadros y figuras», y así
+% se citan en el texto. Las versiones recientes de babel-spanish rotulan
+% las tablas como «Tabla», por lo que se fija explícitamente «Cuadro»
+% para que el rótulo automático y las menciones del texto coincidan.
+% Si prefiere «Tabla», cambie las dos líneas siguientes y, con ellas,
+% las menciones «Cuadro~\ref{...}» del texto.
+\addto\captionsspanish{%
+  \renewcommand{\tablename}{Cuadro}%
+  \renewcommand{\listtablename}{Índice de cuadros}%
+  \renewcommand{\listfigurename}{Índice de figuras}%
+  \renewcommand{\contentsname}{Tabla de contenido}%
+}
+
+% ---- Símbolos Unicode de uso frecuente ------------------------------
+% Permiten que el equipo escriba directamente ×, ÷, ≥, ≤, ≠, → … en el
+% texto y en las tablas sin recurrir a modo matemático.
+\usepackage{amsmath}
+\DeclareUnicodeCharacter{00D7}{\ensuremath{\times}}
+\DeclareUnicodeCharacter{00F7}{\ensuremath{\div}}
+\DeclareUnicodeCharacter{2264}{\ensuremath{\leq}}
+\DeclareUnicodeCharacter{2265}{\ensuremath{\geq}}
+\DeclareUnicodeCharacter{2260}{\ensuremath{\neq}}
+\DeclareUnicodeCharacter{2192}{\ensuremath{\rightarrow}}
+\DeclareUnicodeCharacter{2190}{\ensuremath{\leftarrow}}
+\DeclareUnicodeCharacter{2248}{\ensuremath{\approx}}
+\DeclareUnicodeCharacter{2212}{\ensuremath{-}}
+\DeclareUnicodeCharacter{2022}{\textbullet}
+
+% --------------------------- Tipografía ------------------------------
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}   % aproxima la Arial del Word
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{microtype}
+
+% ---------------------------- Geometría ------------------------------
+\usepackage{geometry}
+\geometry{a4paper,
+  left=2.5cm, right=2.5cm, top=2.4cm, bottom=2.2cm,
+  headheight=46pt, headsep=12pt, footskip=34pt}
+
+% ------------------------------ Color --------------------------------
+\usepackage{xcolor}
+\definecolor{uvazul}{HTML}{1F3864}   % azul institucional para títulos
+\definecolor{uvgris}{HTML}{D9D9D9}   % encabezados de tabla
+\definecolor{uvgrisc}{HTML}{F2F2F2}  % relleno suave
+\definecolor{instrverde}{HTML}{2E6B34}
+\definecolor{instrfondo}{HTML}{EDF6EE}
+\definecolor{polinaranja}{HTML}{9C5A00}
+\definecolor{polfondo}{HTML}{FDF3E3}
+\definecolor{ejemazul}{HTML}{1F4E79}
+\definecolor{ejemfondo}{HTML}{EAF1F8}
+\definecolor{normgris}{HTML}{4A4A4A}
+\definecolor{normfondo}{HTML}{F4F4F4}
+\definecolor{campoamar}{HTML}{FFF2CC}
+\definecolor{campotexto}{HTML}{9A3412}  % marcador de campo por rellenar
+
+% ------------------------- Tablas y figuras --------------------------
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{xltabular}   % longtable + columnas X: fichas que pueden partirse entre páginas
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{float}
+
+\captionsetup{font=small,labelfont=bf,justification=centering,skip=6pt}
+\captionsetup[table]{position=above}
+
+% Tipos de columna reutilizables ---------------------------------------
+% El \hspace{0pt} inicial permite que TeX divida con guion la PRIMERA
+% palabra de la celda (sin él, TeX nunca parte la primera palabra de un
+% párrafo, y las columnas estrechas se desbordan).
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash\hspace{0pt}}X}                       % flexible
+\newcolumntype{C}[1]{>{\Centering\arraybackslash\hspace{0pt}}p{#1}}                  % centrada fija
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash\hspace{0pt}}p{#1}}                % izquierda fija
+\newcolumntype{E}[1]{>{\columncolor{uvgrisc}\bfseries\RaggedRight\arraybackslash\hspace{0pt}}p{#1}} % etiqueta
+
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{5pt}
+
+% ------------------------- Índice (TOC) ------------------------------
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{2pt}
+% La numeración de los anexos («ANEXO A») es mucho más ancha que la de
+% una sección numérica, por lo que \iniciaranexos ensancha la caja del
+% número a partir de ese punto del índice (véase config/commands.tex).
+
+% --------------------------- Listas ----------------------------------
+\usepackage{ragged2e}   % \RaggedRight conserva la partición de palabras
+\usepackage{enumitem}
+\setlist{nosep,topsep=3pt,itemsep=2pt,parsep=0pt,leftmargin=1.4em}
+
+% ------------------------ Encabezado y pie ---------------------------
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\newcommand{\bandaEncabezado}{%
+  \setlength{\tabcolsep}{4pt}%
+  \renewcommand{\arraystretch}{1.05}%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|C{3.2cm}|>{\raggedleft\arraybackslash}X|}
+    \hline
+    \uvPrograma & \textbf{\uvActividad} & \uvEE \\ \hline
+    \multicolumn{3}{|c|}{\uvBandaHeader} \\ \hline
+  \end{tabularx}%
+}
+
+\newcommand{\bandaPie}{%
+  \setlength{\tabcolsep}{4pt}%
+  \renewcommand{\arraystretch}{1.05}%
+  \footnotesize
+  \begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedleft\arraybackslash}p{5.4cm}|}
+    \hline
+    \textbf{\uvUniversidad}\ \textperiodcentered\ \uvFacultad
+      & Página \thepage\ de \pageref{LastPage}\quad \docVersionPlantilla \\ \hline
+  \end{tabularx}%
+}
+
+\fancypagestyle{uvestilo}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}%
+  \fancyhead[C]{\bandaEncabezado}%
+  \fancyfoot[C]{\bandaPie}%
+}
+\pagestyle{uvestilo}
+\fancypagestyle{plain}{\pagestyle{uvestilo}}
+
+% ------------------------ Títulos de sección -------------------------
+\usepackage{titlesec}
+\titleformat{\section}[block]
+  {\normalfont\large\bfseries\color{uvazul}}{\thesection.}{0.6em}{}
+\titleformat{\subsection}[block]
+  {\normalfont\normalsize\bfseries\color{uvazul}}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}[block]
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{10pt}{3pt}
+
+% ---------------------- Cajas de la plantilla ------------------------
+\usepackage[most]{tcolorbox}
+\usepackage{comment}
+
+% ----------------------------- Enlaces -------------------------------
+\usepackage[hidelinks,bookmarksnumbered,bookmarksopen]{hyperref}
+\usepackage{bookmark}
+
+% ------------------------------ TikZ ---------------------------------
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit,backgrounds,calc,decorations.pathreplacing}
+
+% ------------------- Ajustes finales de composición ------------------
+\setlength{\parskip}{6pt}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{3em}   % reduce overfull hboxes en texto justificado
+\widowpenalty=10000
+\clubpenalty=10000
