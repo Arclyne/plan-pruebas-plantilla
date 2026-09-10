@@ -54,11 +54,11 @@ a error: los dos primeros tipos se apagan con un interruptor. *(OBS §5.1 · PRO
 (`mostrarinstrucciones`, `mostrarejemplos`, `mostrarobservaciones`) y el Makefile
 compila tres variantes de un único `main.tex`, sin duplicar las secciones:
 
-| Variante | Comando | Archivo | instrucciones | ejemplos | observaciones |
-|---|---|---|:--:|:--:|:--:|
-| Trabajo | `make` | `plantilla-trabajo.pdf` | sí | sí | — |
-| Anotada | `make annotated` | `plantilla-anotada.pdf` | sí | sí | sí |
-| Final | `make final` | `plantilla-final.pdf` | — | — | — |
+| Variante | Comando | Archivo | instrucciones | ejemplos | observaciones | diagramas |
+|---|---|---|:--:|:--:|:--:|:--:|
+| Trabajo | `make` | `plantilla-trabajo.pdf` | sí | sí | — | sí |
+| Anotada | `make annotated` | `plantilla-anotada.pdf` | sí | sí | sí | sí |
+| Final | `make final` | `plantilla-final.pdf` | — | — | — | — |
 
 Cada objetivo define una macro (`\VARIANTEANOTADA`, `\VARIANTEFINAL`) al llamar a
 `pdflatex`, y `metadata.tex` la traduce a la combinación de interruptores. La
@@ -69,7 +69,7 @@ variante de trabajo es la configuración por defecto, de modo que un
 de mejora y entregar un documento limpio son tres necesidades distintas que no
 pueden satisfacerse con un solo PDF, pero tampoco justifican mantener tres copias
 del contenido: cualquier corrección tendría que aplicarse tres veces y las
-variantes divergirían. Páginas resultantes: 67 (trabajo), 73 (anotada), 56 (final).
+variantes divergirían. Páginas resultantes: 67 (trabajo), 73 (anotada), 53 (final).
 *(PROPIA)*
 
 ## D-05. Orden de las secciones: riesgos antes que estrategia
@@ -294,3 +294,35 @@ arábigos, de modo que `\pageref{LastPage}` devuelve el último número arábigo
 (58 en la variante de trabajo), no el total físico de páginas (67). Antes de la
 corrección, una página preliminar mostraba «Página ii de 58», mezclando dos
 sistemas de numeración. *(PROPIA)*
+
+## D-23. Los diagramas son material de apoyo, no contenido del plan
+
+**Decisión.** Las cuatro figuras se controlan con un cuarto interruptor,
+`mostrardiagramas`: aparecen en las variantes de trabajo y anotada, y no en la
+final.
+
+**Motivo.** Los tres PNG de partida eran material de referencia sobre la norma, y
+sus versiones corregidas siguen siéndolo: las figuras 1–3 explican qué es
+ISO/IEC/IEEE 29119, no dicen nada del sistema bajo prueba. Un plan de pruebas
+entregado no necesita un diagrama de las partes de la norma. La figura 4 (cadena
+de trazabilidad) es de creación propia y explica cómo rellenar el Anexo G, de modo
+que también es instruccional; se le da el mismo trato para mantener una regla
+única.
+
+Que los diagramas se incorporaran al documento no fue una invención: el encargo
+inicial pedía crear al menos tres visualizaciones en `diagrams/` y exigía que toda
+figura se mencionara desde el texto. Lo que faltaba era distinguir entre
+*existir en el repositorio* y *formar parte del documento entregable*.
+
+**Consecuencia técnica.** Quince menciones a las figuras estaban repartidas por
+secciones y anexos. Se envolvieron en `\sidiag{...}` y se reescribieron las frases
+para que se sostengan sin el inciso; los párrafos que sólo describían una figura
+—los que el encargo exigía para cada una— quedaron dentro del bloque condicional
+junto a la propia figura. También se ocultan el índice de figuras y la mención a
+las figuras en el título del índice de cuadros. Resultado: 0 referencias sin
+resolver en las tres variantes.
+
+**Reversible.** Basta con poner `\mostrardiagramastrue` dentro del bloque
+`\VARIANTEFINAL` de `config/metadata.tex` si el curso espera que la entrega
+incluya el marco conceptual. *(PROPIA · decisión del autor tras revisar el
+resultado)*

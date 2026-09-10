@@ -117,6 +117,15 @@
 \fi
 
 % ---------------------------------------------------------------------
+% Menciones a las figuras
+%   Los diagramas son material de apoyo y no se componen en la variante
+%   final. \sidiag envuelve las frases (o los incisos) que remiten a una
+%   figura, de modo que el texto siga siendo correcto cuando no está.
+%   Redacte siempre la frase de manera que se sostenga sin el inciso.
+% ---------------------------------------------------------------------
+\newcommand{\sidiag}[1]{\ifmostrardiagramas #1\fi}
+
+% ---------------------------------------------------------------------
 % Marcador de campo por rellenar
 % ---------------------------------------------------------------------
 % Se compone como texto normal (no como caja) para que pueda partirse

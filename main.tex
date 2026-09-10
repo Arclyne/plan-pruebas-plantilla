@@ -41,10 +41,12 @@
 
 \clearpage
 \phantomsection
-\addcontentsline{toc}{part}{Índice de cuadros y figuras}
+\addcontentsline{toc}{part}{\ifmostrardiagramas Índice de cuadros y figuras\else Índice de cuadros\fi}
 \listoftables
+\ifmostrardiagramas
 \vspace{1\baselineskip}
 \listoffigures
+\fi
 
 % ---------------------------------------------------------------------
 % PARTE I. PLAN DE PRUEBA

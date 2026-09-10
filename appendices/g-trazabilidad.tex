@@ -13,17 +13,21 @@ evidencia, y desde un incidente hasta el requisito y el riesgo que justificaron 
 \obsproblema{La plantilla anterior pedía «elaborar una tabla de trazabilidad» para los elementos
 de prueba, sin indicar qué debía encadenar ni con qué identificadores.}
 \obscambio{Matriz de nueve columnas —base, riesgo, condición, elemento de cobertura, caso,
-procedimiento, ejecución, evidencia e incidente—, con la Figura~\ref{fig:trazabilidad} que
-señala dónde se registra cada eslabón y un resumen de cobertura de la base de prueba.}
+procedimiento, ejecución, evidencia e incidente—, con un diagrama que señala dónde se registra
+cada eslabón y un resumen de cobertura de la base de prueba.}
 \obsfuente{OBS §6}
 \end{observacion}
 
+\ifmostrardiagramas
 \input{diagrams/cadena-trazabilidad}
 
 La Figura~\ref{fig:trazabilidad} muestra la cadena que esta plantilla permite representar y el
-apartado o anexo donde se registra cada eslabón. No todos los proyectos necesitan todos los
-eslabones: un proyecto sin análisis de riesgo formal, o sin elementos de cobertura explícitos,
-puede dejar esas columnas vacías. Lo que la plantilla garantiza es que sean \emph{expresables}.
+apartado o anexo donde se registra cada eslabón.
+\fi
+
+No todos los proyectos necesitan todos los eslabones de la cadena: un proyecto sin análisis de
+riesgo formal, o sin elementos de cobertura explícitos, puede dejar esas columnas vacías. Lo que
+la plantilla garantiza es que sean \emph{expresables}.
 
 \begin{instruccion}
 Complete una fila por cada relación que quiera poder demostrar. Los identificadores provienen de

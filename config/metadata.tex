@@ -43,25 +43,32 @@
 %    correspondiente al compilar. Edítelas sólo si desea fijar una
 %    combinación distinta de forma permanente.
 %
-%      Variante   | instrucciones | ejemplos | observaciones
-%      -----------+---------------+----------+---------------
-%      trabajo    |      sí       |    sí    |      no
-%      anotada    |      sí       |    sí    |      sí
-%      final      |      no       |    no    |      no
+%      Variante   | instrucciones | ejemplos | observaciones | diagramas
+%      -----------+---------------+----------+---------------+-----------
+%      trabajo    |      sí       |    sí    |      no       |    sí
+%      anotada    |      sí       |    sí    |      sí       |    sí
+%      final      |      no       |    no    |      no       |    no
 % ---------------------------------------------------------------------
 \newif\ifmostrarinstrucciones   \mostrarinstruccionestrue
 \newif\ifmostrarejemplos        \mostrarejemplostrue
 \newif\ifmostrarobservaciones   \mostrarobservacionesfalse
 
+% Los cuatro diagramas explican la norma y el uso de la plantilla; son
+% material de apoyo, no contenido del plan. Por eso acompañan a las guías
+% y desaparecen en el documento de entrega.
+\newif\ifmostrardiagramas       \mostrardiagramastrue
+
 \ifdefined\VARIANTEANOTADA      % make annotated
   \mostrarinstruccionestrue
   \mostrarejemplostrue
   \mostrarobservacionestrue
+  \mostrardiagramastrue
 \fi
 \ifdefined\VARIANTEFINAL        % make final
   \mostrarinstruccionesfalse
   \mostrarejemplosfalse
   \mostrarobservacionesfalse
+  \mostrardiagramasfalse
 \fi
 
 % Etiqueta que identifica la variante en la portada. Queda vacía en la
