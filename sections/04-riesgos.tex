@@ -1,0 +1,139 @@
+% =====================================================================
+%  3. Registro de riesgos   (actividades TP3 y TP4 de ISO/IEC/IEEE 29119-2)
+% =====================================================================
+\section{Registro de riesgos}
+\label{sec:riesgos}
+
+\begin{notanormativa}[Correspondencia con el modelo de procesos]
+Este apartado desarrolla las actividades \textbf{TP3 «Identificar y analizar riesgos»} y
+\textbf{TP4 «Identificar enfoques de mitigación»} de \normap{2}. La planificación es el único
+proceso de gestión que integra explícitamente la gestión de riesgos como paso previo al diseño
+de la estrategia: los riesgos priorizados aquí son la justificación de las decisiones del
+apartado~\ref{sec:estrategia}.
+\end{notanormativa}
+
+\begin{notanormativa}[Corrección respecto de la plantilla original]
+La plantilla original explicaba el \emph{riesgo del producto} por su efecto sobre el tiempo y
+el desarrollo de la prueba. Eso corresponde en realidad a un riesgo de proyecto. La distinción
+correcta es:
+\begin{itemize}
+  \item \textbf{Riesgo del producto}: consecuencia potencial de un fallo o deficiencia del
+        \emph{software} sobre los usuarios, el negocio, los datos, la seguridad o la operación.
+        \emph{Ejemplo: un cálculo erróneo cobra de más al cliente.}
+  \item \textbf{Riesgo del proyecto}: amenaza a la capacidad de \emph{ejecutar el esfuerzo de
+        prueba}: tiempo, recursos, personal, entorno, herramientas o acceso a la información.
+        \emph{Ejemplo: la indisponibilidad del entorno retrasa la ejecución.}
+\end{itemize}
+Ambos se evalúan por probabilidad e impacto, pero el «impacto» no significa lo mismo en cada
+caso: en el producto se mide sobre el usuario o el negocio; en el proyecto, sobre el plan.
+\end{notanormativa}
+
+\begin{instruccion}
+Use una escala explícita y aplíquela igual en los dos registros. Si emplea valores numéricos,
+diga cómo se combinan (por ejemplo, exposición $=$ probabilidad $\times$ impacto) y qué umbral
+convierte un riesgo en prioritario. Los riesgos priorizados deben poder rastrearse hasta las
+decisiones de estrategia que los mitigan.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Escala acordada para valorar probabilidad, impacto y exposición.}
+\label{tab:escala-riesgo}
+\begin{tabularx}{\textwidth}{|C{2.0cm}|Y|Y|}
+  \hline
+  \filaenc \textbf{Valor} & \textbf{Probabilidad — significado} & \textbf{Impacto — significado} \\ \hline
+  \campo{Alta (3)}  & \campo{Criterio observable} & \campo{Criterio observable} \\ \hline
+  \campo{Media (2)} & \campo{Criterio observable} & \campo{Criterio observable} \\ \hline
+  \campo{Baja (1)}  & \campo{Criterio observable} & \campo{Criterio observable} \\ \hline
+\end{tabularx}
+\notatabla{Fórmula de exposición: \campo{p.\,ej. exposición = probabilidad × impacto}. Umbral de priorización: \campo{p.\,ej. exposición ≥ 6}.}
+\end{table}
+
+El Cuadro~\ref{tab:escala-riesgo} fija el significado de cada valor para que dos personas
+distintas puedan valorar el mismo riesgo de forma comparable.
+
+% ---------------------------------------------------------------------
+\subsection{Riesgos del producto}
+
+\begin{instruccion}
+Identifique qué puede salir mal \textbf{en el software} y qué consecuencia tendría para
+usuarios, negocio, datos, seguridad u operación. Estos riesgos son la principal justificación
+para decidir qué se prueba primero, con qué profundidad y con qué técnicas.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Riesgos del producto: consecuencias potenciales de un fallo del software.}
+\label{tab:riesgos-producto}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{1.6cm}|Y|C{1.4cm}|C{1.4cm}|C{1.7cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Objeto (\ref{tab:objetos})} & \textbf{Descripción: qué falla y qué consecuencia tiene} & \textbf{Prob.} & \textbf{Impacto} & \textbf{Exposición} \\ \hline
+  \campo{RP-01} & \campo{OP-01} & \campo{Si el cálculo de impuestos es incorrecto, se factura de más al cliente y se incurre en incumplimiento fiscal} & \campo{2} & \campo{3} & \campo{6} \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:riesgos-producto} enumera las consecuencias que la prueba pretende hacer
+visibles antes de la liberación; su columna de exposición ordena la prioridad de diseño y
+ejecución.
+
+% ---------------------------------------------------------------------
+\subsection{Riesgos del proyecto}
+
+\begin{instruccion}
+Identifique lo que puede impedir o degradar la \emph{realización} del esfuerzo de prueba:
+planeación, recursos, personal, competencias, entorno, herramientas, dependencias externas o
+acceso a la base de prueba. Los supuestos del Cuadro~\ref{tab:supuestos} que puedan fallar
+deben aparecer aquí.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Riesgos del proyecto: amenazas a la ejecución del esfuerzo de prueba.}
+\label{tab:riesgos-proyecto}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.0cm}|Y|C{1.4cm}|C{1.4cm}|C{1.7cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Categoría} & \textbf{Descripción del riesgo} & \textbf{Prob.} & \textbf{Impacto} & \textbf{Exposición} \\ \hline
+  \campo{RPy-01} & \campo{Entorno} & \campo{El entorno de prueba no está disponible en la fecha prevista y la ejecución se retrasa} & \campo{3} & \campo{2} & \campo{6} \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+\end{tabularx}
+\notatabla{Categorías sugeridas: planeación · recursos · personal y competencias · entorno · herramientas · datos · dependencias externas · calidad de la base de prueba.}
+\end{table}
+
+El Cuadro~\ref{tab:riesgos-proyecto} recoge las amenazas al plan mismo; se vigilan durante el
+seguimiento (apartado~\ref{sec:seguimiento}) y pueden disparar acciones de control o
+replanificación.
+
+% ---------------------------------------------------------------------
+\subsection{Tratamiento de los riesgos}
+
+\begin{instruccion}
+Para cada riesgo priorizado, indique cómo se tratará. No todos los riesgos se mitigan mediante
+prueba: algunos se aceptan, se transfieren o se evitan cambiando el alcance. Declare
+explícitamente cuáles se mitigarán \emph{probando} y cuáles no, porque esa decisión determina
+el contenido de la estrategia.
+
+Los riesgos que se acepten sin mitigar deben reaparecer en el apartado~\ref{sec:residuales}
+al cierre.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Tratamiento acordado para cada riesgo priorizado.}
+\label{tab:tratamiento-riesgos}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|C{2.1cm}|Y|C{2.6cm}|C{1.9cm}|}
+  \hline
+  \filaenc \textbf{Riesgo} & \textbf{Tratamiento} & \textbf{Acción concreta} & \textbf{Se mitiga mediante prueba} & \textbf{Responsable} \\ \hline
+  \campo{RP-01} & \campo{Mitigar} & \campo{Aplicar tablas de decisión y valores límite sobre el cálculo} & \campo{Sí — CF-01} & \campo{Rol} \\ \hline
+  \campo{RPy-01} & \campo{Mitigar} & \campo{Preparar entorno alterno y verificarlo en la semana 2} & \campo{No} & \campo{Rol} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\notatabla{Tratamiento: \textit{Mitigar} · \textit{Aceptar} · \textit{Transferir} · \textit{Evitar}. Sólo la columna «se mitiga mediante prueba» justifica contenido de la estrategia.}
+\end{table}
+
+El Cuadro~\ref{tab:tratamiento-riesgos} cierra el vínculo entre riesgo y estrategia: cada
+riesgo que se decide mitigar probando debe corresponderse con al menos una condición de prueba
+y una técnica en el apartado~\ref{sec:tecnicas}, y con una fila de la matriz de trazabilidad
+del \ref{anx:trazabilidad}.
