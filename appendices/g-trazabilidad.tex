@@ -1,0 +1,94 @@
+% =====================================================================
+%  ANEXO G. Matriz de trazabilidad
+% =====================================================================
+\section{Matriz de trazabilidad}
+\label{anx:trazabilidad}
+
+\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
+La plantilla original pedía «elaborar una tabla de trazabilidad» para los elementos de prueba,
+sin indicar qué debía encadenar. La revisión pide poder recorrer la cadena completa, en ambos
+sentidos: desde un requisito hasta el resultado que lo evidencia, y desde un incidente hasta el
+requisito y el riesgo que justificaron probarlo.
+\end{notanormativa}
+
+\input{diagrams/cadena-trazabilidad}
+
+La Figura~\ref{fig:trazabilidad} muestra la cadena que esta plantilla permite representar y el
+apartado o anexo donde se registra cada eslabón. No todos los proyectos necesitan todos los
+eslabones: un proyecto sin análisis de riesgo formal, o sin elementos de cobertura explícitos,
+puede dejar esas columnas vacías. Lo que la plantilla garantiza es que sean \emph{expresables}.
+
+\begin{instruccion}
+Complete una fila por cada relación que quiera poder demostrar. Los identificadores provienen de
+los cuadros ya definidos: base de prueba (Cuadro~\ref{tab:base-prueba}), riesgos
+(Cuadro~\ref{tab:riesgos-producto}), condiciones (Cuadro~\ref{tab:condiciones}), casos
+(Cuadro~\ref{tab:indice-casos}), procedimientos (Cuadro~\ref{tab:indice-procedimientos}),
+ejecuciones (Cuadro~\ref{tab:registro-ejecuciones}) e incidentes
+(Cuadro~\ref{tab:registro-incidentes}).
+
+Use la matriz también como herramienta de control: una fila de la base de prueba sin caso
+asociado indica una brecha de cobertura; un caso sin base ni riesgo indica esfuerzo que nadie
+pidió.
+\end{instruccion}
+
+\begin{footnotesize}
+\begin{longtable}{|C{1.35cm}|C{1.35cm}|C{1.45cm}|C{1.8cm}|C{1.3cm}|C{1.3cm}|C{1.3cm}|C{1.45cm}|C{1.3cm}|}
+\caption{Matriz de trazabilidad de la base de prueba al incidente.}
+\label{tab:trazabilidad} \\
+\hline
+\filaenc \textbf{Base} & \textbf{Riesgo} & \textbf{Condición} & \textbf{Elemento de cobertura} & \textbf{Caso} & \textbf{Proc.} & \textbf{Ejec.} & \textbf{Evidencia} & \textbf{Incid.} \\ \hline
+\endfirsthead
+\hline
+\filaenc \textbf{Base} & \textbf{Riesgo} & \textbf{Condición} & \textbf{Elemento de cobertura} & \textbf{Caso} & \textbf{Proc.} & \textbf{Ejec.} & \textbf{Evidencia} & \textbf{Incid.} \\ \hline
+\endhead
+\hline \multicolumn{9}{|r|}{\textit{continúa en la página siguiente}} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+BP-01 & RP-01 & COND-01 & Partición P3 & CP-007 & PP-001 & EJ-014 & EVID-014 & INC-05 \\ \hline
+\campo{} & \campo{} & \campo{} & \campo{} & \campo{} & \campo{} & \campo{} & \campo{} & \campo{} \\ \hline
+ & & & & & & & & \\ \hline
+ & & & & & & & & \\ \hline
+ & & & & & & & & \\ \hline
+ & & & & & & & & \\ \hline
+\end{longtable}
+\end{footnotesize}
+
+La primera fila del Cuadro~\ref{tab:trazabilidad} está rellena a modo de ejemplo y reproduce la
+cadena ilustrativa de la revisión: el requisito BP-01, motivado por el riesgo RP-01, generó la
+condición COND-01, cuya partición P3 se ejercita mediante el caso CP-007, incluido en el
+procedimiento PP-001; su ejecución EJ-014 produjo la evidencia EVID-014 y dio origen al
+incidente INC-05. Sustituya esa fila por los datos reales del proyecto.
+
+\begin{instruccion}
+Si el volumen de filas hace inmanejable esta matriz en el documento, manténgala en una hoja de
+cálculo o herramienta y deje aquí la referencia a su ubicación y responsable, tal como admite la
+revisión para el resto de los registros. Lo que no es admisible es no poder reconstruir la
+cadena.
+\end{instruccion}
+
+\subsection*{Cobertura de la base de prueba}
+
+\begin{instruccion}
+Este cuadro resume la matriz anterior desde el punto de vista de la base de prueba: sirve para
+calcular la medida de cobertura COB-01 del Cuadro~\ref{tab:cobertura} y para detectar
+requisitos sin verificar.
+\end{instruccion}
+
+\begin{table}[H]
+\centering
+\caption{Resumen de cobertura de la base de prueba.}
+\label{tab:cobertura-base}
+\begin{tabularx}{\textwidth}{|C{1.7cm}|Y|C{2.0cm}|C{2.2cm}|C{2.4cm}|}
+  \hline
+  \filaenc \textbf{Base} & \textbf{Descripción} & \textbf{N.º de casos} & \textbf{Ejecutados} & \textbf{¿Cubierto?} \\ \hline
+  \campo{BP-01} & \campo{Descripción} & \campo{3} & \campo{3} & \campo{Sí} \\ \hline
+  \campo{BP-02} & \campo{Descripción} & \campo{0} & \campo{0} & \campo{No — brecha} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+El Cuadro~\ref{tab:cobertura-base} hace visibles las brechas: cada fila con «No» es un elemento
+de la base de prueba que quedó sin verificar y que, si no se justifica como exclusión en el
+Cuadro~\ref{tab:exclusiones}, debe aparecer entre los riesgos residuales del
+apartado~\ref{sec:residuales}.

@@ -1,0 +1,71 @@
+% =====================================================================
+%  ANEXO F. Registro de preparación de entorno y datos
+% =====================================================================
+\section{Registro de preparación de entorno y datos}
+\label{anx:entorno}
+
+\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
+Corresponde a las actividades \textbf{ES1 «Establecer el entorno de prueba»} y \textbf{ES2
+«Mantener el entorno de prueba»} de \normap{2}, e implementa la verificación de los criterios de
+entrada CE-04 y CE-05 del Cuadro~\ref{tab:criterios-entrada}. La plantilla original describía
+los requisitos del entorno, pero no dejaba constancia de que se hubieran cumplido antes de
+ejecutar.
+\end{notanormativa}
+
+\begin{instruccion}
+Complete un registro por cada ciclo de prueba, o cada vez que el entorno cambie. Los requisitos
+que aquí se verifican se definieron en los apartados~\ref{sec:entorno} y~\ref{sec:datos}, y su
+cumplimiento habilita el inicio del ciclo según el apartado~\ref{sec:criterios-entrada}. Es el documento
+que permite responder, meses después, a la pregunta «¿en qué condiciones exactas se obtuvo este
+resultado?». Sin él, el registro de ejecución del \ref{anx:ejecuciones} queda incompleto.
+\end{instruccion}
+
+\subsection*{Verificación de disponibilidad}
+
+\begin{table}[H]
+\centering
+\caption{Registro de preparación y verificación del entorno y los datos.}
+\label{tab:registro-entorno}
+\begin{tabularx}{\textwidth}{|C{1.5cm}|L{2.9cm}|C{1.8cm}|Y|C{1.7cm}|C{1.8cm}|}
+  \hline
+  \filaenc \textbf{Clave} & \textbf{Componente o conjunto} & \textbf{Versión instalada} & \textbf{Configuración aplicada} & \textbf{Estado} & \textbf{Verificado por / fecha} \\ \hline
+  \campo{ENT-01} & \campo{Servidor de aplicación} & \campo{v0.0} & \campo{Parámetros} & \campo{Listo} & \campo{Nombre — dd/mm} \\ \hline
+  \campo{ENT-02} & \campo{Base de datos} & \campo{v0.0} & \campo{Parámetros} & \campo{Listo} & \campo{Nombre — dd/mm} \\ \hline
+  \campo{DAT-01} & \campo{Catálogo de clientes} & \campo{v1} & \campo{Cargado y anonimizado} & \campo{Listo} & \campo{Nombre — dd/mm} \\ \hline
+  & & & & & \\ \hline
+\end{tabularx}
+\notatabla{Estado: \textit{Listo} · \textit{Listo con restricciones} (indíquelas) · \textit{No disponible}. Un ciclo que inicia con algún componente «no disponible» debe registrarse como desviación.}
+\end{table}
+
+El Cuadro~\ref{tab:registro-entorno} deja constancia firmada de que el entorno y los datos
+estaban en el estado requerido antes de ejecutar, y de quién lo comprobó.
+
+\subsection*{Cambios y restauración durante el ciclo}
+
+\begin{table}[H]
+\centering
+\caption{Cambios aplicados al entorno o a los datos durante el ciclo.}
+\label{tab:cambios-entorno}
+\begin{tabularx}{\textwidth}{|C{1.9cm}|C{1.8cm}|Y|C{2.4cm}|C{2.2cm}|}
+  \hline
+  \filaenc \textbf{Fecha} & \textbf{Componente} & \textbf{Cambio aplicado y motivo} & \textbf{Ejecuciones afectadas} & \textbf{Responsable} \\ \hline
+  \campo{dd/mm} & \campo{ENT-01} & \campo{Qué cambió y por qué} & \campo{EJ-010 en adelante} & \campo{Nombre} \\ \hline
+  & & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Restauración del entorno a un estado conocido.}
+\label{tab:restauracion}
+\begin{tabularx}{\textwidth}{|C{1.9cm}|Y|C{2.6cm}|C{2.2cm}|}
+  \hline
+  \filaenc \textbf{Fecha} & \textbf{Acción de restauración realizada} & \textbf{Estado resultante} & \textbf{Responsable} \\ \hline
+  \campo{dd/mm} & \campo{Qué se restauró y cómo} & \campo{Estado base} & \campo{Nombre} \\ \hline
+  & & & \\ \hline
+\end{tabularx}
+\end{table}
+
+Los Cuadros~\ref{tab:cambios-entorno} y~\ref{tab:restauracion} documentan la actividad ES2. La
+columna «ejecuciones afectadas» es la que permite detectar cuándo dos resultados no son
+comparables porque el entorno cambió entre ellos.

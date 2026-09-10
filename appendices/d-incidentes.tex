@@ -1,0 +1,84 @@
+% =====================================================================
+%  ANEXO D. Registro de incidentes
+% =====================================================================
+\section{Registro de incidentes}
+\label{anx:incidentes}
+
+\begin{notanormativa}[Registro nuevo respecto de la plantilla original]
+Corresponde a la actividad \textbf{IR2 «Crear o actualizar el reporte de incidente»} de
+\normap{2}. Las reglas de análisis previo, las escalas de severidad y prioridad y el flujo de
+estados se definen en el apartado~\ref{sec:gestion-incidentes}; aquí se registran los
+incidentes concretos.
+\end{notanormativa}
+
+\begin{instruccion}
+Reproduzca la ficha por cada incidente reportado. Los pasos de reproducción son el campo que
+determina si el incidente podrá ser atendido: escríbalos de forma que una persona ajena al
+equipo pueda reproducir el fallo sin preguntar nada.
+
+Recuerde que \textbf{severidad y prioridad son campos distintos} y que un incidente puede tener
+como origen el entorno, los datos o el propio caso de prueba, y no el objeto probado.
+\end{instruccion}
+
+\subsection*{Ficha de incidente}
+
+\begin{xltabular}{\textwidth}{|E{4.4cm}|Y|}
+\caption{Formato de registro de un incidente de prueba.}\label{tab:ficha-incidente}\\ \hline
+\endfirsthead
+\multicolumn{2}{@{}l@{}}{\footnotesize\itshape\tablename~\thetable{} (continuación)}\\ \hline
+\endhead
+\multicolumn{2}{@{}r@{}}{\footnotesize\itshape continúa en la página siguiente}\\
+\endfoot
+\endlastfoot
+  Identificador                & \campo{INC-05} \\ \hline
+  Resumen                      & \campo{Una línea que identifique el problema} \\ \hline
+  Descripción                  & \campo{Explicación detallada de lo observado} \\ \hline
+  Origen determinado (IR1)     & \campo{Objeto de prueba / entorno / datos / caso de prueba / duplicado} \\ \hline
+  Ejecución que lo reveló      & \campo{EJ-001 (\ref{anx:ejecuciones})} \\ \hline
+  Objeto de prueba afectado    & \campo{OP-01} \\ \hline
+  Resultado esperado           & \campo{Qué debía ocurrir} \\ \hline
+  Resultado obtenido           & \campo{Qué ocurrió} \\ \hline
+  Pasos de reproducción        & \campo{1. …\quad 2. …\quad 3. …} \\ \hline
+  ¿Reproducible?               & \campo{Siempre / intermitente / no reproducido} \\ \hline
+  Versión del software         & \campo{v1.2.0} \\ \hline
+  Entorno y configuración      & \campo{ENT-xx y parámetros} \\ \hline
+  Datos utilizados             & \campo{DAT-xx} \\ \hline
+  Evidencia                    & \campo{Capturas, registros, archivos} \\ \hline
+  Severidad                    & \campo{Cuadro~\ref{tab:severidad}} \\ \hline
+  Prioridad                    & \campo{Cuadro~\ref{tab:prioridad}} \\ \hline
+  Riesgo de producto asociado  & \campo{RP-01} \\ \hline
+  Reportado por / fecha        & \campo{Nombre — dd/mm/aaaa} \\ \hline
+  Responsable asignado         & \campo{Nombre o equipo} \\ \hline
+  Estado                       & \campo{Cuadro~\ref{tab:estados-incidente}} \\ \hline
+  Fecha de última actualización& \campo{dd/mm/aaaa} \\ \hline
+  Resolución o disposición     & \campo{Qué se hizo, o por qué se difiere o rechaza} \\ \hline
+  Ejecución de confirmación    & \campo{EJ-014, si ya se confirmó la corrección} \\ \hline
+\end{xltabular}
+
+El Cuadro~\ref{tab:ficha-incidente} contiene los campos mínimos para que un incidente pueda
+comunicarse, priorizarse y cerrarse de forma verificable. El campo de origen evita que un
+problema del entorno se contabilice como defecto del producto.
+
+\subsection*{Registro consolidado de incidentes}
+
+\begin{longtable}{|C{1.4cm}|L{3.6cm}|C{1.5cm}|C{1.5cm}|C{1.6cm}|C{1.8cm}|C{1.6cm}|}
+\caption{Registro consolidado de incidentes.}
+\label{tab:registro-incidentes} \\
+\hline
+\filaenc \textbf{ID} & \textbf{Resumen} & \textbf{Sever.} & \textbf{Prior.} & \textbf{Estado} & \textbf{Responsable} & \textbf{Ejecución} \\ \hline
+\endfirsthead
+\hline
+\filaenc \textbf{ID} & \textbf{Resumen} & \textbf{Sever.} & \textbf{Prior.} & \textbf{Estado} & \textbf{Responsable} & \textbf{Ejecución} \\ \hline
+\endhead
+\hline \multicolumn{7}{|r|}{\footnotesize\textit{continúa en la página siguiente}} \\ \hline
+\endfoot
+\hline
+\endlastfoot
+\campo{INC-05} & \campo{Resumen} & \campo{Alta} & \campo{Normal} & \campo{Cerrado} & \campo{Nombre} & \campo{EJ-001} \\ \hline
+ & & & & & & \\ \hline
+ & & & & & & \\ \hline
+\end{longtable}
+
+El Cuadro~\ref{tab:registro-incidentes} es la vista de conjunto que alimenta el seguimiento
+(apartado~\ref{sec:seguimiento}) y, al cierre, el
+Cuadro~\ref{tab:incidentes-abiertos}.
